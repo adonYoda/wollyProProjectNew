@@ -1,4 +1,4 @@
-export interface User {
+export interface IUser {
   login: string;
   firstName: string;
   lastName: string;
@@ -7,11 +7,11 @@ export interface User {
   userPhotos: string[];
   phone: string;
   mail: string;
-  addresses: Address[];
+  addresses: IAddress[];
   roles: string[];
 }
 
-export interface Address {
+export interface IAddress {
   id: string;
   index: string;
   city: string;
@@ -21,22 +21,22 @@ export interface Address {
 }
 
 
-export interface State {
-  user?: UserProfile;
+export interface IState {
+  user?: IUserProfile;
   token?: string;
 }
 
-export interface Action {
+export interface IAction {
   type: string;
   payload?: any;
 }
 
-export interface UserProfile extends User {}
+export interface IUserProfile extends IUser {}
 
-export interface UserRegister extends User {}
+export interface IUserRegister extends IUser {}
 
-export type GetState = () => State;
+export type GetState = () => IState;
 
-export type Dispatch = (action: Action | FuncAction) => void;
+export type Dispatch = (action: IAction | FuncAction) => void;
 
 export type FuncAction = (dispatch: Dispatch) => void;

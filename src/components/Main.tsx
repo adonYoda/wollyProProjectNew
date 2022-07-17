@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { Route, Routes } from "react-router";
-import { State } from "../types";
+import { IState } from "../types";
 import { homePage, profilePage } from "../utils/constants";
 import Brooches from "./Brooches";
 import Chains from "./Chains";
@@ -15,7 +15,7 @@ import Necklaces from "./Necklaces";
 import Pendants from "./Pendants";
 
 const Main = () => {
-  const token = useSelector<State, string | undefined | null>(
+  const token = useSelector<IState, string | undefined | null>(
     (state) => state.token
   );
 

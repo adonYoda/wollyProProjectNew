@@ -1,9 +1,9 @@
 import { PUT_TOKEN, PUT_USER } from "../actions/accountAction";
-import { Action, State } from "../types";
+import { IAction, IState } from "../types";
 
 const initialState = {};
 
-export const rootReducer = (state: State = initialState, action: Action) => {
+export const rootReducer = (state: IState = initialState, action: IAction) => {
   switch (action.type) {
     case PUT_USER:
       return { ...state, user: action.payload };
