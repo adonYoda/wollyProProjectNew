@@ -1,14 +1,15 @@
-import {
-  applyMiddleware,
-  legacy_createStore as createStore,
-} from "@reduxjs/toolkit";
-import { composeWithDevTools } from "redux-devtools-extension";
-import thunk from "redux-thunk";
-import { rootReducer } from "../reducers/rootReducer";
+import { configureStore } from "@reduxjs/toolkit";
+import { accountingApi } from "../API/accountingApi";
+import userReducer from "./userSlice";
 
-const store = createStore(
-  rootReducer,
-  composeWithDevTools(applyMiddleware(thunk))
-);
+export const store = configureStore({
+  reducer: {
+    [accountingApi.reducerPath]: accountingApi.reducer,
+    user: userReducer,
+  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(accountingApi.middleware),
+});
 
-export { store };
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch

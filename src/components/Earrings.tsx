@@ -1,17 +1,13 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from "react";
+import styled from "styled-components";
 
 const MyEarrings = styled.div`
-    width: 300px;
-    height: 300px;
-    color: red;
-`
-
+  width: 300px;
+  height: 300px;
+`;
 
 const Earrings = () => {
-  return (
-    <MyEarrings>Earrings</MyEarrings>
-  )
-}
+  return <MyEarrings>Earrings</MyEarrings>;
+};
 
-export default Earrings
+export default Earrings;

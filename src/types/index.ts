@@ -40,3 +40,18 @@ export type GetState = () => IState;
 export type Dispatch = (action: IAction | FuncAction) => void;
 
 export type FuncAction = (dispatch: Dispatch) => void;
+
+export interface Jewel {
+  id: string;
+  type: string;
+  option: string[]
+  seller: string;
+  description: string;
+  price: string;
+  img: string;
+  urls: string[];
+}
+
+export interface Jewellery {
+  [key: string]: Jewel
+}

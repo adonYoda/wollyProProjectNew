@@ -2,21 +2,30 @@ import React, { useState } from "react";
 import {
   Button,
   ClickAwayListener,
+  FormControl,
   Grid,
   Grow,
+  IconButton,
+  InputAdornment,
+  InputLabel,
   Link,
+  OutlinedInput,
   Paper,
   Popper,
 } from "@mui/material";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-
-import { RegistrationPage } from "../Customer/RegistrationPage";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import {useGetUsersQuery} from '../../API/accountingApi'
+import { RegistrationPage } from "../Accounting/RegistrationForm";
 import { validate } from "email-validator";
-import { getUser } from "../../actions/accountAction";
 import { createToken } from "../../utils/constants";
 import { useDispatch } from "react-redux";
-import { Dispatch } from "../../types";
+import { getUser, putUser } from "../../store/userSlice";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/configureStore";
+
 
 interface Props {
   anchorRef: any;
@@ -26,18 +35,36 @@ interface Props {
 
 const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
   const [email, setEmail] = useState("");
-  // const [login, setLogin] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [emailIsValid, setEmailIsValid] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
   const [password, setPassword] = useState("");
-  const dispatch = useDispatch() as Dispatch;
+  const dispatch = useDispatch();
+  const users = useSelector((state: RootState) => state.user.users);
+  const {data = [], isLoading} = useGetUsersQuery();
+  
+  
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
 
   const handleClickLoginIn = () => {
-    dispatch(getUser(createToken(email, password)));
+   dispatch(putUser(email))
   };
 
-  const handleClickRegistration = () => {
-    console.log("registration");
+  const handleClickCreateAccount = () => {
+     
   };
+
+  const handleClickGetUsers = () => {
+    if(isLoading){
+      console.log("UsersLoading");
+      
+    }else
+   console.log(data);
+   
+  }
+
 
   const handleClose = (event: Event | React.SyntheticEvent) => {
     if (
@@ -60,7 +87,15 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
     }
   };
 
+
+  const handleMouseDownPassword = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    event.preventDefault();
+  };
+
   return (
+    
     <Popper
       open={open}
       anchorEl={anchorRef.current}
@@ -106,30 +141,52 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
                     onChange={(e) => emailValidate(e.target.value.trim())}
                     error={!emailIsValid}
                   />
-                  <TextField
-                    id="outlined-password-input"
-                    label="Password"
-                    type="password"
-                    autoComplete="current-password"
-                    onChange={(e) => setPassword(e.target.value.trim())}
-                    // value={password}
-                  />
-
+                  <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
+                    <InputLabel htmlFor="outlined-adornment-password">
+                      Password
+                    </InputLabel>
+                    <OutlinedInput
+                      id="outlined-adornment-password"
+                      type={showPassword ? "text" : "password"}
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value.trim())}
+                      endAdornment={
+                        <InputAdornment position="end">
+                          <IconButton
+                            aria-label="toggle password visibility"
+                            onClick={handleClickShowPassword}
+                            onMouseDown={handleMouseDownPassword}
+                            edge="end"
+                          >
+                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                          </IconButton>
+                        </InputAdornment>
+                      }
+                      label="Password"
+                    />
+                  </FormControl>
                   <Link href="#" color="inherit">
                     Forgot Password?
                   </Link>
                   <div style={{ margin: "2em" }}>
-                    <Button variant="contained" onClick={handleClickLoginIn}>
+                    <Button variant="contained" 
+                    onClick={handleClickLoginIn}
+                    >
                       Sign In
                     </Button>
                   </div>
                   <div>
                     <Button
                       variant="contained"
-                      onClick={handleClickRegistration}
+                      onClick = {() => {
+                       setIsLogin((prev) => !prev)
+                      }}
                     >
                       Create Account
                     </Button>
+                    <Button
+                    onClick = {handleClickGetUsers}
+                    >Get Users</Button>
                   </div>
                 </Grid>
               </Box>
@@ -137,7 +194,7 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
           </Paper>
         </Grow>
       )}
-    </Popper>
+    </Popper> 
   );
 };
 

@@ -1,20 +1,30 @@
+import styled from "styled-components";
 import rectangle from "../images/Images/Rectangle 115.png";
-import style from "../styles/main.module.css";
+import { jewelleryMain } from "../utils/constants";
+import Jewel from "./Jewel";
+
+const MyContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  height: 806px;
+  width: 1920px;
+  margin: 0 auto;
+`;
+
 
 const HomePage = () => {
   return (
-    <>
-      <div className={style.mainPicture}>
-        <h1>
-          ReDesign <span>precious</span> things!
-        </h1>
-        <h2>To the shop </h2>
-        <div className={style.rectangle}>
-          <img src={rectangle} />
-        </div>
-      </div>
-      <div className={style.mainPicture2}></div>
-    </>
+    
+    
+    <MyContainer>
+     <div style={{ color: "white"}}>NEW</div>
+      {jewelleryMain.map((item, index) => 
+        <Jewel key={index} jewel={item} />
+      )}
+    </MyContainer>
+  
   );
 };
 

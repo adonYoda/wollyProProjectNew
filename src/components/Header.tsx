@@ -5,9 +5,12 @@ import Navigation from "./Navigation";
 import IconBar from "./IconBar";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import SignUp from "./Accounting/SignUp";
+import { useState } from "react";
 
 const MyHeader = styled.div`
-  max-width: 100%;
+  width: 1920px;
+  height: auto;
   padding: 0 20px;
   margin: 0 auto;
   display: flex;
@@ -31,6 +34,8 @@ const MyLink = styled(Link)`
 `;
 
 const Header = () => {
+ 
+
   return (
     <MyHeader>
       <Container>
@@ -38,7 +43,8 @@ const Header = () => {
           <img src={logo} alt="WollyProLogo" title="Wolly Pro" />
         </MyLink>
         <Search />
-        <SignIn />
+        <SignIn /> 
+        
         <IconBar />
       </Container>
       <Navigation />

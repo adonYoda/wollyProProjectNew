@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 const MyLinks = styled(Link)`
   text-decoration: none;
+  color: white;
 `;
 const MyNavigation = styled.nav`
   display: flex;

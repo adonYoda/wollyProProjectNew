@@ -1,14 +1,21 @@
+import styled from "styled-components";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Main from "./components/Main";
 
+const MyApp = styled.div`
+  background-color: black;
+  display: flex;
+  flex-wrap: wrap;
+`;
+
 function App() {
   return (
-    <div>
+    <MyApp>
       <Header />
       <Main />
       <Footer />
-    </div>
+    </MyApp>
   );
 }
 

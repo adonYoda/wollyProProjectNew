@@ -32,11 +32,11 @@ const SignIn = () => {
         aria-haspopup="true"
         onClick={handleToggle}
       >
-        <UserLoggedOut style={{ width: " 3em", height: "3em" }} />{" "}
+        <UserLoggedOut style={{ width: " 3em", height: "3em"}} />{" "}
         <span
           style={{
             fontSize: " 1.5em",
-            color: "black",
+            color: "white",
           }}
         >
           Sign In
