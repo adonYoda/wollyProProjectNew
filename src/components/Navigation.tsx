@@ -4,6 +4,22 @@ import styled from "styled-components";
 const MyLinks = styled(Link)`
   text-decoration: none;
   color: white;
+  position: relative;
+  &:after {
+    content: "";
+    width: 0%;
+    height: 1px;
+    background-color: white;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transition: all 0.5s;
+  }
+  &:hover {
+    &:after {
+      width: 100%;
+    }
+  }
 `;
 const MyNavigation = styled.nav`
   display: flex;

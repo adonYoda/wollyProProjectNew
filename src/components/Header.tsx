@@ -2,7 +2,6 @@ import logo from "../images/Icons/Loggo Button.svg";
 import SignIn from "./SignIn";
 import Search from "./Search";
 import Navigation from "./Navigation";
-import IconBar from "./IconBar";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import SignUp from "./Accounting/SignUp";
@@ -29,7 +28,7 @@ const MyLink = styled(Link)`
   flex-direction: row;
   align-items: flex-start;
   margin-top: 20px;
-  width: 113px;
+ 
   height: 201px;
 `;
 
@@ -45,7 +44,7 @@ const Header = () => {
         <Search />
         <SignIn /> 
         
-        <IconBar />
+        
       </Container>
       <Navigation />
     </MyHeader>

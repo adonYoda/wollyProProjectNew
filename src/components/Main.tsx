@@ -14,6 +14,7 @@ import KidsJewellery from "./KidsJewellery";
 import MensRings from "./MensRings";
 import Necklaces from "./Necklaces";
 import Pendants from "./Pendants";
+import { RegistrationPage } from "./Accounting/RegistrationForm";
 
 const MyRoutes = styled(Routes)`
   display: flex;
@@ -44,6 +45,7 @@ const Main = () => {
       <Route path="/kidsJewellery" element={<KidsJewellery />} />
       <Route path="/fashionRings" element={<FashionRings />} />
       <Route path="/brooches" element={<Brooches />} />
+      <Route path="/registration" element={<RegistrationPage/>} />
     </MyRoutes>
   );
 };

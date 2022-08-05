@@ -2,9 +2,14 @@ import { TextField } from '@mui/material'
 import { Box } from '@mui/system'
 import React from 'react'
 
+
+
+
 export const RegistrationPage = () => {
+
   return (
     <Box
+    style={{backgroundColor: "white"}}
       component="form"
       sx={{
         '& .MuiTextField-root': { m: 1, width: '25ch' },

@@ -25,6 +25,7 @@ import { useDispatch } from "react-redux";
 import { getUser, putUser } from "../../store/userSlice";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/configureStore";
+import { useNavigate } from "react-router";
 
 
 interface Props {
@@ -41,7 +42,8 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const users = useSelector((state: RootState) => state.user.users);
-  const {data = [], isLoading} = useGetUsersQuery();
+  const {data = [], isLoading} = useGetUsersQuery('');
+  const navigate = useNavigate();
   
   
   const handleClickShowPassword = () => {
@@ -179,7 +181,7 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
                     <Button
                       variant="contained"
                       onClick = {() => {
-                       setIsLogin((prev) => !prev)
+                      navigate("/registration")
                       }}
                     >
                       Create Account
