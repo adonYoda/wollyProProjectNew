@@ -28,6 +28,7 @@ const ButtonSearch = styled.div`
     background-color: transparent;
     background-position: 10px 10px;
     background-repeat: no-repeat;
+    outline: none;
   }
 
   & button {
@@ -59,14 +60,18 @@ const ButtonSearch = styled.div`
 
 const Search = () => {
   const [activeSearch, setActiveSearch] = useState(false);
-
+  const [searchValue, setSearchValue] = useState('')
   const hadleClickSearch = () => {
     setActiveSearch((prev) => !prev);
+    console.log(searchValue);
+    setSearchValue('')
   };
+
+  
 
   return (
     <ButtonSearch className={activeSearch? "search" : ""} >
-      <input type="text" name="search" placeholder="" />
+      <input type="text" name="search" placeholder="" onChange ={ (e) => {setSearchValue(e.target.value.trim())}} />
       <button onClick={hadleClickSearch} type="button">
         Search...
       </button>

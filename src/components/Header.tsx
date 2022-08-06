@@ -32,6 +32,15 @@ const MyLink = styled(Link)`
   height: 201px;
 `;
 
+const MySearch = styled.div`
+width: 40%;
+display: flex;
+flex-direction: row;
+justify-content: space-around;
+margin-top: 6vw;
+margin-right: 3em;
+`
+
 const Header = () => {
  
 
@@ -41,10 +50,11 @@ const Header = () => {
         <MyLink to="/">
           <img src={logo} alt="WollyProLogo" title="Wolly Pro" />
         </MyLink>
+        <MySearch>
         <Search />
         <SignIn /> 
         
-        
+        </MySearch>
       </Container>
       <Navigation />
     </MyHeader>
