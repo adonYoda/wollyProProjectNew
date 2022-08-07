@@ -8,8 +8,15 @@ export const accountingApi = createApi({
     endpoints: (build) => ({
        getUsers: build.query({
         query: () => "users"
-       }) 
+       }),
+       addUsers: build.mutation({
+        query: (body) => ({
+            url: 'users',
+            mathod: 'POST',
+            body,
+        })
+       })
     })
 });
 
-export const {useGetUsersQuery} = accountingApi
+export const {useGetUsersQuery, useAddUsersMutation} = accountingApi

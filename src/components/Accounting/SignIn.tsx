@@ -1,8 +1,8 @@
 import { Button } from "@mui/material";
 import React from "react";
-import UserLoggedOut from "../iconComponents/UserLoggedOut";
+import UserLoggedOut from "../../iconComponents/UserLoggedOut";
 
-import DropdownMenuLogIn from "./Guest/DropdownMenuLogIn";
+import DropdownMenuLogIn from "./DropdownMenuLogIn";
 
 const SignIn = () => {
   const [open, setOpen] = React.useState(false);

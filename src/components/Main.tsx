@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { Route, Routes } from "react-router";
 import styled from "styled-components";
 import { IState } from "../types";
-import { homePage, profilePage } from "../utils/constants";
+import { homePage} from "../utils/constants";
 import Brooches from "./Brooches";
 import Chains from "./Chains";
 import Profile from "./Accounting/Index";
@@ -22,8 +22,6 @@ const MyRoutes = styled(Routes)`
   flex-wrap: wrap;
   width: 1920px;
   height: auto;
- 
-  
 `
 
 

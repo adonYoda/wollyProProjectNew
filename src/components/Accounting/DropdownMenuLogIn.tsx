@@ -18,11 +18,9 @@ import TextField from "@mui/material/TextField";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import {useGetUsersQuery} from '../../API/accountingApi'
-import { RegistrationPage } from "../Accounting/RegistrationForm";
 import { validate } from "email-validator";
-import { createToken } from "../../utils/constants";
 import { useDispatch } from "react-redux";
-import { getUser, putUser } from "../../store/userSlice";
+import {putUser } from "../../store/userSlice";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/configureStore";
 import { useNavigate } from "react-router";
@@ -38,10 +36,8 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
   const [email, setEmail] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [emailIsValid, setEmailIsValid] = useState(false);
-  const [isLogin, setIsLogin] = useState(true);
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
-  const users = useSelector((state: RootState) => state.user.users);
   const {data = [], isLoading} = useGetUsersQuery('');
   const navigate = useNavigate();
   
