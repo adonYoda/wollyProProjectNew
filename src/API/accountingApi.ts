@@ -12,7 +12,7 @@ export const accountingApi = createApi({
        addUsers: build.mutation({
         query: (body) => ({
             url: 'users',
-            mathod: 'POST',
+            method: 'POST',
             body,
         })
        })

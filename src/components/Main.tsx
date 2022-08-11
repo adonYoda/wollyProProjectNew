@@ -22,7 +22,9 @@ const MyRoutes = styled(Routes)`
   flex-wrap: wrap;
   width: 1920px;
   height: auto;
+  
 `
+
 
 
 

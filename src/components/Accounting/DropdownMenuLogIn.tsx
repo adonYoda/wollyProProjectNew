@@ -17,7 +17,7 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import {useGetUsersQuery} from '../../API/accountingApi'
+import {useAddUsersMutation, useGetUsersQuery} from '../../API/accountingApi'
 import { validate } from "email-validator";
 import { useDispatch } from "react-redux";
 import {putUser } from "../../store/userSlice";
@@ -41,18 +41,20 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
   const {data = [], isLoading} = useGetUsersQuery('');
   const navigate = useNavigate();
   
-  
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
   };
 
   const handleClickLoginIn = () => {
-   dispatch(putUser(email))
+   
   };
-
-  const handleClickCreateAccount = () => {
+  // const handleAddUsers = async () => {
+  //   if(???){
+  //     await addUsers({name: ???}).unwrap();
      
-  };
+  //   }
+  // }
+  
 
   const handleClickGetUsers = () => {
     if(isLoading){

@@ -4,13 +4,12 @@ import Search from "./Search";
 import Navigation from "./Navigation";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import SignUp from "./Accounting/SignUp";
 import { useState } from "react";
 
 const MyHeader = styled.div`
   width: 1920px;
   height: auto;
-  padding: 0 20px;
+  padding: 10px 20px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
