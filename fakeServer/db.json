@@ -1,90 +1,147 @@
-{ "users" : [{
-    "login": "WollyPro",
-    "firstName": "Sveta",
-    "lastName": "Socolova",
-    "about": "I am a pro!",
-    "profilePicture": "https://www.picture.com/url?sa=i&url",
-    "userPhotos": [
-      "https://www.picture.com/url?sa=i&url",
-      "https://www.picture.com/url?sa=i&url"
-    ],
-    "phone": "050-123-0123",
-    "mail": "wollyPro@gmail.com",
-    "addresses": [
-      {
-        "id": "12345",
-        "index": "95673",
-        "city": "CA",
-        "street": "Evergreen rd.",
-        "building": 209,
-        "types": [
-          "shipping",
-          "billing"
-        ]
-      }
-    ],
-    "roles": [
-      "user"
-    ]
-  },
-  {
-    "login": "WollyPro1",
-    "firstName": "Sveta1",
-    "lastName": "Socolova1",
-    "about": "I am a pro!",
-    "profilePicture": "https://www.picture.com/url?sa=i&url",
-    "userPhotos": [
-      "https://www.picture.com/url?sa=i&url",
-      "https://www.picture.com/url?sa=i&url"
-    ],
-    "phone": "050-123-0123",
-    "mail": "wollyPro@gmail.com",
-    "addresses": [
-      {
-        "id": "12345",
-        "index": "95673",
-        "city": "CA",
-        "street": "Evergreen rd.",
-        "building": 209,
-        "types": [
-          "shipping",
-          "billing"
-        ]
-      }
-    ],
-    "roles": [
-      "user"
-    ]
-  },
-  {
-    "login": "WollyPro",
-    "firstName": "Sveta2",
-    "lastName": "Socolova2",
-    "about": "I am a pro!",
-    "profilePicture": "https://www.picture.com/url?sa=i&url",
-    "userPhotos": [
-      "https://www.picture.com/url?sa=i&url",
-      "https://www.picture.com/url?sa=i&url"
-    ],
-    "phone": "050-123-0123",
-    "mail": "wollyPro@gmail.com",
-    "addresses": [
-      {
-        "id": "12345",
-        "index": "95673",
-        "city": "CA",
-        "street": "Evergreen rd.",
-        "building": 209,
-        "types": [
-          "shipping",
-          "billing"
-        ]
-      }
-    ],
-    "roles": [
-      "user"
-    ]
-  }
-]
-
+{
+  "users": [
+    {
+      "login": "WollyPro",
+      "firstName": "Sveta",
+      "lastName": "Socolova",
+      "about": "I am a pro!",
+      "profilePicture": "https://www.picture.com/url?sa=i&url",
+      "userPhotos": [
+        "https://www.picture.com/url?sa=i&url",
+        "https://www.picture.com/url?sa=i&url"
+      ],
+      "phone": "050-123-0123",
+      "mail": "wollyPro@gmail.com",
+      "addresses": [
+        {
+          "id": "12345",
+          "index": "95673",
+          "city": "CA",
+          "street": "Evergreen rd.",
+          "building": 209,
+          "types": [
+            "shipping",
+            "billing"
+          ]
+        }
+      ],
+      "roles": [
+        "user"
+      ]
+    },
+    {
+      "login": "WollyPro1",
+      "firstName": "Sveta1",
+      "lastName": "Socolova1",
+      "about": "I am a pro!",
+      "profilePicture": "https://www.picture.com/url?sa=i&url",
+      "userPhotos": [
+        "https://www.picture.com/url?sa=i&url",
+        "https://www.picture.com/url?sa=i&url"
+      ],
+      "phone": "050-123-0123",
+      "mail": "wollyPro@gmail.com",
+      "addresses": [
+        {
+          "id": "12345",
+          "index": "95673",
+          "city": "CA",
+          "street": "Evergreen rd.",
+          "building": 209,
+          "types": [
+            "shipping",
+            "billing"
+          ]
+        }
+      ],
+      "roles": [
+        "user"
+      ]
+    },
+    {
+      "login": "WollyPro",
+      "firstName": "Sveta2",
+      "lastName": "Socolova2",
+      "about": "I am a pro!",
+      "profilePicture": "https://www.picture.com/url?sa=i&url",
+      "userPhotos": [
+        "https://www.picture.com/url?sa=i&url",
+        "https://www.picture.com/url?sa=i&url"
+      ],
+      "phone": "050-123-0123",
+      "mail": "wollyPro@gmail.com",
+      "addresses": [
+        {
+          "id": "12345",
+          "index": "95673",
+          "city": "CA",
+          "street": "Evergreen rd.",
+          "building": 209,
+          "types": [
+            "shipping",
+            "billing"
+          ]
+        }
+      ],
+      "roles": [
+        "user"
+      ]
+    },
+    {
+      "id": 1,
+      "email": "vitredjer@gmail.com",
+      "login": "aaaaaa"
+    },
+    {
+      "id": "vitredjer@gmail.com",
+      "email": "vitredjer@gmail.com",
+      "login": "vitredjer@gmail.com"
+    },
+    {
+      "id": "ludmila.vishnyak@gmail.com",
+      "email": "vitredjer@gmail.com",
+      "login": "ludmila.vishnyak@gmail.com"
+    },
+    {
+      "id": "aaaaaa",
+      "email": "vitredjer@gmail.com",
+      "login": "aaaaaa"
+    },
+    {
+      "id": "sdsdsdsd",
+      "email": "vitredjer@gmail.com",
+      "login": "sdsdsdsd"
+    },
+    {
+      "id": 2,
+      "email": "",
+      "login": ""
+    },
+    {
+      "login": "AdonYoda",
+      "password": "1!Aa00000000",
+      "firstName": "",
+      "lastName": "",
+      "about": "",
+      "profilePicture": "",
+      "userPhotos": [],
+      "phone": "",
+      "mail": "vitredjer@gmail.com",
+      "addresses": [],
+      "id": 3
+    },
+    {
+      "id": "AdonYoda",
+      "login": "AdonYoda",
+      "password": "1!Aa00000000",
+      "firstName": "",
+      "lastName": "",
+      "about": "",
+      "profilePicture": "",
+      "userPhotos": [],
+      "phone": "",
+      "mail": "vitredjer@gmail.com",
+      "addresses": []
+    }
+  ]
 }

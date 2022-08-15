@@ -1,17 +1,20 @@
+import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { IconButton} from "@mui/material";
 import React, { useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import { useAddUsersMutation } from "../../API/accountingApi";
+import { emailRegex, loginRegex } from "../../utils/constants";
 
 const Container = styled.div`
- justify-content: space-around;
+  justify-content: space-around;
   height: 806px;
   width: 1920px;
   margin: 0 auto;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-`
+`;
 
 const MyFormRegistartion = styled.form`
   background-color: transparent;
@@ -26,7 +29,7 @@ const MyFormRegistartion = styled.form`
       content: "";
     }
   }
-  input[type="submit"] {
+  button[type="button"] {
     width: 100%;
     background: #802882;
     color: white;
@@ -74,143 +77,163 @@ const MyTextField = styled.label`
 `;
 
 interface IFormInputs {
-  TextField: string;
   login: string;
-  firstName: string;
-  lastName: string;
   email: string;
   password: string;
+  confirmPassword: string;
 }
 
 export const RegistrationPage = () => {
-  const [login, setLogin] = useState('');
-  const [mail, setMail] = useState('');
-  const [password, setPassword] = useState('');
-
   const {
     register,
     formState: { errors, isValid },
-    handleSubmit,
+    getValues,
     reset,
   } = useForm<IFormInputs>({
     mode: "onBlur",
   });
+  const [isPasswordValid, setIsPasswordValid] = useState(false);
+  const [putUser, { isError }] = useAddUsersMutation();
+  const [showPassword, setShowPassword] = useState(false);
 
-  const onSubmit: SubmitHandler<IFormInputs> = (data) => {
-   
-    setLogin(data.login);
-    setMail(data.email);
-    setPassword(data.password);
-    console.log({login, mail, password});
-     alert(JSON.stringify(data));
-    // reset();
+  const handleMouseDownPassword = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    event.preventDefault();
   };
 
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleClickRegistration = () => {
+    const login = getValues("login");
+    const email = getValues("email");
+    const confirmPassword = getValues("confirmPassword");
+    const password = getValues("password");
+    if (confirmPassword === password) {
+      putUser({ 
+        id: login,
+        login: login,
+        password: password,
+        firstName: "",
+        lastName: "",
+        about: "",
+        profilePicture: "",
+        userPhotos: [],
+        phone: "",
+        mail: email,
+        addresses:[] 
+       });
+    } else {
+      setIsPasswordValid(true);
+    }
+
+    reset();
+  };
 
   return (
-    <Container >
-    <MyFormRegistartion onSubmit={handleSubmit(onSubmit)}>
-      <MyTextField>
-        Login:
-        <input
-          placeholder="Login"
-          type="text"
-          autoComplete="on"
-          {...register("login", {
-            required: "Please enter your Login",
-            pattern: {
-              value: /[a-zA-Z0-9]/,
-              message: "Only latin letters and numbers",
-            },
-            minLength: {
-              value: 5,
-              message: "Minimum 5 characters",
-            },
-          })}
-        />
-      </MyTextField>
-      <div style={{ height: 40 }}>
-        {errors?.login && <p>{errors?.login?.message || "Error!"}</p>}
-      </div>
-      {/* <MyTextField>
-        First Name:
-        <input
-          placeholder="First Name"
-          type="text"
-          autoComplete="on"
-          {...register("firstName", {
-            required: "Please enter your First Name",
-            minLength: {
-              value: 1,
-              message: "Minimum 1 characters",
-            },
-          })}
-        />
-      </MyTextField>
-      <div style={{ height: 40 }}>
-        {errors?.firstName && <p>{errors?.firstName?.message || "Error!"}</p>}
-      </div>
-      <MyTextField>
-        Last Name:
-        <input
-          placeholder="Last Name"
-          type="text"
-          autoComplete="on"
-          {...register("lastName", {
-            required: "Please enter your Last Name",
-            minLength: {
-              value: 1,
-              message: "Minimum 1 characters",
-            },
-          })}
-        />
-      </MyTextField>
-      <div style={{ height: 40 }}>
-        {errors?.lastName && <p>{errors?.lastName?.message || "Error!"}</p>}
-      </div> */}
-      <MyTextField>
-        Email:
-        <input
-          placeholder="Email"
-          type="email"
-          autoComplete="on"
-          {...register("email", {
-            required: "Please enter your email",
-            pattern:{
-              value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-              message: "Please enter a valid email address",
-            }
-          })}
-        />
-      </MyTextField>
-      <div style={{ height: 40 }}>
-        {errors?.email && <p>{errors?.email?.message || "Error!"}</p>}
-      </div>
-      <MyTextField>
-        Password:
-        <input type="password" 
-        placeholder="Enter your password"
-        {...register("password", {required: "Please enter your password"})}
-        />
-      </MyTextField>
-      <MyTextField>
-       Confirm Password:
-        <input type="password" />
-      </MyTextField>
+    <Container>
+      <MyFormRegistartion>
+        <h2
+          style={{
+            color: "white",
+            fontWeight: "normal",
+            fontFamily: "Montserrat sans-serif",
+            margin: "20px",
+          }}
+        >
+          Create an account
+        </h2>
+        <MyTextField>
+          Login:
+          <input
+            placeholder="Login"
+            type="text"
+            autoComplete="on"
+            {...register("login", {
+              required: "Please enter your Login",
+              pattern: {
+                value: loginRegex,
+                message: "Only latin letters and numbers",
+              },
+              minLength: {
+                value: 3,
+                message: "Minimum 3 characters",
+              },
+            })}
+          />
+        </MyTextField>
+        <div style={{ height: 40 }}>
+          {errors?.login && <p>{errors?.login?.message || "Error!"}</p>}
+        </div>
 
-      {/* FIX FEATURE */}
-      {/* <button
-        type="button"
-        onClick={() => {
-          setValue("lastName", "luo"); // ✅
-          errors.bill; // ❌: property bill does not exist
-        }}
-      >
-        SetValue
-      </button> */}
-
-      <input type="submit" disabled={!isValid} />
-    </MyFormRegistartion>
+        <MyTextField>
+          Email:
+          <input
+            placeholder="Email"
+            type="email"
+            autoComplete="on"
+            {...register("email", {
+              required: "Please enter your email",
+              pattern: {
+                value: emailRegex,
+                message: "Please enter a valid email address",
+              },
+            })}
+          />
+        </MyTextField>
+        <div style={{ height: 40 }}>
+          {errors?.email && <p>{errors?.email?.message || "Error!"}</p>}
+        </div>
+        <MyTextField>
+          Password:
+          <input
+            type={showPassword ? "text" : "password"}
+            placeholder="Enter your password"
+            {...register("password", {
+              required: "Please enter your password",
+              pattern: {
+                value:
+                  /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,15}$/,
+                message: "Password must contain ",
+              },
+            })}
+          />
+        </MyTextField>
+        <div style={{ height: 40 }}>
+          {errors?.password && <p>{errors?.password?.message || "Error!"}</p>}
+        </div>
+        <MyTextField>
+          Confirm Password:
+          <input
+            type={showPassword ? "text" : "password"}
+            placeholder="Confirm your password"
+            {...register("confirmPassword", {
+              required: "Please confirm your password",
+            })}
+          />
+          <IconButton
+          style={{ width:40, height:40, margin: 0}}
+            aria-label="toggle password visibility"
+            onClick={handleClickShowPassword}
+            onMouseDown={handleMouseDownPassword}
+            edge="end"
+          >
+            {showPassword ? <VisibilityOff /> : <Visibility />}
+          </IconButton>
+        </MyTextField>
+        <div style={{ height: 40 }}>
+          {errors?.confirmPassword && (
+            <p>{errors?.confirmPassword?.message || "Error!"}</p>
+          )}
+          {isPasswordValid && <p>Please ENTER your confirm password</p>}
+        </div>
+        <button type="button" onClick={handleClickRegistration}>
+          Create account
+        </button>
+      </MyFormRegistartion>
     </Container>
   );
 };
+

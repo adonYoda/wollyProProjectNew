@@ -17,14 +17,10 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import {useAddUsersMutation, useGetUsersQuery} from '../../API/accountingApi'
-import { validate } from "email-validator";
+import { useGetUsersQuery } from "../../API/accountingApi";
 import { useDispatch } from "react-redux";
-import {putUser } from "../../store/userSlice";
-import { useSelector } from "react-redux";
-import { RootState } from "../../store/configureStore";
 import { useNavigate } from "react-router";
-
+import { loginRegex } from "../../utils/constants";
 
 interface Props {
   anchorRef: any;
@@ -33,38 +29,25 @@ interface Props {
 }
 
 const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
-  const [email, setEmail] = useState("");
+  const [login, setLogin] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [emailIsValid, setEmailIsValid] = useState(false);
+  const [loginIsValid, setLoginIsValid] = useState(false);
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
-  const {data = [], isLoading} = useGetUsersQuery('');
+  const { data = [] } = useGetUsersQuery(login);
   const navigate = useNavigate();
-  
+
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
   };
 
   const handleClickLoginIn = () => {
-   
+    console.log(data);
   };
-  // const handleAddUsers = async () => {
-  //   if(???){
-  //     await addUsers({name: ???}).unwrap();
-     
-  //   }
-  // }
-  
 
   const handleClickGetUsers = () => {
-    if(isLoading){
-      console.log("UsersLoading");
-      
-    }else
-   console.log(data);
-   
-  }
-
+    console.log(data);
+  };
 
   const handleClose = (event: Event | React.SyntheticEvent) => {
     if (
@@ -76,17 +59,15 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
     setOpen(false);
   };
 
-  const emailValidate = (e: string) => {
-    const email = e;
-    if (validate(email)) {
-      setEmail(email);
-      console.log(email);
-      setEmailIsValid(true);
+  const loginValidate = (e: string) => {
+    if (e.match(loginRegex)) {
+      setLogin(e);
+      console.log(e);
+      setLoginIsValid(true);
     } else {
-      setEmailIsValid(false);
+      setLoginIsValid(false);
     }
   };
-
 
   const handleMouseDownPassword = (
     event: React.MouseEvent<HTMLButtonElement>
@@ -95,7 +76,6 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
   };
 
   return (
-    
     <Popper
       open={open}
       anchorEl={anchorRef.current}
@@ -135,11 +115,10 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
                   <p>Sign In to your Account</p>
 
                   <TextField
-                    required
-                    id="outlined-required"
-                    label="Email"
-                    onChange={(e) => emailValidate(e.target.value.trim())}
-                    error={!emailIsValid}
+                    id="outlined-adornment"
+                    label="Login"
+                    onChange={(e) => loginValidate(e.target.value.trim())}
+                    error={!loginIsValid}
                   />
                   <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
                     <InputLabel htmlFor="outlined-adornment-password">
@@ -169,8 +148,12 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
                     Forgot Password?
                   </Link>
                   <div style={{ margin: "2em" }}>
-                    <Button variant="contained" 
-                    onClick={handleClickLoginIn}
+                    <Button
+                      variant="contained"
+                      onClick={(e) => {
+                        handleClickLoginIn();
+                        handleClose(e);
+                      }}
                     >
                       Sign In
                     </Button>
@@ -178,15 +161,14 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
                   <div>
                     <Button
                       variant="contained"
-                      onClick = {() => {
-                      navigate("/registration")
+                      onClick={(e) => {
+                        navigate("/registration");
+                        handleClose(e);
                       }}
                     >
                       Create Account
                     </Button>
-                    <Button
-                    onClick = {handleClickGetUsers}
-                    >Get Users</Button>
+                    <Button onClick={handleClickGetUsers}>Get Users</Button>
                   </div>
                 </Grid>
               </Box>
@@ -194,7 +176,7 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
           </Paper>
         </Grow>
       )}
-    </Popper> 
+    </Popper>
   );
 };
 

@@ -71,7 +71,7 @@ const Search = () => {
 
   return (
     <ButtonSearch className={activeSearch? "search" : ""} >
-      <input type="text" name="search" placeholder="" onChange ={ (e) => {setSearchValue(e.target.value.trim())}} />
+      <input autoComplete="off" type="text" name="search" placeholder="" onChange ={ (e) => {setSearchValue(e.target.value.trim())}} />
       <button onClick={hadleClickSearch} type="button">
         Search...
       </button>

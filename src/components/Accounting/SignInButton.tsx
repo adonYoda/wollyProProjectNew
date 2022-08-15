@@ -1,8 +1,7 @@
 import { Button } from "@mui/material";
 import React from "react";
 import UserLoggedOut from "../../iconComponents/UserLoggedOut";
-
-import DropdownMenuLogIn from "./DropdownMenuLogIn";
+import DropdownMenuLogIn from "./MenuSignIn";
 
 const SignIn = () => {
   const [open, setOpen] = React.useState(false);
@@ -12,7 +11,6 @@ const SignIn = () => {
     setOpen((prevOpen) => !prevOpen);
   };
 
-  // return focus to the button when we transitioned from !open -> open
   const prevOpen = React.useRef(open);
   React.useEffect(() => {
     if (prevOpen.current === true && open === false) {
@@ -32,7 +30,7 @@ const SignIn = () => {
         aria-haspopup="true"
         onClick={handleToggle}
       >
-        <UserLoggedOut style={{ width: " 3em", height: "3em"}} />{" "}
+        <UserLoggedOut style={{ width: " 3em", height: "3em" }} />{" "}
         <span
           style={{
             fontSize: " 1.5em",

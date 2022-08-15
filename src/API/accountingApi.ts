@@ -7,7 +7,7 @@ export const accountingApi = createApi({
     baseQuery: fetchBaseQuery({baseUrl: 'http://localhost:3001/'}),
     endpoints: (build) => ({
        getUsers: build.query({
-        query: () => "users"
+        query: (login = "") => `users/${login}`
        }),
        addUsers: build.mutation({
         query: (body) => ({

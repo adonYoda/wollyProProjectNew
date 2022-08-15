@@ -52,7 +52,7 @@ const Footer = () => {
         <MySection>
           <Title>Account</Title>
           <MyLink to="/signIn">Sign In</MyLink>
-          <MyLink to="/registrationPage">Register</MyLink>
+          <MyLink to="/registration">Register</MyLink>
           <MyLink to="/orderStatus">Order Status</MyLink>
         </MySection>
 

@@ -3,7 +3,7 @@ import { useGetUsersQuery } from "../API/accountingApi";
 import { createToken } from "../utils/constants";
 
 const userSlice = createSlice({
-  name: "users",
+  name: "user",
   initialState: {
     login: null,
     firstName: null,
@@ -29,9 +29,22 @@ const userSlice = createSlice({
       state.addresses = action.payload.addresses;
       state.roles = action.payload.roles;
     },
-    putToken(state, action) {},
+    putToken(state, action) {
+      state.token = action.payload.token;
+    },
     getUser(state, action) {},
-    deleteUser(state, action) {},
+    deleteUser(state) {
+      state.login = null;
+      state.firstName = null;
+      state.lastName = null;
+      state.about = null;
+      state.profilePicture = null;
+      state.userPhotos = null;
+      state.phone = null;
+      state.mail = null;
+      state.addresses = null;
+      state.roles = null;
+    },
   },
 });
 export const { getUser, putUser, putToken } = userSlice.actions;
