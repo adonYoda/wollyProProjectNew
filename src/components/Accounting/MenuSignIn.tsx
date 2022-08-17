@@ -20,7 +20,6 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { useGetUsersQuery } from "../../API/accountingApi";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
-import { loginRegex } from "../../utils/constants";
 
 interface Props {
   anchorRef: any;
@@ -33,7 +32,6 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
   const [isLogined, setisLogined] = useState('');
 
   const [showPassword, setShowPassword] = useState(false);
-  const [loginIsValid, setLoginIsValid] = useState(false);
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const { data = [] } = useGetUsersQuery(isLogined);
@@ -121,8 +119,7 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
                     label="Login"
                     value={login}
                     onChange={(e) => setLogin(e.target.value.trim())}
-                    error={!loginIsValid}
-                  // onBlur={() => setisLogined(login)}
+                   
                   />
                   <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
                     <InputLabel htmlFor="outlined-adornment-password">
