@@ -30,11 +30,13 @@ interface Props {
 
 const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
   const [login, setLogin] = useState("");
+  const [isLogined, setisLogined] = useState('');
+
   const [showPassword, setShowPassword] = useState(false);
   const [loginIsValid, setLoginIsValid] = useState(false);
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
-  const { data = [] } =  useGetUsersQuery(login);
+  const { data = [] } = useGetUsersQuery(isLogined);
   const navigate = useNavigate();
 
   const handleClickShowPassword = () => {
@@ -42,12 +44,15 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
   };
 
   const handleClickLoginIn = () => {
-   
+    console.log("login " + login);
+
+    console.log("isLogined " + isLogined);
+    console.log(data);
   };
 
   const handleClickGetUsers = () => {
-   
-    
+
+
   };
 
   const handleClose = (event: Event | React.SyntheticEvent) => {
@@ -60,7 +65,7 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
     setOpen(false);
   };
 
-  
+
 
   const handleMouseDownPassword = (
     event: React.MouseEvent<HTMLButtonElement>
@@ -76,6 +81,10 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
       placement="bottom-start"
       transition
       disablePortal
+      style={{
+        position: 'relative',
+        zIndex: 100
+      }}
     >
       {({ TransitionProps, placement }) => (
         <Grow
@@ -110,9 +119,10 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
                   <TextField
                     id="outlined-adornment"
                     label="Login"
-                    value = {login}
+                    value={login}
                     onChange={(e) => setLogin(e.target.value.trim())}
                     error={!loginIsValid}
+                  // onBlur={() => setisLogined(login)}
                   />
                   <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
                     <InputLabel htmlFor="outlined-adornment-password">
@@ -145,9 +155,10 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
                     <Button
                       variant="contained"
                       onClick={(e) => {
-                        setLogin(login);
+                        setisLogined(login);
                         handleClickLoginIn();
                         handleClose(e);
+
                       }}
                     >
                       Sign In
@@ -171,7 +182,7 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
           </Paper>
         </Grow>
       )}
-    </Popper>
+    </Popper >
   );
 };
 

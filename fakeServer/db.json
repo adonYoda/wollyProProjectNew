@@ -138,6 +138,19 @@
       "phone": "",
       "mail": "vitredjer@gmail.com",
       "addresses": []
+    },
+    {
+      "id": "belmoz",
+      "login": "belmoz",
+      "password": "Ss-12345678",
+      "firstName": "",
+      "lastName": "",
+      "about": "",
+      "profilePicture": "",
+      "userPhotos": [],
+      "phone": "",
+      "mail": "belmoz@tut.by",
+      "addresses": []
     }
   ]
 }
