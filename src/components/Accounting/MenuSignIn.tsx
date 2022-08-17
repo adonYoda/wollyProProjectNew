@@ -34,7 +34,7 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
   const [loginIsValid, setLoginIsValid] = useState(false);
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
-  const { data = [] } = useGetUsersQuery(login);
+  const { data = [] } =  useGetUsersQuery(login);
   const navigate = useNavigate();
 
   const handleClickShowPassword = () => {
@@ -42,11 +42,12 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
   };
 
   const handleClickLoginIn = () => {
-    console.log(data);
+   
   };
 
   const handleClickGetUsers = () => {
-    console.log(data);
+   
+    
   };
 
   const handleClose = (event: Event | React.SyntheticEvent) => {
@@ -59,15 +60,7 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
     setOpen(false);
   };
 
-  const loginValidate = (e: string) => {
-    if (e.match(loginRegex)) {
-      setLogin(e);
-      console.log(e);
-      setLoginIsValid(true);
-    } else {
-      setLoginIsValid(false);
-    }
-  };
+  
 
   const handleMouseDownPassword = (
     event: React.MouseEvent<HTMLButtonElement>
@@ -117,7 +110,8 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
                   <TextField
                     id="outlined-adornment"
                     label="Login"
-                    onChange={(e) => loginValidate(e.target.value.trim())}
+                    value = {login}
+                    onChange={(e) => setLogin(e.target.value.trim())}
                     error={!loginIsValid}
                   />
                   <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
@@ -151,6 +145,7 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
                     <Button
                       variant="contained"
                       onClick={(e) => {
+                        setLogin(login);
                         handleClickLoginIn();
                         handleClose(e);
                       }}

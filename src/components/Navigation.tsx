@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 const MyLinks = styled(Link)`
   text-decoration: none;
+  text-transform: uppercase;
   color: white;
   position: relative;
   &:after {

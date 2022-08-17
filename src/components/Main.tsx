@@ -1,11 +1,10 @@
 import { useSelector } from "react-redux";
-import { Route, Routes } from "react-router";
+import { Navigate, Route, Routes } from "react-router";
 import styled from "styled-components";
 import { IState } from "../types";
-import { homePage} from "../utils/constants";
+import { homePage } from "../utils/constants";
 import Brooches from "./Brooches";
 import Chains from "./Chains";
-import Profile from "./Accounting/Index";
 import Earrings from "./Earrings";
 import FashionRings from "./FashionRings";
 import GoldRings from "./GoldRings";
@@ -15,6 +14,7 @@ import MensRings from "./MensRings";
 import Necklaces from "./Necklaces";
 import Pendants from "./Pendants";
 import { RegistrationPage } from "./Accounting/RegistrationForm";
+import ProfilePage from "./Profile";
 
 const MyRoutes = styled(Routes)`
   display: flex;
@@ -35,7 +35,7 @@ const Main = () => {
 
   return (
     <MyRoutes>
-      <Route path={homePage} element={token ? <Profile /> : <HomePage />} />
+      <Route path={homePage} element={token ? < ProfilePage/> : <HomePage />} />
       <Route path="/earrings" element={<Earrings />} />
       <Route path="/necklaces" element={<Necklaces />} />
       <Route path="/pendants" element={<Pendants />} />
@@ -45,7 +45,9 @@ const Main = () => {
       <Route path="/kidsJewellery" element={<KidsJewellery />} />
       <Route path="/fashionRings" element={<FashionRings />} />
       <Route path="/brooches" element={<Brooches />} />
-      <Route path="/registration" element={<RegistrationPage/>} />
+      <Route path="/registration" element={<RegistrationPage />} />
+      {/* <Route path="/signInMenu" ADD LINK FOR SIGN IN MENU /> */}
+      <Route path="/profile" element={!token ? <RegistrationPage /> : <Navigate to={homePage} />} />
     </MyRoutes>
   );
 };

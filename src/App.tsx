@@ -7,6 +7,8 @@ const MyApp = styled.div`
   background-color: black;
   display: flex;
   flex-wrap: wrap;
+  min-height: 100vh;
+  min-width: 100%;
 `;
 
 function App() {

@@ -3,16 +3,17 @@ import { useState } from "react";
 import styled from "styled-components";
 
 const ButtonSearch = styled.div`
-  width: 200px;
   position: relative;
   display: flex;
+  justify-content: flex-end;
+  width: 100px;
+  /* margin: 0px 30px 0px 0px; */
 
   &.search{
     width: 60%;
     & input {
       width: 100%;
-      padding: 12px 20px 12px 40px;
-
+      padding: 0px 0px 5px 10px;
     }
     &:after {
       width: 100%;
@@ -29,13 +30,15 @@ const ButtonSearch = styled.div`
     background-position: 10px 10px;
     background-repeat: no-repeat;
     outline: none;
+    transition: all 0.3s ease 0s;
   }
 
   & button {
-    width: 200px;
+    text-transform: uppercase;
+    width: 100px;
     color: white;
     border: none;
-    font-size: 26px;
+    font-size: 18px;
     background-color: transparent;
     cursor: pointer;
   }
@@ -43,7 +46,7 @@ const ButtonSearch = styled.div`
   &:after {
     content: "";
     width: 0%;
-    height: 2px;
+    height: 1px;
     background-color: white;
     position: absolute;
     bottom: 0;
@@ -67,13 +70,13 @@ const Search = () => {
     setSearchValue('')
   };
 
-  
+
 
   return (
-    <ButtonSearch className={activeSearch? "search" : ""} >
-      <input autoComplete="off" type="text" name="search" placeholder="" onChange ={ (e) => {setSearchValue(e.target.value.trim())}} />
+    <ButtonSearch className={activeSearch ? "search" : ""} >
+      <input autoComplete="off" type="text" name="search" placeholder="" onChange={(e) => { setSearchValue(e.target.value.trim()) }} />
       <button onClick={hadleClickSearch} type="button">
-        Search...
+        Search
       </button>
     </ButtonSearch>
   );

@@ -88,36 +88,7 @@
       ]
     },
     {
-      "id": 1,
-      "email": "vitredjer@gmail.com",
-      "login": "aaaaaa"
-    },
-    {
-      "id": "vitredjer@gmail.com",
-      "email": "vitredjer@gmail.com",
-      "login": "vitredjer@gmail.com"
-    },
-    {
-      "id": "ludmila.vishnyak@gmail.com",
-      "email": "vitredjer@gmail.com",
-      "login": "ludmila.vishnyak@gmail.com"
-    },
-    {
-      "id": "aaaaaa",
-      "email": "vitredjer@gmail.com",
-      "login": "aaaaaa"
-    },
-    {
-      "id": "sdsdsdsd",
-      "email": "vitredjer@gmail.com",
-      "login": "sdsdsdsd"
-    },
-    {
-      "id": 2,
-      "email": "",
-      "login": ""
-    },
-    {
+      "id": "AdonYoda",
       "login": "AdonYoda",
       "password": "1!Aa00000000",
       "firstName": "",
@@ -127,12 +98,37 @@
       "userPhotos": [],
       "phone": "",
       "mail": "vitredjer@gmail.com",
-      "addresses": [],
-      "id": 3
+      "addresses": []
     },
     {
-      "id": "AdonYoda",
-      "login": "AdonYoda",
+      "id": "Vasily",
+      "login": "Vasily",
+      "password": "1!Aa00000000",
+      "firstName": "",
+      "lastName": "",
+      "about": "",
+      "profilePicture": "",
+      "userPhotos": [],
+      "phone": "",
+      "mail": "vitredjer@gmail.com",
+      "addresses": []
+    },
+    {
+      "id": "Alex",
+      "login": "Alex",
+      "password": "1!Aa00000000",
+      "firstName": "",
+      "lastName": "",
+      "about": "",
+      "profilePicture": "",
+      "userPhotos": [],
+      "phone": "",
+      "mail": "vitredjer@gmail.com",
+      "addresses": []
+    },
+    {
+      "id": "Fedor",
+      "login": "Fedor",
       "password": "1!Aa00000000",
       "firstName": "",
       "lastName": "",

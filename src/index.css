@@ -7,8 +7,7 @@
 	font-family: "BroadwayRegular";
 	src: local("BroadwayRegular"), url(./Fonts/BroadwayRegular/BroadwayRegular.ttf) format("truetype");
 }
-body
- {
+*, body {
 	margin: 0;
 	padding: 0;
 	border: 0;
