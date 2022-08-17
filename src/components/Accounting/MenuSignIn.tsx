@@ -30,13 +30,25 @@ interface Props {
 
 const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
   const [login, setLogin] = useState("");
-  const [isLogined, setisLogined] = useState('');
+  // const [isLogined, setisLogined] = useState('');
 
   const [showPassword, setShowPassword] = useState(false);
   const [loginIsValid, setLoginIsValid] = useState(false);
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
-  const { data = [] } = useGetUsersQuery(isLogined);
+  // const { data = [] } = useGetUsersQuery(isLogined);
+
+  //=========================================================================
+  const [skip, setSkip] = React.useState(true);
+  const { data = [], error, isLoading, isUninitialized } = useGetUsersQuery(
+    login,
+    {
+      skip,
+    }
+  )
+  //=========================================================================
+
+  console.log(data);
   const navigate = useNavigate();
 
   const handleClickShowPassword = () => {
@@ -46,8 +58,7 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
   const handleClickLoginIn = () => {
     console.log("login " + login);
 
-    console.log("isLogined " + isLogined);
-    console.log(data);
+    // console.log("isLogined " + isLogined);
   };
 
   const handleClickGetUsers = () => {
@@ -122,7 +133,6 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
                     value={login}
                     onChange={(e) => setLogin(e.target.value.trim())}
                     error={!loginIsValid}
-                  // onBlur={() => setisLogined(login)}
                   />
                   <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
                     <InputLabel htmlFor="outlined-adornment-password">
@@ -155,8 +165,9 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
                     <Button
                       variant="contained"
                       onClick={(e) => {
-                        setisLogined(login);
-                        handleClickLoginIn();
+                        // setisLogined(login);
+
+                        setSkip(prev => !prev);
                         handleClose(e);
 
                       }}
