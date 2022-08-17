@@ -78,7 +78,7 @@ const SignIn: React.FC<Props> = ({ token, setToken }) => {
 
     prevOpen.current = open;
   }, [open]);
-
+  console.log('render');
   return (
     <>
       <MyButton
