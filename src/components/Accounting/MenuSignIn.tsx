@@ -21,6 +21,7 @@ import { useGetUsersQuery } from "../../API/accountingApi";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { loginRegex } from "../../utils/constants";
+import { putUser } from "../../store/userSlice";
 
 interface Props {
   anchorRef: any;
@@ -33,14 +34,12 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
   // const [isLogined, setisLogined] = useState('');
 
   const [showPassword, setShowPassword] = useState(false);
-  const [loginIsValid, setLoginIsValid] = useState(false);
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   // const { data = [] } = useGetUsersQuery(isLogined);
 
   //=========================================================================
   const [skip, setSkip] = React.useState(true);
-  console.log(skip)
   const { data = [], error, isLoading, isUninitialized } = useGetUsersQuery(login, { skip });
   //=========================================================================
   const skipTime = () => {
@@ -49,7 +48,6 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
     }, 1000);
   }
 
-  console.log(data);
   const navigate = useNavigate();
 
   const handleClickShowPassword = () => {
@@ -57,8 +55,19 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
   };
 
   const handleClickLoginIn = () => {
-    console.log("login " + login);
-
+    dispatch(putUser({
+      login : data.login,
+      firstName : data.firstName,
+      lastName : data.lastName,
+      about : data.about,
+      profilePicture : data.profilePicture,
+      userPhotos : data.userPhotos,
+      phone : data.phone,
+      mail : data.email,
+      addresses : data.addresses,
+      roles : data.roles,
+    }))
+    
     // console.log("isLogined " + isLogined);
   };
 
@@ -133,7 +142,7 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
                     label="Login"
                     value={login}
                     onChange={(e) => setLogin(e.target.value.trim())}
-                    error={!loginIsValid}
+                  
                   />
                   <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
                     <InputLabel htmlFor="outlined-adornment-password">
@@ -169,7 +178,8 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
                         // setisLogined(login);
                         setSkip(prev => !prev);
                         skipTime();
-                        handleClose(e);
+                        handleClickLoginIn();
+                        handleClose(e)
                       }}
                     >
                       Sign In
