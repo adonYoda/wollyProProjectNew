@@ -40,13 +40,14 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
 
   //=========================================================================
   const [skip, setSkip] = React.useState(true);
-  const { data = [], error, isLoading, isUninitialized } = useGetUsersQuery(
-    login,
-    {
-      skip,
-    }
-  )
+  console.log(skip)
+  const { data = [], error, isLoading, isUninitialized } = useGetUsersQuery(login, { skip });
   //=========================================================================
+  const skipTime = () => {
+    setTimeout(() => {
+      setSkip(true);
+    }, 1000);
+  }
 
   console.log(data);
   const navigate = useNavigate();
@@ -166,10 +167,9 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
                       variant="contained"
                       onClick={(e) => {
                         // setisLogined(login);
-
                         setSkip(prev => !prev);
+                        skipTime();
                         handleClose(e);
-
                       }}
                     >
                       Sign In
