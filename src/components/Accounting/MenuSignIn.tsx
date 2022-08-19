@@ -37,7 +37,9 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
   // const { data = [] } = useGetUsersQuery(isLogined);
 
   //=========================================================================
-  const [skip, setSkip] = React.useState(true);
+  
+  const [flag, setFlag]= useState(false);
+  const [skip, setSkip] = useState(true);
   const {
     data = [],
     error,
@@ -46,6 +48,7 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
   } = useGetUsersQuery(login, {
     skip,
   });
+  
   //=========================================================================
 
   console.log(data);
@@ -56,9 +59,9 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
   };
 
   const handleClickLoginIn = () => {
-    console.log("login " + login);
-
-    // console.log("isLogined " + isLogined);
+     
+     console.log(data);
+    
   };
 
   const handleClickGetUsers = () => {};
@@ -71,6 +74,7 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
       return;
     }
     setOpen(false);
+    setSkip(true);
   };
 
   const handleMouseDownPassword = (
@@ -158,10 +162,10 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
                   <div style={{ margin: "2em" }}>
                     <Button
                       variant="contained"
-                      onClick={(e) => {
+                      onClick={ (e) => {
                         // setisLogined(login);
-
                         setSkip((prev) => !prev);
+                        
                         handleClose(e);
                       }}
                     >
