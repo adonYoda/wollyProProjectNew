@@ -27,7 +27,7 @@ const MyLink = styled(Link)`
 `;
 
 const MySearch = styled.div`
-/* width: 40%; */
+max-width: 40%;
 display: flex;
 flex-direction: row;
 justify-content: flex-end;

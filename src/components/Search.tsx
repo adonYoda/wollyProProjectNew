@@ -2,15 +2,17 @@ import { Button, ButtonProps } from "@mui/material";
 import { useState } from "react";
 import styled from "styled-components";
 
+const widthButton = 100;
 const ButtonSearch = styled.div`
   position: relative;
   display: flex;
   justify-content: flex-end;
-  width: 100px;
-  /* margin: 0px 30px 0px 0px; */
+  width: ${widthButton}px;
+  height: 35px;
+  margin: 0px 30px 0px 0px;
 
   &.search{
-    width: 60%;
+    min-width: 100%;
     & input {
       width: 100%;
       padding: 0px 0px 5px 10px;
@@ -27,15 +29,15 @@ const ButtonSearch = styled.div`
     border: none;
     font-size: 26px;
     background-color: transparent;
-    background-position: 10px 10px;
-    background-repeat: no-repeat;
     outline: none;
     transition: all 0.3s ease 0s;
+    height: 100%;
   }
 
   & button {
     text-transform: uppercase;
-    width: 100px;
+    min-width: ${widthButton}px;
+    height: 100%;
     color: white;
     border: none;
     font-size: 18px;

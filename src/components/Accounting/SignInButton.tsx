@@ -4,12 +4,12 @@ import styled from "styled-components";
 import PersonIcon from '@mui/icons-material/Person';
 import DropdownMenuLogIn from "./MenuSignIn";
 
-
+const widthButton = 185;
 const MyButton = styled(Button) <{ isLogin: boolean }>`
-  width: ${({ isLogin }) => isLogin ? 'auto' : '185px'};
-  max-width: auto;
+  flex: 0 0 ${widthButton}px;
   height: 50px;
   position: relative;
+  
   & span {
     font-size: 18px;
     color: ${({ isLogin }) => isLogin ? '#fff' : '#bbb'};
@@ -26,7 +26,7 @@ const MyButton = styled(Button) <{ isLogin: boolean }>`
     content: '';
     width: 100%;
     height: 100%;
-    border: ${({ isLogin }) => isLogin ? 'none' : '1px solid #bbb'};
+    box-shadow: ${({ isLogin }) => isLogin ? 'none' : '0 0 1px 1px #bbb'};
     background-color: ${({ isLogin }) => isLogin ? '#bbbbbb30' : 'none'};
     border-radius: 100px;
     position: absolute;
@@ -37,9 +37,10 @@ const MyButton = styled(Button) <{ isLogin: boolean }>`
     position: absolute;
     top: 0;
     right: -3px;
-    transform: ${({ isLogin }) => isLogin ? 'translateX(-135px)' : 'translateX(0px)'};
-    width: 52px;
-    height: 52px;
+    right: ${({ isLogin }) => isLogin ? '100%' : '-3px'};
+    transform: ${({ isLogin }) => isLogin ? `translateX(100%)` : 'translateX(0px)'};
+    width: 51px;
+    height: 51px;
     background-color: #bbb;
     border-radius: 100px;
     display: flex;
@@ -62,7 +63,7 @@ const SignIn: React.FC<Props> = ({ token, setToken }) => {
   const anchorRef = React.useRef<HTMLButtonElement>(null);
 
   //================================================================
-  const user = { name: 'Wolly' } // !Get user from global state
+  const user = { name: 'Baburaka' } // !Get user from global state
   //================================================================
 
   const handleToggle = () => {

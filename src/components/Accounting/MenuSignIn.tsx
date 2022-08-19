@@ -20,6 +20,7 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { useGetUsersQuery } from "../../API/accountingApi";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
+import { loginRegex } from "../../utils/constants";
 
 interface Props {
   anchorRef: any;
@@ -32,24 +33,21 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
   // const [isLogined, setisLogined] = useState('');
 
   const [showPassword, setShowPassword] = useState(false);
+  const [loginIsValid, setLoginIsValid] = useState(false);
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   // const { data = [] } = useGetUsersQuery(isLogined);
 
   //=========================================================================
-  
-  const [flag, setFlag]= useState(false);
-  const [skip, setSkip] = useState(true);
-  const {
-    data = [],
-    error,
-    isLoading,
-    isUninitialized,
-  } = useGetUsersQuery(login, {
-    skip,
-  });
-  
+  const [skip, setSkip] = React.useState(true);
+  console.log(skip)
+  const { data = [], error, isLoading, isUninitialized } = useGetUsersQuery(login, { skip });
   //=========================================================================
+  const skipTime = () => {
+    setTimeout(() => {
+      setSkip(true);
+    }, 1000);
+  }
 
   console.log(data);
   const navigate = useNavigate();
@@ -59,12 +57,15 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
   };
 
   const handleClickLoginIn = () => {
-     
-     console.log(data);
-    
+    console.log("login " + login);
+
+    // console.log("isLogined " + isLogined);
   };
 
-  const handleClickGetUsers = () => {};
+  const handleClickGetUsers = () => {
+
+
+  };
 
   const handleClose = (event: Event | React.SyntheticEvent) => {
     if (
@@ -74,8 +75,9 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
       return;
     }
     setOpen(false);
-    setSkip(true);
   };
+
+
 
   const handleMouseDownPassword = (
     event: React.MouseEvent<HTMLButtonElement>
@@ -92,8 +94,8 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
       transition
       disablePortal
       style={{
-        position: "relative",
-        zIndex: 100,
+        position: 'relative',
+        zIndex: 100
       }}
     >
       {({ TransitionProps, placement }) => (
@@ -131,6 +133,7 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
                     label="Login"
                     value={login}
                     onChange={(e) => setLogin(e.target.value.trim())}
+                    error={!loginIsValid}
                   />
                   <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
                     <InputLabel htmlFor="outlined-adornment-password">
@@ -162,10 +165,10 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
                   <div style={{ margin: "2em" }}>
                     <Button
                       variant="contained"
-                      onClick={ (e) => {
+                      onClick={(e) => {
                         // setisLogined(login);
-                        setSkip((prev) => !prev);
-                        
+                        setSkip(prev => !prev);
+                        skipTime();
                         handleClose(e);
                       }}
                     >
@@ -190,7 +193,7 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
           </Paper>
         </Grow>
       )}
-    </Popper>
+    </Popper >
   );
 };
 
