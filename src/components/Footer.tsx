@@ -17,10 +17,7 @@ const MyContent = styled.div`
 `;
 
 const MySection = styled.div`
-  display: flex;
-  flex-direction: column;
   text-align: left;
-  width: 300px;
 `;
 
 const MyFooter = styled.div`
@@ -43,9 +40,6 @@ const DownFooter = styled.div`
   color: rgba(84, 93, 99, 1);
   font-size: 36px;
   font-family: IBM Plex Sans;
-  /* display: flex; */
-  flex-direction: row;
-  justify-content: space-around;
   height: 64px;
   padding: 14px;
   width: 100%;
@@ -59,20 +53,26 @@ const Footer = () => {
           <MyContent>
             <MySection>
               <Title>Account</Title>
-              <MyLink to="/signIn">Sign In</MyLink>
-              <MyLink to="/registration">Register</MyLink>
-              <MyLink to="/orderStatus">Order Status</MyLink>
+              <ul>
+                <li><MyLink to="/signIn">Sign In</MyLink></li>
+                <li><MyLink to="/registration">Register</MyLink></li>
+                <li><MyLink to="/orderStatus">Order Status</MyLink></li>
+              </ul>
             </MySection>
             <MySection>
               <Title>About Us</Title>
-              <MyLink to="/ourStory">Our Story</MyLink>
-              <MyLink to="/careers">Careers</MyLink>
+              <ul>
+                <li><MyLink to="/ourStory">Our Story</MyLink></li>
+                <li><MyLink to="/careers">Careers</MyLink></li>
+              </ul>
             </MySection>
             <MySection>
               <Title>Help</Title>
-              <MyLink to="/contactUs">Contact Us</MyLink>
-              <MyLink to="/orderStatus">Order Status</MyLink>
-              <MyLink to="/returns">Returns</MyLink>
+              <ul>
+                <li><MyLink to="/contactUs">Contact Us</MyLink></li>
+                <li><MyLink to="/orderStatus">Order Status</MyLink></li>
+                <li><MyLink to="/returns">Returns</MyLink></li>
+              </ul>
             </MySection>
             <MySection style={{ width: 400 }}>
               <Title> Follow Us! </Title>
