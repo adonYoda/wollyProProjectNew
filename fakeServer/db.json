@@ -151,6 +151,19 @@
       "phone": "",
       "mail": "belmoz@tut.by",
       "addresses": []
+    },
+    {
+      "id": "Nilolay",
+      "login": "Nilolay",
+      "password": "0!A0000000",
+      "firstName": "",
+      "lastName": "",
+      "about": "",
+      "profilePicture": "",
+      "userPhotos": [],
+      "phone": "",
+      "mail": "vitredjer@gmail.com",
+      "addresses": []
     }
   ]
 }

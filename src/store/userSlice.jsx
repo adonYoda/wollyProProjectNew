@@ -5,6 +5,7 @@ import { createToken } from "../utils/constants";
 const userSlice = createSlice({
   name: "user",
   initialState: {
+    token: null,
     login: null,
     firstName: null,
     lastName: null,
@@ -29,8 +30,14 @@ const userSlice = createSlice({
       state.addresses = action.payload.addresses;
       state.roles = action.payload.roles;
     },
-    putToken(state, action) {
-      state.token = action.payload.token;
+    setCredentials: (
+      state,
+      {
+        payload: { user, token },
+      }
+    ) => {
+      state.user = user;
+      state.token = token;
     },
     getUser(state, action) {},
     deleteUser(state) {
@@ -47,6 +54,6 @@ const userSlice = createSlice({
     },
   },
 });
-export const { getUser, putUser, putToken } = userSlice.actions;
-
+export const { getUser, putUser, setCredentials } = userSlice.actions;
+export const selectCurrentUser = (state) => state.user;
 export default userSlice.reducer;

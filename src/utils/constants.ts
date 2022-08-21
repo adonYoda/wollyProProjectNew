@@ -14,7 +14,7 @@ export const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 export const loginRegex = /^[A-Za-z0-9_-]{3,16}$/;
 export const createToken = (mail: string, password: string) =>
   `Basic ${window.btoa(mail + ":" + password)}`;
-export const baseUrl = "http://localhost:3001/";
+export const baseUrl = "https://wollypro.herokuapp.com";
 export const homePage = "/";
 export const profilePage = "/profile";
 export const jewellery: Jewellery = {

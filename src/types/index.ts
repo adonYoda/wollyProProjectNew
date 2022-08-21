@@ -22,8 +22,8 @@ export interface IAddress {
 
 
 export interface IState {
-  user?: IUserProfile;
-  token?: string;
+  user?: IUserProfile | null;
+  token?: string | null;
 }
 
 export interface IAction {

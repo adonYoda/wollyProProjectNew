@@ -3,7 +3,7 @@ import { IconButton} from "@mui/material";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
-import { useAddUsersMutation } from "../../API/accountingApi";
+import { useAddUserMutation } from "../../API/accountingApi";
 import { emailRegex, loginRegex } from "../../utils/constants";
 
 const Container = styled.div`
@@ -93,7 +93,7 @@ export const RegistrationPage = () => {
     mode: "onBlur",
   });
   const [isPasswordValid, setIsPasswordValid] = useState(false);
-  const [putUser, { isError }] = useAddUsersMutation();
+  const [addUser, { isError }] = useAddUserMutation();
   const [showPassword, setShowPassword] = useState(false);
 
   const handleMouseDownPassword = (
@@ -112,8 +112,7 @@ export const RegistrationPage = () => {
     const confirmPassword = getValues("confirmPassword");
     const password = getValues("password");
     if (confirmPassword === password) {
-      putUser({ 
-        id: login,
+      addUser({ 
         login: login,
         password: password,
         firstName: "",

@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { accountingApi } from "../API/accountingApi";
 import userReducer from "./userSlice";
 
+
 export const store = configureStore({
   reducer: {
     [accountingApi.reducerPath]: accountingApi.reducer,
