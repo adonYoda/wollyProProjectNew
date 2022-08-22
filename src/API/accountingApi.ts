@@ -1,6 +1,12 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { useDispatch } from "react-redux";
 import { RootState } from "../store/configureStore";
+import { putUser } from "../store/userSlice";
+import { Dispatch, IUser, IUserProfile } from "../types";
 import { baseUrl } from "../utils/constants";
+
+
+
 
 export const accountingApi = createApi({
   baseQuery: fetchBaseQuery({
@@ -29,6 +35,10 @@ export const accountingApi = createApi({
         method: "POST",
         body,
       }),
+      // transformResponse: (response) => {dispatch(putUser(response))
+      // console.log(response);
+      // }
+      // ,
     }),
   }),
 });

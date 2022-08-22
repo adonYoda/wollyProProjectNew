@@ -12,5 +12,7 @@ export const store = configureStore({
     getDefaultMiddleware().concat(accountingApi.middleware),
 });
 
+store.subscribe(()=> localStorage.setItem('state', JSON.stringify(store.getState())));
+
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch

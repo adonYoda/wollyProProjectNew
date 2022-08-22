@@ -2,8 +2,10 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { IconButton} from "@mui/material";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { useAddUserMutation } from "../../API/accountingApi";
+import { putUser } from "../../store/userSlice";
 import { emailRegex, loginRegex } from "../../utils/constants";
 
 const Container = styled.div`
@@ -95,6 +97,7 @@ export const RegistrationPage = () => {
   const [isPasswordValid, setIsPasswordValid] = useState(false);
   const [addUser, { isError }] = useAddUserMutation();
   const [showPassword, setShowPassword] = useState(false);
+  const dispatch = useDispatch()
 
   const handleMouseDownPassword = (
     event: React.MouseEvent<HTMLButtonElement>
@@ -106,13 +109,13 @@ export const RegistrationPage = () => {
     setShowPassword(!showPassword);
   };
 
-  const handleClickRegistration = () => {
+  const handleClickRegistration = async () => {
     const login = getValues("login");
     const email = getValues("email");
     const confirmPassword = getValues("confirmPassword");
     const password = getValues("password");
     if (confirmPassword === password) {
-      addUser({ 
+       const user = await addUser({ 
         login: login,
         password: password,
         firstName: "",
@@ -123,7 +126,11 @@ export const RegistrationPage = () => {
         phone: "",
         mail: email,
         addresses:[] 
-       });
+       }).unwrap()
+       dispatch(putUser(user))
+      console.log(user);
+      
+       
     } else {
       setIsPasswordValid(true);
     }

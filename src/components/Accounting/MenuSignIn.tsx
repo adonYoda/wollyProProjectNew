@@ -154,7 +154,7 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
                           const token = createToken(formState.login, formState.password) 
                           dispatch(putUser(user))
                           dispatch(setToken(token))
-                          localStorage.setItem("token", user.token)
+                          localStorage.setItem("token", JSON.stringify(user.token))
                         } catch (err) {
                           alert("ERROR")
                         }

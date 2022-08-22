@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { useGetUsersQuery } from "../API/accountingApi";
-import { createToken } from "../utils/constants";
+
 
 const userSlice = createSlice({
   name: "user",
