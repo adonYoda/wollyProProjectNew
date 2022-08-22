@@ -30,14 +30,8 @@ const userSlice = createSlice({
       state.addresses = action.payload.addresses;
       state.roles = action.payload.roles;
     },
-    setCredentials: (
-      state,
-      {
-        payload: { user, token },
-      }
-    ) => {
-      state.user = user;
-      state.token = token;
+    setToken (state,action) { 
+      state.token = action.payload.token;
     },
     getUser(state, action) {},
     deleteUser(state) {
@@ -54,6 +48,6 @@ const userSlice = createSlice({
     },
   },
 });
-export const { getUser, putUser, setCredentials } = userSlice.actions;
+export const { getUser, putUser, setToken } = userSlice.actions;
 export const selectCurrentUser = (state) => state.user;
 export default userSlice.reducer;

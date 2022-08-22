@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   Button,
   ClickAwayListener,
@@ -20,8 +20,8 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { useGetUserMutation} from "../../API/accountingApi";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
-import { loginRegex } from "../../utils/constants";
-import { putUser, setCredentials } from "../../store/userSlice";
+import { putUser, setToken } from "../../store/userSlice";
+import { createToken } from "../../utils/constants";
 
 interface Props {
   anchorRef: any;
@@ -34,61 +34,23 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
     login: '',
     password: '',
   })
+
+  
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
-  const [getUsers, {isLoading}] = useGetUserMutation();
+  const [getUser, {isLoading}] = useGetUserMutation();
 
   const handleChange = ({
     target: {name, value} 
   }: React.ChangeEvent<HTMLInputElement>) => setFormState((prev) => ({...prev, [name]: value}))
 
 
-
-
-
-  // useEffect(() => {
-  //   dispatch(putUser({
-  //     login : data.login,
-  //     firstName : data.firstName,
-  //     lastName : data.lastName,
-  //     about : data.about,
-  //     profilePicture : data.profilePicture,
-  //     userPhotos : data.userPhotos,
-  //     phone : data.phone,
-  //     mail : data.email,
-  //     addresses : data.addresses,
-  //     roles : data.roles,
-  //   }))
-  // }, [data])
-
   const navigate = useNavigate();
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
   };
-//================================================================
-  // const handleClickLoginIn = () => {
-  //   dispatch(putUser({
-  //     login : data.login,
-  //     firstName : data.firstName,
-  //     lastName : data.lastName,
-  //     about : data.about,
-  //     profilePicture : data.profilePicture,
-  //     userPhotos : data.userPhotos,
-  //     phone : data.phone,
-  //     mail : data.email,
-  //     addresses : data.addresses,
-  //     roles : data.roles,
-  //   }))
-    
-  //   // console.log("isLogined " + isLogined);
-  // };
-//================================================================
-  const handleClickGetUsers = () => {
-
-
-  };
-
+  
   const handleClose = (event: Event | React.SyntheticEvent) => {
     if (
       anchorRef.current &&
@@ -188,8 +150,11 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
                       variant="contained"
                       onClick={async () => {
                         try {
-                          const user = await getUsers(formState).unwrap()
-                          dispatch(setCredentials(user))
+                          const user = await getUser(createToken(formState.login, formState.password)).unwrap()
+                          const token = createToken(formState.login, formState.password) 
+                          dispatch(putUser(user))
+                          dispatch(setToken(token))
+                          localStorage.setItem("token", user.token)
                         } catch (err) {
                           alert("ERROR")
                         }
@@ -208,7 +173,6 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
                     >
                       Create Account
                     </Button>
-                    <Button onClick={handleClickGetUsers}>Get Users</Button>
                   </div>
                 </Grid>
               </Box>

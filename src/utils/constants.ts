@@ -12,8 +12,8 @@ import jewel7 from '../images/Images/4xStones_01.136.jpg'
 
 export const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 export const loginRegex = /^[A-Za-z0-9_-]{3,16}$/;
-export const createToken = (mail: string, password: string) =>
-  `Basic ${window.btoa(mail + ":" + password)}`;
+export const createToken = (login: string, password: string) =>
+  `${window.btoa(login + ":" + password)}`;
 export const baseUrl = "https://wollypro.herokuapp.com";
 export const homePage = "/";
 export const profilePage = "/profile";
