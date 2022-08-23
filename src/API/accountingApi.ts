@@ -5,9 +5,6 @@ import { putUser } from "../store/userSlice";
 import { Dispatch, IUser, IUserProfile } from "../types";
 import { baseUrl } from "../utils/constants";
 
-
-
-
 export const accountingApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: baseUrl,
@@ -23,10 +20,10 @@ export const accountingApi = createApi({
     getUser: build.mutation({
       query: (token) => ({
         url: "/login",
-        method: "POST",
         headers: {
-            Autorization: `Basic ${token}`
-        }
+          Autorization: `Basic ${token}`,
+          method: "POST",
+        },
       }),
     }),
     addUser: build.mutation({
