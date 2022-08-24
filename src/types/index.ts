@@ -55,3 +55,10 @@ export interface Jewel {
 export interface Jewellery {
   [key: string]: Jewel
 }
+
+
+export interface IMessage{
+  recipient: string;
+  subject: string;
+  content: string;
+}

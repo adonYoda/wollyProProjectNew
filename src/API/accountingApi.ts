@@ -1,7 +1,4 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { RootState } from "../store/configureStore";
-import { putUser } from "../store/userSlice";
-import { Dispatch } from "../types";
 import { baseUrl } from "../utils/constants";
 
 export const accountingApi = createApi({
