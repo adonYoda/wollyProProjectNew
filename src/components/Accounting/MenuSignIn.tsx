@@ -17,7 +17,7 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import { useGetUserMutation} from "../../API/accountingApi";
+import { useGetUserMutation } from "../../API/accountingApi";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { putUser, setToken } from "../../store/userSlice";
@@ -31,26 +31,25 @@ interface Props {
 
 const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
   const [formState, setFormState] = useState({
-    login: '',
-    password: '',
-  })
+    login: "",
+    password: "",
+  });
 
-  
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
-  const [getUser, {isLoading}] = useGetUserMutation();
+  const [getUser, { isLoading }] = useGetUserMutation();
 
   const handleChange = ({
-    target: {name, value} 
-  }: React.ChangeEvent<HTMLInputElement>) => setFormState((prev) => ({...prev, [name]: value}))
-
+    target: { name, value },
+  }: React.ChangeEvent<HTMLInputElement>) =>
+    setFormState((prev) => ({ ...prev, [name]: value }));
 
   const navigate = useNavigate();
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
   };
-  
+
   const handleClose = (event: Event | React.SyntheticEvent) => {
     if (
       anchorRef.current &&
@@ -60,8 +59,6 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
     }
     setOpen(false);
   };
-
-
 
   const handleMouseDownPassword = (
     event: React.MouseEvent<HTMLButtonElement>
@@ -78,8 +75,8 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
       transition
       disablePortal
       style={{
-        position: 'relative',
-        zIndex: 100
+        position: "relative",
+        zIndex: 100,
       }}
     >
       {({ TransitionProps, placement }) => (
@@ -115,7 +112,7 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
                   <TextField
                     id="outlined-adornment"
                     label="Login"
-                    name = "login"
+                    name="login"
                     onChange={handleChange}
                   />
                   <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
@@ -125,7 +122,7 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
                     <OutlinedInput
                       id="outlined-adornment-password"
                       type={showPassword ? "text" : "password"}
-                      name= "password"
+                      name="password"
                       onChange={handleChange}
                       endAdornment={
                         <InputAdornment position="end">
@@ -148,15 +145,21 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
                   <div style={{ margin: "2em" }}>
                     <Button
                       variant="contained"
-                      onClick={async () => {
+                      onClick={async (e) => {
                         try {
-                          const user = await getUser(createToken(formState.login, formState.password)).unwrap()
-                          const token = createToken(formState.login, formState.password) 
-                          dispatch(putUser(user))
-                          dispatch(setToken(token))
-                          localStorage.setItem("token", JSON.stringify(user.token))
+                          const user = await getUser(
+                            createToken(formState.login, formState.password)
+                          ).unwrap();
+                          const token = createToken(
+                            formState.login,
+                            formState.password
+                          );
+                          dispatch(putUser(user));
+                          dispatch(setToken(token));
+                          localStorage.setItem("token", JSON.stringify(token));
+                          handleClose(e);
                         } catch (err) {
-                          alert("ERROR")
+                          alert(err);
                         }
                       }}
                     >
@@ -180,7 +183,7 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
           </Paper>
         </Grow>
       )}
-    </Popper >
+    </Popper>
   );
 };
 

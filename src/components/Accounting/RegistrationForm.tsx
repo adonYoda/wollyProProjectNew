@@ -128,7 +128,7 @@ export const RegistrationPage = () => {
         addresses:[] 
        }).unwrap()
        dispatch(putUser(user))
-      console.log(user);
+      console.log(` Registration PUT USER ${user}`);
       
        
     } else {
@@ -202,7 +202,7 @@ export const RegistrationPage = () => {
               pattern: {
                 value:
                   /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,15}$/,
-                message: "Password must contain ",
+                message: "Password must contain A-z !@#$%^&*_=+- 0-9",
               },
             })}
           />
