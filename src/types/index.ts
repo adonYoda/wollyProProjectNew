@@ -23,7 +23,7 @@ export interface IAddress {
 
 export interface IState {
   user?: IUserProfile | null;
-  token?: string | null;
+  token?: { token: string } | null;
 }
 
 export interface IAction {
@@ -31,9 +31,9 @@ export interface IAction {
   payload?: any;
 }
 
-export interface IUserProfile extends IUser {}
+export interface IUserProfile extends IUser { }
 
-export interface IUserRegister extends IUser {}
+export interface IUserRegister extends IUser { }
 
 export type GetState = () => IState;
 
@@ -57,7 +57,7 @@ export interface Jewellery {
 }
 
 
-export interface IMessage{
+export interface IMessage {
   recipient: string;
   subject: string;
   content: string;
