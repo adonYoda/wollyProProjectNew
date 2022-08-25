@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { useGetUsersQuery } from "../API/accountingApi";
-import { createToken } from "../utils/constants";
+
 
 const userSlice = createSlice({
   name: "user",
@@ -29,7 +28,7 @@ const userSlice = createSlice({
       state.addresses = action.payload.addresses;
       state.roles = action.payload.roles;
     },
-    putToken(state, action) {
+    setToken (state,action) { 
       state.token = action.payload.token;
     },
     getUser(state, action) {},
@@ -47,6 +46,6 @@ const userSlice = createSlice({
     },
   },
 });
-export const { getUser, putUser, putToken } = userSlice.actions;
-
+export const { getUser, putUser, setToken } = userSlice.actions;
+export const selectCurrentUser = (state) => state.user;
 export default userSlice.reducer;

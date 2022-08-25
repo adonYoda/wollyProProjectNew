@@ -2,8 +2,10 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { IconButton} from "@mui/material";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { useAddUsersMutation } from "../../API/accountingApi";
+import { useAddUserMutation } from "../../API/accountingApi";
+import { putUser } from "../../store/userSlice";
 import { emailRegex, loginRegex } from "../../utils/constants";
 
 const Container = styled.div`
@@ -93,8 +95,9 @@ export const RegistrationPage = () => {
     mode: "onBlur",
   });
   const [isPasswordValid, setIsPasswordValid] = useState(false);
-  const [putUser, { isError }] = useAddUsersMutation();
+  const [addUser, { isError }] = useAddUserMutation();
   const [showPassword, setShowPassword] = useState(false);
+  const dispatch = useDispatch()
 
   const handleMouseDownPassword = (
     event: React.MouseEvent<HTMLButtonElement>
@@ -106,14 +109,13 @@ export const RegistrationPage = () => {
     setShowPassword(!showPassword);
   };
 
-  const handleClickRegistration = () => {
+  const handleClickRegistration = async () => {
     const login = getValues("login");
     const email = getValues("email");
     const confirmPassword = getValues("confirmPassword");
     const password = getValues("password");
     if (confirmPassword === password) {
-      putUser({ 
-        id: login,
+       const user = await addUser({ 
         login: login,
         password: password,
         firstName: "",
@@ -124,7 +126,11 @@ export const RegistrationPage = () => {
         phone: "",
         mail: email,
         addresses:[] 
-       });
+       }).unwrap()
+       dispatch(putUser(user))
+      console.log(` Registration PUT USER ${user}`);
+      
+       
     } else {
       setIsPasswordValid(true);
     }
@@ -196,7 +202,7 @@ export const RegistrationPage = () => {
               pattern: {
                 value:
                   /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,15}$/,
-                message: "Password must contain ",
+                message: "Password must contain A-z !@#$%^&*_=+- 0-9",
               },
             })}
           />

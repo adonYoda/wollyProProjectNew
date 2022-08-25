@@ -3,6 +3,9 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import PersonIcon from '@mui/icons-material/Person';
 import DropdownMenuLogIn from "./MenuSignIn";
+import { useSelector } from "react-redux";
+import { State } from "history";
+import { IState, IUserProfile } from "../../types";
 
 const widthButton = 185;
 const MyButton = styled(Button) <{ isLogin: boolean }>`
@@ -63,7 +66,7 @@ const SignIn: React.FC<Props> = ({ token, setToken }) => {
   const anchorRef = React.useRef<HTMLButtonElement>(null);
 
   //================================================================
-  const user = { name: 'Baburaka' } // !Get user from global state
+  const user = useSelector<IState, IUserProfile>(state => state.user!) // !Get user from global state
   //================================================================
 
   const handleToggle = () => {
@@ -79,7 +82,6 @@ const SignIn: React.FC<Props> = ({ token, setToken }) => {
 
     prevOpen.current = open;
   }, [open]);
-  console.log('render');
   return (
     <>
       <MyButton
@@ -92,7 +94,7 @@ const SignIn: React.FC<Props> = ({ token, setToken }) => {
         isLogin={!!token}
         className='login_button'
       >
-        {token ? <span>Hello, {user.name}!</span> : <span>
+        {token ? <span>Hello, {user.login}!</span> : <span>
           Sign<span>In</span>
         </span>}
         <div className="circle">

@@ -17,10 +17,11 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import { useGetUsersQuery } from "../../API/accountingApi";
+import { useGetUserMutation } from "../../API/accountingApi";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
-import { loginRegex } from "../../utils/constants";
+import { putUser, setToken } from "../../store/userSlice";
+import { createToken } from "../../utils/constants";
 
 interface Props {
   anchorRef: any;
@@ -29,42 +30,24 @@ interface Props {
 }
 
 const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
-  const [login, setLogin] = useState("");
-  // const [isLogined, setisLogined] = useState('');
+  const [formState, setFormState] = useState({
+    login: "",
+    password: "",
+  });
 
   const [showPassword, setShowPassword] = useState(false);
-  const [loginIsValid, setLoginIsValid] = useState(false);
-  const [password, setPassword] = useState("");
   const dispatch = useDispatch();
-  // const { data = [] } = useGetUsersQuery(isLogined);
+  const [getUser, { isLoading }] = useGetUserMutation();
 
-  //=========================================================================
-  const [skip, setSkip] = React.useState(true);
-  console.log(skip)
-  const { data = [], error, isLoading, isUninitialized } = useGetUsersQuery(login, { skip });
-  //=========================================================================
-  const skipTime = () => {
-    setTimeout(() => {
-      setSkip(true);
-    }, 1000);
-  }
+  const handleChange = ({
+    target: { name, value },
+  }: React.ChangeEvent<HTMLInputElement>) =>
+    setFormState((prev) => ({ ...prev, [name]: value }));
 
-  console.log(data);
   const navigate = useNavigate();
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
-  };
-
-  const handleClickLoginIn = () => {
-    console.log("login " + login);
-
-    // console.log("isLogined " + isLogined);
-  };
-
-  const handleClickGetUsers = () => {
-
-
   };
 
   const handleClose = (event: Event | React.SyntheticEvent) => {
@@ -76,8 +59,6 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
     }
     setOpen(false);
   };
-
-
 
   const handleMouseDownPassword = (
     event: React.MouseEvent<HTMLButtonElement>
@@ -94,8 +75,8 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
       transition
       disablePortal
       style={{
-        position: 'relative',
-        zIndex: 100
+        position: "relative",
+        zIndex: 100,
       }}
     >
       {({ TransitionProps, placement }) => (
@@ -131,9 +112,8 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
                   <TextField
                     id="outlined-adornment"
                     label="Login"
-                    value={login}
-                    onChange={(e) => setLogin(e.target.value.trim())}
-                    error={!loginIsValid}
+                    name="login"
+                    onChange={handleChange}
                   />
                   <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
                     <InputLabel htmlFor="outlined-adornment-password">
@@ -142,8 +122,8 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
                     <OutlinedInput
                       id="outlined-adornment-password"
                       type={showPassword ? "text" : "password"}
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value.trim())}
+                      name="password"
+                      onChange={handleChange}
                       endAdornment={
                         <InputAdornment position="end">
                           <IconButton
@@ -165,11 +145,22 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
                   <div style={{ margin: "2em" }}>
                     <Button
                       variant="contained"
-                      onClick={(e) => {
-                        // setisLogined(login);
-                        setSkip(prev => !prev);
-                        skipTime();
-                        handleClose(e);
+                      onClick={async (e) => {
+                        try {
+                          const user = await getUser(
+                            createToken(formState.login, formState.password)
+                          ).unwrap();
+                          const token = createToken(
+                            formState.login,
+                            formState.password
+                          );
+                          dispatch(putUser(user));
+                          dispatch(setToken(token));
+                          localStorage.setItem("token", JSON.stringify(token));
+                          handleClose(e);
+                        } catch (err) {
+                          alert(err);
+                        }
                       }}
                     >
                       Sign In
@@ -185,7 +176,6 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
                     >
                       Create Account
                     </Button>
-                    <Button onClick={handleClickGetUsers}>Get Users</Button>
                   </div>
                 </Grid>
               </Box>
@@ -193,7 +183,7 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
           </Paper>
         </Grow>
       )}
-    </Popper >
+    </Popper>
   );
 };
 

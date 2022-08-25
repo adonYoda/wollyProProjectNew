@@ -1,4 +1,4 @@
-import logo from "../images/Icons/Loggo Button.svg";
+import logo from "../images/Icons/LoggoButton.svg";
 import SignIn from "./Accounting/SignInButton";
 import Search from "./Search";
 import Navigation from "./Navigation";

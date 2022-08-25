@@ -22,8 +22,8 @@ export interface IAddress {
 
 
 export interface IState {
-  user?: IUserProfile;
-  token?: string;
+  user?: IUserProfile | null;
+  token?: string | null;
 }
 
 export interface IAction {
@@ -54,4 +54,11 @@ export interface Jewel {
 
 export interface Jewellery {
   [key: string]: Jewel
+}
+
+
+export interface IMessage{
+  recipient: string;
+  subject: string;
+  content: string;
 }
