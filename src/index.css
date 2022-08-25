@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;1,100;1,200&family=Poller+One&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600&display=swap');
 @font-face{
 	font-family: "BroadwayNormal";
 	src: local("BroadwayNormal"), url(./Fonts/BroadwayNormal/BroadwayNormal.ttf) format("truetype");
