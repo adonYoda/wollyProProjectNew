@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { Navigate, Route, Routes } from "react-router";
 import styled from "styled-components";
 import { IState } from "../types";
-import { homePage, profilePage } from "../utils/constants";
+import { homePage, profilePage, registrationPage } from "../utils/constants";
 import Brooches from "./Brooches";
 import Chains from "./Chains";
 import Earrings from "./Earrings";
@@ -45,9 +45,9 @@ const Main = () => {
       <Route path="/kidsJewellery" element={<KidsJewellery />} />
       <Route path="/fashionRings" element={<FashionRings />} />
       <Route path="/brooches" element={<Brooches />} />
-      <Route path="/registration" element={<RegistrationPage />} />
+      <Route path={registrationPage} element={<RegistrationPage />} />
       {/* <Route path="/signInMenu" ADD LINK FOR SIGN IN MENU /> */}
-      <Route path="/profile" element={!token ? <RegistrationPage /> : <Navigate to={profilePage} />} />
+      <Route path={profilePage} element={token ? <ProfilePage /> : <Navigate to={registrationPage} />} />
     </MyRoutes>
   );
 };

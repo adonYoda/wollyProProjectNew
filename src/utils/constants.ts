@@ -14,10 +14,13 @@ export const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 export const loginRegex = /^[A-Za-z0-9_-]{3,16}$/;
 export const createToken = (login: string, password: string) =>
   `${window.btoa(login + ":" + password)}`;
+//==============================================================================
 export const baseUrl = "https://wollypro.herokuapp.com";
 //export const baseUrl = "http://localhost:3001"
 export const homePage = "/";
 export const profilePage = "/profile";
+export const registrationPage = "/registration";
+//==============================================================================
 export const jewellery: Jewellery = {
   Title1: {
     id: "1",
@@ -26,7 +29,7 @@ export const jewellery: Jewellery = {
     seller: "Jean Lao",
     description: "It is a beautiful gold ring for ladys",
     price: "130",
-    img: jewel1 ,
+    img: jewel1,
     urls: [
       "https://www.picture.com/url?sa=i&url",
       "https://www.picture.com/url?sa=i&url",
