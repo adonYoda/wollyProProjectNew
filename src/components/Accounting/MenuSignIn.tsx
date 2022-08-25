@@ -20,7 +20,8 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { useGetUserMutation } from "../../API/accountingApi";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
-import { putUser, setToken } from "../../store/userSlice";
+import { putUser } from "../../store/userSlice";
+import { setToken } from "../../store/tokenSlice";
 import { createToken } from "../../utils/constants";
 
 interface Props {
@@ -147,16 +148,17 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
                       variant="contained"
                       onClick={async (e) => {
                         try {
-                          const user = await getUser(
-                            createToken(formState.login, formState.password)
-                          ).unwrap();
                           const token = createToken(
                             formState.login,
                             formState.password
                           );
+                          const user = await getUser(
+                            token
+                          ).unwrap();
+
                           dispatch(putUser(user));
-                          dispatch(setToken(token));
                           localStorage.setItem("token", JSON.stringify(token));
+                          dispatch(setToken(token));
                           handleClose(e);
                         } catch (err) {
                           alert(err);

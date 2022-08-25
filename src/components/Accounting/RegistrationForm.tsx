@@ -1,12 +1,13 @@
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { IconButton} from "@mui/material";
+import { IconButton } from "@mui/material";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { useAddUserMutation } from "../../API/accountingApi";
 import { putUser } from "../../store/userSlice";
-import { emailRegex, loginRegex } from "../../utils/constants";
+import { setToken } from "../../store/tokenSlice";
+import { createToken, emailRegex, loginRegex } from "../../utils/constants";
 
 const Container = styled.div`
   justify-content: space-around;
@@ -115,7 +116,7 @@ export const RegistrationPage = () => {
     const confirmPassword = getValues("confirmPassword");
     const password = getValues("password");
     if (confirmPassword === password) {
-       const user = await addUser({ 
+      const user = await addUser({
         login: login,
         password: password,
         firstName: "",
@@ -125,12 +126,13 @@ export const RegistrationPage = () => {
         userPhotos: [],
         phone: "",
         mail: email,
-        addresses:[] 
-       }).unwrap()
-       dispatch(putUser(user))
+        addresses: []
+      }).unwrap()
+      dispatch(putUser(user));
+      dispatch(setToken(createToken(login, password)));
       console.log(` Registration PUT USER ${user}`);
-      
-       
+
+
     } else {
       setIsPasswordValid(true);
     }
@@ -220,7 +222,7 @@ export const RegistrationPage = () => {
             })}
           />
           <IconButton
-          style={{ width:40, height:40, margin: 0}}
+            style={{ width: 40, height: 40, margin: 0 }}
             aria-label="toggle password visibility"
             onClick={handleClickShowPassword}
             onMouseDown={handleMouseDownPassword}

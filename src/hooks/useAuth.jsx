@@ -2,12 +2,11 @@ import { useSelector } from "react-redux";
 import { IState, IUser } from "../types";
 
 export function useAuth() {
-  const { mail, token, login } = useSelector((state) => state.user);
+  const { token, user } = useSelector((state) => state);
 
   return {
-    isAuth: !!mail,
-    mail,
+    isAuth: !!token,
     token,
-    login,
+    user,
   };
 }

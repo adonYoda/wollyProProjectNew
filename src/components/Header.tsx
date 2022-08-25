@@ -6,6 +6,9 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { useState } from "react";
 import { MyContainer } from "../styles/Container.styled";
+import ProfilePageTitle from "./Profile/ProfilePageTitle";
+import { useSelector } from "react-redux";
+import { IState } from "../types";
 
 const MyHeader = styled.div`
   min-width: 100%;
@@ -55,8 +58,10 @@ const MySignUp = styled(Link)`
 
 const Header = () => {
 
-  const [token, setToken] = useState(false);
-
+  const token = useSelector<IState, string | undefined | null>(
+    (state) => state.token
+  );
+  console.log('HEADER')
 
   return (
     <MyHeader>
@@ -67,10 +72,11 @@ const Header = () => {
           </MyLink>
           <MySearch>
             <Search />
-            <SignIn token={!!token} setToken={setToken} />
+            <SignIn />
             {!token && <MySignUp to="/registration" >SignUp</MySignUp>}
           </MySearch>
         </Content>
+        {<ProfilePageTitle />}
         <Navigation />
       </MyContainer>
     </MyHeader>

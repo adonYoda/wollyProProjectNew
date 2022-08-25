@@ -1,5 +1,5 @@
 import { Button } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import PersonIcon from '@mui/icons-material/Person';
 import DropdownMenuLogIn from "./MenuSignIn";
@@ -56,22 +56,17 @@ const MyButton = styled(Button) <{ isLogin: boolean }>`
   }
 `
 //! Remove Interface props or use data from global state
-interface Props {
-  token: boolean;
-  setToken: any;
-}
 
-const SignIn: React.FC<Props> = ({ token, setToken }) => {
+const SignIn = () => {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef<HTMLButtonElement>(null);
 
   //================================================================
-  const user = useSelector<IState, IUserProfile>(state => state.user!) // !Get user from global state
+  const user = useSelector<IState, IUserProfile>(state => state.user!);
+  const token = useSelector<IState, string | undefined | null>(state => state.token);
   //================================================================
-
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
-    setToken((prev: any) => !prev); //! REMOVE
   };
 
   const prevOpen = React.useRef(open);
@@ -82,6 +77,8 @@ const SignIn: React.FC<Props> = ({ token, setToken }) => {
 
     prevOpen.current = open;
   }, [open]);
+  console.log('TOKEN -> ' + token)
+  console.log('SignInButton render')
   return (
     <>
       <MyButton
