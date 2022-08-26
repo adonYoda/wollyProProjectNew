@@ -22,7 +22,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { putUser } from "../../store/userSlice";
 import { setToken } from "../../store/tokenSlice";
-import { createToken, registrationPage } from "../../utils/constants";
+import { createToken, profilePage, registrationPage } from "../../utils/constants";
 
 interface Props {
   anchorRef: any;
@@ -159,6 +159,7 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
                           dispatch(putUser(user));
                           localStorage.setItem("token", JSON.stringify(token));
                           dispatch(setToken(token));
+                          navigate(profilePage);
                           handleClose(e);
                         } catch (err) {
                           alert(err);

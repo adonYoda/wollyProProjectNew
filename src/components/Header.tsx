@@ -59,8 +59,8 @@ const Header = () => {
 
   const token = useSelector<IState>(state => state.token!.token) as string;
   const navigate = useNavigate();
-  const onProfilePage = window.location.pathname === profilePage;
-
+  // const onProfilePage = window.location.pathname === profilePage;
+  const onProfilePage = /^\/profile?/.test(window.location.pathname);
   return (
     <MyHeader>
       <MyContainer>

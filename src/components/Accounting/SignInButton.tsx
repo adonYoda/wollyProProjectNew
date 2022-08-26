@@ -5,6 +5,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import DropdownMenuLogIn from "./MenuSignIn";
 import { useSelector } from "react-redux";
 import { IState, IUserProfile } from "../../types";
+import MenuProfile from "./MenuProfile";
 
 const widthButton = 185;
 const MyButton = styled(Button) <{ isLogin: boolean }>`
@@ -100,6 +101,7 @@ const SignIn: React.FC<Props> = ({ token }) => {
       </MyButton>
 
       {!token && <DropdownMenuLogIn anchorRef={anchorRef} open={open} setOpen={setOpen} />}
+      {token && <MenuProfile anchorRef={anchorRef} open={open} setOpen={setOpen} />}
     </>
   );
 };

@@ -8,8 +8,12 @@ const tokenSlice = createSlice({
     setToken(state, action) {
       state.token = JSON.parse(localStorage.getItem('token')) || action.payload.token;
     },
+    logout(state) {
+      state.token = null;
+      localStorage.removeItem('token');
+    }
   },
 });
-export const { setToken } = tokenSlice.actions;
+export const { setToken, logout } = tokenSlice.actions;
 // export const selectCurrentUser = (state) => state.user;
 export default tokenSlice.reducer;
