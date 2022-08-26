@@ -62,3 +62,13 @@ export interface IMessage {
   subject: string;
   content: string;
 }
+
+export interface IMessageResponse extends IMessage {
+  id: string;
+  author: string;
+  dateCreated: Date;
+  read: boolean;
+  stared: boolean;
+  sent: boolean;
+  trashed: boolean;
+}
