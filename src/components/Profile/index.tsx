@@ -18,7 +18,9 @@ const Content = styled.div`
 	flex: 1 1 100%;
 `;
 const ProfilePageMainStyled = styled.div`
-	
+	display: flex;
+	flex-direction: column;
+	flex: 1 1 auto;
 `;
 
 const ProfilePage = () => {
@@ -27,16 +29,12 @@ const ProfilePage = () => {
 		<ProfilePageWrapper>
 			<MyContainer>
 				<Content>
-					{/*
-					sidebar
-					main block
-						buttons
-						howToStart
-					*/}
 					<ProfilePageSidebarWrapper>
 						<ProfilePageSidebar />
 					</ProfilePageSidebarWrapper>
-					<ProfilePageMain />
+					<ProfilePageMainStyled>
+						<ProfilePageMain />
+					</ProfilePageMainStyled>
 				</Content>
 			</MyContainer>
 		</ProfilePageWrapper>

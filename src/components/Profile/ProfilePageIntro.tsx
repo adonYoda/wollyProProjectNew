@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components';
 import { profilePage, profilePages } from '../../utils/constants';
 import HowToContent from './HowToContent'
+import ProfileTopBar from './ProfileTopBar';
 
 
 
@@ -15,7 +16,7 @@ const ProfilePageIntro = () => {
 
 	return (
 		<>
-
+			<ProfileTopBar />
 			{/* <HowTo>
 				<h3 className='howto__title'>How to start:</h3>
 				<HowToContent />
