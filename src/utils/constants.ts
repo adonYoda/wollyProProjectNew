@@ -23,13 +23,13 @@ export const registrationPage = "/registration";
 export const shippingPage = "/shipping";
 export const faqPage = "/faq";
 export const profilePages = {
-  introPage: profilePage + "/",
-  mailBoxPage: profilePage + "/mailbox",
-  paymentMethodsPage: profilePage + "/paymentMethods",
-  purchaseHistoryPage: profilePage + "/purchaseHistory",
-  savedPage: profilePage + "/saved",
-  ordersPage: profilePage + "/orders",
-  myAccountPage: profilePage + "/myAccount",
+  introPage: "/",
+  mailBoxPage: "/mailbox",
+  paymentMethodsPage: "/paymentMethods",
+  purchaseHistoryPage: "/purchaseHistory",
+  savedPage: "/saved",
+  ordersPage: "/orders",
+  myAccountPage: "/myAccount",
   setUpPage: "/setup",
 }
 // </URLs> ==============================================================================

@@ -40,12 +40,12 @@ const ProfilePageSidebar = () => {
 	return (
 		<>
 			<MyLink className='back_to_shop' to={homePage}>Back to Shop</MyLink>
-			<MyLink to={mailBoxPage}>Mail Box</MyLink>
-			<MyLink to={paymentMethodsPage}>Payment Methodas</MyLink>
-			<MyLink to={purchaseHistoryPage}>Purchase History</MyLink>
-			<MyLink to={savedPage}>Saved</MyLink>
-			<MyLink to={ordersPage}>Orders</MyLink>
-			<MyLink to={myAccountPage}>My Account</MyLink>
+			<MyLink to={profilePage + mailBoxPage}>Mail Box</MyLink>
+			<MyLink to={profilePage + paymentMethodsPage}>Payment Methodas</MyLink>
+			<MyLink to={profilePage + purchaseHistoryPage}>Purchase History</MyLink>
+			<MyLink to={profilePage + savedPage}>Saved</MyLink>
+			<MyLink to={profilePage + ordersPage}>Orders</MyLink>
+			<MyLink to={profilePage + myAccountPage}>My Account</MyLink>
 		</>
 	)
 }

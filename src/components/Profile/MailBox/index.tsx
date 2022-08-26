@@ -15,9 +15,9 @@ const Container = styled.div`
 const MailPage = () => {
   return (
     <div>
-        <Container>
-        <MessagePreview/>
-        </Container>
+      <Container>
+        <MessagePreview />
+      </Container>
 
     </div>
   )

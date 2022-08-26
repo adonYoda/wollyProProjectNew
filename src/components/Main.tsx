@@ -45,7 +45,7 @@ const Main = () => {
       <Route path="/brooches" element={<Brooches />} />
       <Route path={registrationPage} element={<RegistrationPage />} />
       {/* <Route path="/signInMenu" ADD LINK FOR SIGN IN MENU /> */}
-      <Route path={profilePage} element={token ? <ProfilePage /> : <Navigate to={registrationPage} />} />
+      <Route path={`${profilePage}/*`} element={token ? <ProfilePage /> : <Navigate to={registrationPage} />} />
     </MyRoutes>
   );
 };
