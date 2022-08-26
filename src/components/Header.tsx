@@ -9,6 +9,7 @@ import { MyContainer } from "../styles/Container.styled";
 import ProfilePageTitle from "./Profile/ProfilePageTitle";
 import { useSelector } from "react-redux";
 import { IState } from "../types";
+import { registrationPage } from "../utils/constants";
 
 const MyHeader = styled.div`
   min-width: 100%;
@@ -58,10 +59,7 @@ const MySignUp = styled(Link)`
 
 const Header = () => {
 
-  const token = useSelector<IState, string | undefined | null>(
-    (state) => state.token
-  );
-  console.log('HEADER')
+  const token = useSelector<IState>(state => state.token!.token) as string;
 
   return (
     <MyHeader>
@@ -72,8 +70,8 @@ const Header = () => {
           </MyLink>
           <MySearch>
             <Search />
-            <SignIn />
-            {!token && <MySignUp to="/registration" >SignUp</MySignUp>}
+            <SignIn token={token} />
+            {!token && <MySignUp to={registrationPage} >SignUp</MySignUp>}
           </MySearch>
         </Content>
         {<ProfilePageTitle />}

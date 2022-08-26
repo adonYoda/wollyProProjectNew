@@ -4,7 +4,6 @@ import styled from "styled-components";
 import PersonIcon from '@mui/icons-material/Person';
 import DropdownMenuLogIn from "./MenuSignIn";
 import { useSelector } from "react-redux";
-import { State } from "history";
 import { IState, IUserProfile } from "../../types";
 
 const widthButton = 185;
@@ -15,6 +14,7 @@ const MyButton = styled(Button) <{ isLogin: boolean }>`
   
   & span {
     font-size: 18px;
+    line-height: 1.2;
     color: ${({ isLogin }) => isLogin ? '#fff' : '#bbb'};
     text-transform: none;
     width: 100%;
@@ -55,15 +55,17 @@ const MyButton = styled(Button) <{ isLogin: boolean }>`
     }
   }
 `
-//! Remove Interface props or use data from global state
 
-const SignIn = () => {
+interface Props {
+  token: string
+}
+
+const SignIn: React.FC<Props> = ({ token }) => {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef<HTMLButtonElement>(null);
 
   //================================================================
   const user = useSelector<IState, IUserProfile>(state => state.user!);
-  const token = useSelector<IState, string | undefined | null>(state => state.token);
   //================================================================
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
@@ -74,11 +76,9 @@ const SignIn = () => {
     if (prevOpen.current === true && open === false) {
       anchorRef.current!.focus();
     }
-
     prevOpen.current = open;
   }, [open]);
-  console.log('TOKEN -> ' + token)
-  console.log('SignInButton render')
+
   return (
     <>
       <MyButton
@@ -99,7 +99,7 @@ const SignIn = () => {
         </div>{" "}
       </MyButton>
 
-      <DropdownMenuLogIn anchorRef={anchorRef} open={open} setOpen={setOpen} />
+      {!token && <DropdownMenuLogIn anchorRef={anchorRef} open={open} setOpen={setOpen} />}
     </>
   );
 };

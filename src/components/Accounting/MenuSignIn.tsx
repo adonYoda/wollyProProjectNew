@@ -22,7 +22,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { putUser } from "../../store/userSlice";
 import { setToken } from "../../store/tokenSlice";
-import { createToken } from "../../utils/constants";
+import { createToken, registrationPage } from "../../utils/constants";
 
 interface Props {
   anchorRef: any;
@@ -172,7 +172,7 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
                     <Button
                       variant="contained"
                       onClick={(e) => {
-                        navigate("/registration");
+                        navigate(registrationPage);
                         handleClose(e);
                       }}
                     >

@@ -29,9 +29,7 @@ const MyRoutes = styled(Routes)`
 
 
 const Main = () => {
-  const token = useSelector<IState, string | undefined | null>(
-    (state) => state.token
-  );
+  const token = useSelector<IState>(state => state.token!.token);
 
   return (
     <MyRoutes>
