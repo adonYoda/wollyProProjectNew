@@ -120,19 +120,19 @@ export const messageApi = createApi({
 
 
 //================================REFACTOR QUERIES================================
-    getInboxMessage: build.mutation<
+    getMailboxMessages: build.mutation<
       any,
       {
         limit: number;
         page: number;
         token: string;
+        folder: string;
       }
     >({
       query: (args) => {
-        const { limit, page, token } = args;
-        const folder = "inbox";
+        const { limit, page, token, folder } = args;
         return {
-          url: `/profile/mailbox?folder=inbox&limit=${limit}&page=${page}`,
+          url: `/profile/mailbox?folder=${folder}&limit=${limit}&page=${page}`,
           params: { folder, limit, page },
           method: "GET",
           headers: {
@@ -141,90 +141,90 @@ export const messageApi = createApi({
         };
       },
     }),
-    getSentMessage: build.mutation<
-      any,
-      {
-        limit: number;
-        page: number;
-        token: string;
-      }
-    >({
-      query: (args) => {
-        const { limit, page, token } = args;
-        const folder = "sent";
-        return {
-          url: `/profile/mailbox?folder=sent&limit=${limit}&page=${page}`,
-          params: { folder, limit, page },
-          method: "GET",
-          headers: {
-            Authorization: `Basic ${token}`,
-          },
-        };
-      },
-    }),
-    getStaredMessage: build.mutation<
-      any,
-      {
-        limit: number;
-        page: number;
-        token: string;
-      }
-    >({
-      query: (args) => {
-        const { limit, page, token } = args;
-        const folder = "stared";
-        return {
-          url: `/profile/mailbox?folder=stared&limit=${limit}&page=${page}`,
-          params: { folder, limit, page },
-          method: "GET",
-          headers: {
-            Authorization: `Basic ${token}`,
-          },
-        };
-      },
-    }),
-    getUnreadMessage: build.mutation<
-      any,
-      {
-        limit: number;
-        page: number;
-        token: string;
-      }
-    >({
-      query: (args) => {
-        const { limit, page, token } = args;
-        const folder = "unread";
-        return {
-          url: `/profile/mailbox?folder=unread&limit=${limit}&page=${page}`,
-          params: { folder, limit, page },
-          method: "GET",
-          headers: {
-            Authorization: `Basic ${token}`,
-          },
-        };
-      },
-    }),
-    getTrashedMessage: build.mutation<
-    any,
-    {
-      limit: number;
-      page: number;
-      token: string;
-    }
-  >({
-    query: (args) => {
-      const { limit, page, token } = args;
-      const folder = "trash";
-      return {
-        url: `/profile/mailbox?folder=${folder}&limit=${limit}&page=${page}`,
-        params: { folder, limit, page },
-        method: "GET",
-        headers: {
-          Authorization: `Basic ${token}`,
-        },
-      };
-    },
-  }),
+//     getSentMessage: build.mutation<
+//       any,
+//       {
+//         limit: number;
+//         page: number;
+//         token: string;
+//       }
+//     >({
+//       query: (args) => {
+//         const { limit, page, token } = args;
+//         const folder = "sent";
+//         return {
+//           url: `/profile/mailbox?folder=sent&limit=${limit}&page=${page}`,
+//           params: { folder, limit, page },
+//           method: "GET",
+//           headers: {
+//             Authorization: `Basic ${token}`,
+//           },
+//         };
+//       },
+//     }),
+//     getStaredMessage: build.mutation<
+//       any,
+//       {
+//         limit: number;
+//         page: number;
+//         token: string;
+//       }
+//     >({
+//       query: (args) => {
+//         const { limit, page, token } = args;
+//         const folder = "stared";
+//         return {
+//           url: `/profile/mailbox?folder=stared&limit=${limit}&page=${page}`,
+//           params: { folder, limit, page },
+//           method: "GET",
+//           headers: {
+//             Authorization: `Basic ${token}`,
+//           },
+//         };
+//       },
+//     }),
+//     getUnreadMessage: build.mutation<
+//       any,
+//       {
+//         limit: number;
+//         page: number;
+//         token: string;
+//       }
+//     >({
+//       query: (args) => {
+//         const { limit, page, token } = args;
+//         const folder = "unread";
+//         return {
+//           url: `/profile/mailbox?folder=unread&limit=${limit}&page=${page}`,
+//           params: { folder, limit, page },
+//           method: "GET",
+//           headers: {
+//             Authorization: `Basic ${token}`,
+//           },
+//         };
+//       },
+//     }),
+//     getTrashedMessage: build.mutation<
+//     any,
+//     {
+//       limit: number;
+//       page: number;
+//       token: string;
+//     }
+//   >({
+//     query: (args) => {
+//       const { limit, page, token } = args;
+//       const folder = "trash";
+//       return {
+//         url: `/profile/mailbox?folder=${folder}&limit=${limit}&page=${page}`,
+//         params: { folder, limit, page },
+//         method: "GET",
+//         headers: {
+//           Authorization: `Basic ${token}`,
+//         },
+//       };
+//     },
+//   }),
   //================================================================
   }),
 });
