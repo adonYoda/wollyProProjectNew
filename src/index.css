@@ -19,3 +19,6 @@
     color: #1b252c;
 	box-sizing: border-box;
 }
+* > a {
+	text-decoration: none;
+}
