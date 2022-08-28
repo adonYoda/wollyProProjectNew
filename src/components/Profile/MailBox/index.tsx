@@ -19,10 +19,10 @@ const MailPage = () => {
     
       <Container>
         <Grid  container spacing={2} >
-            <Grid style={{padding: '1'}} item xs={2}>
+            <Grid style={{padding: '1'}} item xs={3}>
             <ListDividers/>
             </Grid>
-            <Grid item xs={10}>
+            <Grid item xs={9}>
         <MessagePreview />
         </Grid>
         </Grid>
