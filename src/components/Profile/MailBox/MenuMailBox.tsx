@@ -12,6 +12,9 @@ import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import StarBorder from '@mui/icons-material/StarBorder';
 import MarkEmailUnreadIcon from '@mui/icons-material/MarkEmailUnread';
+import { useGetMailboxMessagesMutation } from '../../../API/messageApi';
+import { IMessageQuery, IState, IUserProfile } from '../../../types';
+import { useSelector } from 'react-redux';
 
 export default function NestedList() {
   const [open, setOpen] = React.useState(true);
@@ -20,16 +23,13 @@ export default function NestedList() {
     setOpen(!open);
   };
 
+  
+
   return (
     <List
       sx={{ width: '100%',  bgcolor: '' }}
       component="nav"
       aria-labelledby="nested-list-subheader"
-    //   subheader={
-    //     <ListSubheader component="div" id="nested-list-subheader">
-    //       Nested List Items
-    //     </ListSubheader>
-    //   }
     >
       <ListItemButton>
         <ListItemIcon>
@@ -52,7 +52,9 @@ export default function NestedList() {
       </ListItemButton>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-        <ListItemButton sx={{ pl: 4 }}>
+        <ListItemButton sx={{ pl: 4 }} onClick ={() => {
+           //TODO
+        } }>
             <ListItemIcon>
               < MarkEmailUnreadIcon/>
             </ListItemIcon>
@@ -64,14 +66,15 @@ export default function NestedList() {
             </ListItemIcon>
             <ListItemText primary="Starred" />
           </ListItemButton>
-          <ListItemButton sx={{ pl: 4 }}>
+          
+        </List>
+      </Collapse>
+      <ListItemButton>
             <ListItemIcon>
               < DeleteOutlineIcon/>
             </ListItemIcon>
             <ListItemText primary="Deleted" />
           </ListItemButton>
-        </List>
-      </Collapse>
     </List>
   );
 }

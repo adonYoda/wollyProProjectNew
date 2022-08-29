@@ -72,3 +72,10 @@ export interface IMessageResponse extends IMessage {
   sent: boolean;
   trashed: boolean;
 }
+
+export interface IMessageQuery {
+  limit: number;
+    page: number;
+    token: string;
+    folder: string;
+}

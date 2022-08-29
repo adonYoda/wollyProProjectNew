@@ -1,6 +1,7 @@
 import { Grid } from '@mui/material'
 import React from 'react'
 import styled from 'styled-components'
+import { useGetMailboxMessagesMutation } from '../../../API/messageApi'
 import ListDividers from './MenuMailBox'
 import MessagePreview from './MessagePreview'
 
@@ -15,6 +16,11 @@ const Container = styled.div`
 
 
 const MailPage = () => {
+
+    const [getMailboxMessages, {isError}] = useGetMailboxMessagesMutation();
+
+
+
   return (
     
       <Container>

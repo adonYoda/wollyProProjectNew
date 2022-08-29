@@ -12,7 +12,7 @@ const Container = styled.div`
 const MessagePreview = () => {
   return (
     <Container>
-
+        
     </Container>
   )
 }
