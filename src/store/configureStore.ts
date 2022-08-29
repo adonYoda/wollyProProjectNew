@@ -3,12 +3,12 @@ import { accountingApi } from "../API/accountingApi";
 import userReducer from "./userSlice";
 import tokenReducer from "./tokenSlice";
 
-
 export const store = configureStore({
   reducer: {
     [accountingApi.reducerPath]: accountingApi.reducer,
     user: userReducer,
-    token: tokenReducer
+    token: tokenReducer,
+    
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(accountingApi.middleware),

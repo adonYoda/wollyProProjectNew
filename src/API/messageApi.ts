@@ -121,7 +121,7 @@ export const messageApi = createApi({
 
 
 //================================REFACTOR QUERIES================================
-    getMailboxMessages: build.mutation<
+    getMailboxMessages: build.query<
       any,
       {
         limit: number;
@@ -134,7 +134,7 @@ export const messageApi = createApi({
         const { limit, page, token, folder } = args;
         return {
           url: `/profile/mailbox?folder=${folder}&limit=${limit}&page=${page}`,
-          params: { folder, limit, page },
+          //params: { folder, limit, page },
           method: "GET",
           headers: {
             Authorization: `Basic ${token}`,
@@ -230,4 +230,4 @@ export const messageApi = createApi({
   }),
 });
 
-export const {useGetMailboxMessagesMutation} = messageApi
+export const {useGetMailboxMessagesQuery} = messageApi

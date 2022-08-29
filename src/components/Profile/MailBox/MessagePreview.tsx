@@ -6,13 +6,15 @@ const Container = styled.div`
     height: 105px;
     background-color: green;
 `
+interface Props {
+  data: []
+}
 
 
-
-const MessagePreview = () => {
+const MessagePreview: React.FC<Props>= ({data}) => {
   return (
     <Container>
-        
+        <h1>`${data}`</h1>
     </Container>
   )
 }

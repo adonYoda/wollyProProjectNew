@@ -12,15 +12,20 @@ import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import StarBorder from '@mui/icons-material/StarBorder';
 import MarkEmailUnreadIcon from '@mui/icons-material/MarkEmailUnread';
-import { useGetMailboxMessagesMutation } from '../../../API/messageApi';
 import { IMessageQuery, IState, IUserProfile } from '../../../types';
 import { useSelector } from 'react-redux';
 
-export default function NestedList() {
+interface Props{
+    changeArgs: (args:string) => void
+}
+
+
+const NestedList: React.FC<Props> = ({changeArgs}) =>{
   const [open, setOpen] = React.useState(true);
 
-  const handleClick = () => {
+  const handleClick =() => {
     setOpen(!open);
+    changeArgs("sent")
   };
 
   
@@ -78,3 +83,6 @@ export default function NestedList() {
     </List>
   );
 }
+
+
+export default NestedList;
