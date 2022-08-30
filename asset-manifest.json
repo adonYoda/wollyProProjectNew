@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/static/css/main.460ea030.css",
+    "main.js": "/static/js/main.0aca10dd.js",
+    "static/js/787.33b376eb.chunk.js": "/static/js/787.33b376eb.chunk.js",
+    "static/media/LoggoButton.svg": "/static/media/LoggoButton.3fe18cb1e1f851ffb1e99748d83eed76.svg",
+    "static/media/4xStones_01.136.jpg": "/static/media/4xStones_01.136.f0301090ab7570f40099.jpg",
+    "static/media/2xStones_01.143.jpg": "/static/media/2xStones_01.143.8224ecc4acd68fead540.jpg",
+    "static/media/Krappen_Fassung_RIng.168.jpg": "/static/media/Krappen_Fassung_RIng.168.3255430540ade23f8a24.jpg",
+    "static/media/3_Stone_RIng.150.jpg": "/static/media/3_Stone_RIng.150.7974a18c0afc8ac8351d.jpg",
+    "static/media/Kasten_Fassung_RIng.167.jpg": "/static/media/Kasten_Fassung_RIng.167.5367ba93bd77473b38d5.jpg",
+    "static/media/BroadwayRegular.ttf": "/static/media/BroadwayRegular.f86d1b2cbfa07b705cef.ttf",
+    "static/media/1_Stein_Ring_165.jpg": "/static/media/1_Stein_Ring_165.6218b633f054dfa16204.jpg",
+    "static/media/1_Stein_Ring.163.jpg": "/static/media/1_Stein_Ring.163.f7aab4f329652760d846.jpg",
+    "static/media/BroadwayNormal.ttf": "/static/media/BroadwayNormal.a117ed3dec9e6ae0d481.ttf",
+    "index.html": "/index.html",
+    "main.460ea030.css.map": "/static/css/main.460ea030.css.map",
+    "main.0aca10dd.js.map": "/static/js/main.0aca10dd.js.map",
+    "787.33b376eb.chunk.js.map": "/static/js/787.33b376eb.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.460ea030.css",
+    "static/js/main.0aca10dd.js"
+  ]
+}
