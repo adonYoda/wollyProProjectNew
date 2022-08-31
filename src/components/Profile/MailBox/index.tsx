@@ -4,8 +4,9 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { useGetMailboxMessagesQuery } from "../../../API/messageApi";
 import { IMessageQuery, IState } from "../../../types";
+import InputOutcomingMessage from "./InputOutcomingMessage";
 import ListDividers from "./MenuMailBox";
-import MessagePreview from "./MessagePreview";
+import Message from "./Message";
 
 const Container = styled.div`
   width: 850px;
@@ -17,6 +18,7 @@ interface Props {}
 
 const MailPage: React.FC<Props> = () => {
   const [folder, setFolder] = useState<string>("inbox");
+  const [flag, setFlag] = useState(false)
   const {
     data = [],
     isLoading,
@@ -32,10 +34,11 @@ const MailPage: React.FC<Props> = () => {
     <Container>
       <Grid container spacing={2}>
         <Grid style={{ padding: "1" }} item xs={4}>
-          <ListDividers changeFolder={setFolder} />
+          <ListDividers changeFolder={setFolder} changeFlag={setFlag} />
         </Grid>
         <Grid item xs={8}>
-          <MessagePreview data={data} />
+           { flag && <InputOutcomingMessage/>}
+          { !flag && <Message data={data} />}
         </Grid>
       </Grid>
     </Container>

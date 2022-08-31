@@ -16,9 +16,10 @@ import MarkEmailReadIcon from "@mui/icons-material/MarkEmailRead";
 
 interface Props {
   changeFolder: (args: string) => void;
+  changeFlag: (flag: boolean) => void;
 }
 
-const NestedList: React.FC<Props> = ({ changeFolder }) => {
+const NestedList: React.FC<Props> = ({ changeFolder, changeFlag }) => {
   const [open, setOpen] = React.useState(false);
 
   const handleClick = () => {
@@ -32,7 +33,7 @@ const NestedList: React.FC<Props> = ({ changeFolder }) => {
       aria-labelledby="nested-list-subheader"
     >
       <ListItemButton
-      //   onClick={() => }
+        onClick={() => changeFlag(true) }
       >
         <ListItemIcon>
           <SendIcon />
@@ -41,8 +42,9 @@ const NestedList: React.FC<Props> = ({ changeFolder }) => {
       </ListItemButton>
       <ListItemButton
         onClick={() => {
+            changeFlag(false)
           changeFolder("sent");
-          handleClick();
+          
         }}
       >
         <ListItemIcon>
@@ -58,9 +60,10 @@ const NestedList: React.FC<Props> = ({ changeFolder }) => {
       </ListItemButton>
       <ListItemButton
         onClick={() => {
+            changeFlag(false)
           changeFolder("inbox");
           handleClick();
-        }}
+          }}
       >
         <ListItemIcon>
           <InboxIcon />
@@ -73,7 +76,9 @@ const NestedList: React.FC<Props> = ({ changeFolder }) => {
           <ListItemButton
             sx={{ pl: 4 }}
             onClick={() => {
+                changeFlag(false)
               changeFolder("unread");
+             
             }}
           >
             <ListItemIcon>
@@ -84,6 +89,7 @@ const NestedList: React.FC<Props> = ({ changeFolder }) => {
           <ListItemButton
             sx={{ pl: 4 }}
             onClick={() => {
+                changeFlag(false)
               changeFolder("stared");
             }}
           >
@@ -96,6 +102,7 @@ const NestedList: React.FC<Props> = ({ changeFolder }) => {
       </Collapse>
       <ListItemButton
         onClick={() => {
+            changeFlag(false)
           changeFolder("trash");
         }}
       >
