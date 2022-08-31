@@ -14,7 +14,7 @@ interface Props {
 const MessagePreview: React.FC<Props>= ({data}) => {
   return (
     <Container>
-        <h1>`${data}`</h1>
+        {data}
     </Container>
   )
 }

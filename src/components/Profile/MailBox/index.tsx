@@ -16,25 +16,25 @@ const Container = styled.div`
 interface Props {}
 
 const MailPage: React.FC<Props> = () => {
-  const [args, setArgs] = useState<string>("sent");
+  const [folder, setFolder] = useState<string>("inbox");
   const {
     data = [],
     isLoading,
     isError,
   } = useGetMailboxMessagesQuery({
-    limit: 1,
-    page: 1,
+    limit: 15,
+    page: 0,
     token: useSelector<IState>((state) => state.token!.token) as string,
-    folder: args,
+    folder: folder,
   });
 
   return (
     <Container>
       <Grid container spacing={2}>
-        <Grid style={{ padding: "1" }} item xs={3}>
-          <ListDividers changeArgs={setArgs} />
+        <Grid style={{ padding: "1" }} item xs={4}>
+          <ListDividers changeFolder={setFolder} />
         </Grid>
-        <Grid item xs={9}>
+        <Grid item xs={8}>
           <MessagePreview data={data} />
         </Grid>
       </Grid>
