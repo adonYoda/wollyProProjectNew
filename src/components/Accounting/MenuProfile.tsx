@@ -3,6 +3,7 @@ import { Avatar, ClickAwayListener, Divider, Grid, Grow, ListItemIcon, MenuItem,
 import React from 'react'
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
+import styled from 'styled-components';
 import { logout } from '../../store/tokenSlice';
 import { homePage, profilePage } from '../../utils/constants';
 
@@ -11,6 +12,9 @@ interface Props {
 	open: boolean;
 	setOpen: (value: boolean) => void;
 }
+const PopperStyled = styled(Popper)`
+  padding-top: 10px;
+`;
 
 const MenuProfile: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
 
@@ -27,7 +31,7 @@ const MenuProfile: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
 	};
 
 	return (
-		<Popper
+		<PopperStyled
 			open={open}
 			anchorEl={anchorRef.current}
 			role={undefined}
@@ -49,23 +53,15 @@ const MenuProfile: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
 				>
 					<Paper>
 						<ClickAwayListener onClickAway={handleClose}>
-							<div>
+							<div className='wrapper'>
 								<MenuItem onClick={e => {
 									navigate(profilePage);
 									handleClose(e);
 								}}>
-									<Avatar /> Profile
+									<Avatar style={{ marginRight: '10px' }} />
+									Profile
 								</MenuItem>
-								<MenuItem>
-									<Avatar /> My account
-								</MenuItem>
-								<Divider />
-								<MenuItem>
-									<ListItemIcon>
-										<Settings fontSize="small" />
-									</ListItemIcon>
-									Settings
-								</MenuItem>
+								<Divider style={{ margin: '0' }} />
 								<MenuItem onClick={e => {
 									dispatch(logout());
 									navigate(homePage);
@@ -81,7 +77,7 @@ const MenuProfile: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
 					</Paper>
 				</Grow>
 			)}
-		</Popper>
+		</PopperStyled>
 	)
 }
 
