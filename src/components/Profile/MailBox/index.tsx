@@ -1,5 +1,6 @@
+import { DataArray } from "@mui/icons-material";
 import { Grid } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { useGetMailboxMessagesQuery } from "../../../API/messageApi";
@@ -16,20 +17,19 @@ const Container = styled.div`
 `;
 interface Props {}
 
-const MailPage: React.FC<Props> = () => {
+const MailPage: React.FC<Props> =  () => {
   const [folder, setFolder] = useState<string>("inbox");
   const [flag, setFlag] = useState(false)
-  const {
-    data = [],
-    isLoading,
-    isError,
-  } = useGetMailboxMessagesQuery({
+  const {data = []}= useGetMailboxMessagesQuery({
     limit: 15,
     page: 0,
     token: useSelector<IState>((state) => state.token!.token) as string,
     folder: folder,
   });
-
+ 
+  console.log(data);
+  
+  
   return (
     <Container>
       <Grid container spacing={2}>
@@ -38,7 +38,7 @@ const MailPage: React.FC<Props> = () => {
         </Grid>
         <Grid item xs={8}>
            { flag && <InputOutcomingMessage/>}
-          { !flag && <Message data={data} />}
+          { !flag && <Message data ={data} />}
         </Grid>
       </Grid>
     </Container>
