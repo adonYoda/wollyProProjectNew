@@ -35,39 +35,39 @@ const InputOutcomingMessage = () => {
     content: "",
   });
 
-  const [addMessage, {isError, isLoading}] = useAddMessageMutation({})
+  const [addMessage, { isError, isLoading }] = useAddMessageMutation({})
 
   const handleChange = ({
     target: { name, value },
   }: React.ChangeEvent<HTMLTextAreaElement>) =>
     setMessageState((prev) => ({ ...prev, [name]: value }));
 
-    const handleAddMessage = () => {
-      console.log(messageState);
-      const response = addMessage(
-     messageState
-      ).unwrap()
-      console.log(response);
-      
-    }
-  
+  const handleAddMessage = () => {
+    console.log(messageState);
+    const response = addMessage(
+      messageState
+    ).unwrap()
+    console.log(response);
+
+  }
+
 
   return (
     <ContainerStyled>
       <TextField fullWidth name="recepient" label="enter recepient" variant="filled" onChange={handleChange} />
       <TextField fullWidth name="subject" label="enter subject" variant="filled" onChange={handleChange} />
-      <textarea name="content" style={{ outline: "0"}} onChange={handleChange} />
-     {/* FIX ICONS!!! */}
+      <textarea name="content" style={{ outline: "0" }} onChange={handleChange} />
+      {/* FIX ICONS!!! */}
       <Stack direction="row" spacing={1}  >
-      <Button  startIcon={< DraftsIcon/>}>
-        Save to drafts
-      </Button>
-      <Button   endIcon={<SendIcon />}
-      onClick={handleAddMessage}
-      >
-        Send
-      </Button>
-    </Stack>
+        <Button startIcon={< DraftsIcon />}>
+          Save to drafts
+        </Button>
+        <Button endIcon={<SendIcon />}
+          onClick={handleAddMessage}
+        >
+          Send
+        </Button>
+      </Stack>
     </ContainerStyled>
   );
 };
