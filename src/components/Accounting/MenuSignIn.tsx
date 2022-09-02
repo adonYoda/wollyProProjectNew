@@ -23,12 +23,17 @@ import { useNavigate } from "react-router";
 import { putUser } from "../../store/userSlice";
 import { setToken } from "../../store/tokenSlice";
 import { createToken, profilePage, registrationPage } from "../../utils/constants";
+import styled from "styled-components";
 
 interface Props {
   anchorRef: any;
   open: boolean;
   setOpen: (value: boolean) => void;
 }
+
+const PopperStyled = styled(Popper)`
+  padding-top: 10px;
+`;
 
 const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
   const [formState, setFormState] = useState({
@@ -68,7 +73,7 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
   };
 
   return (
-    <Popper
+    <PopperStyled
       open={open}
       anchorEl={anchorRef.current}
       role={undefined}
@@ -186,7 +191,7 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
           </Paper>
         </Grow>
       )}
-    </Popper>
+    </PopperStyled>
   );
 };
 

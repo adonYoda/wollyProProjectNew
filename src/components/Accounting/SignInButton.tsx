@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Avatar, Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import PersonIcon from '@mui/icons-material/Person';
@@ -96,7 +96,7 @@ const SignIn: React.FC<Props> = ({ token }) => {
           Sign<span>In</span>
         </span>}
         <div className="circle">
-          <PersonIcon style={{ width: "1.3em", height: "1.3em" }} />
+          <Avatar alt={user.login} src={user.profilePicture} />
         </div>{" "}
       </MyButton>
 
