@@ -4,6 +4,7 @@ import { MyContainer } from '../../styles/Container.styled';
 import ProfilePageMain from './ProfilePageMain';
 import ProfilePageSidebar from './ProfilePageSidebar';
 
+const sidebarWidth = 185;
 const ProfilePageWrapper = styled.div`
 	min-width: 100%;
 	& * {
@@ -11,7 +12,7 @@ const ProfilePageWrapper = styled.div`
 	}
 `;
 const ProfilePageSidebarWrapper = styled.div`
-	width: 185px;
+	width: ${sidebarWidth}px;
 `;
 const Content = styled.div`
 	display: flex;
@@ -20,7 +21,12 @@ const Content = styled.div`
 const ProfilePageMainStyled = styled.div`
 	display: flex;
 	flex-direction: column;
-	flex: 1 1 auto;
+	flex: 0 1 920px;
+	width: 920px;
+	position: relative;
+	margin-left: -${sidebarWidth}px;
+	left: 50%;
+	transform: translateX(-50%);
 `;
 
 const ProfilePage = () => {

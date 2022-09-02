@@ -5,8 +5,19 @@ import { profilePage, profilePages } from '../../utils/constants';
 import HowToContent from './HowToContent'
 import ProfileTopBar from './ProfileTopBar';
 
+const HowTo = styled.div`
+	& .howto {
+		&__title {
+			padding: 0 0 0 40px;
+		}
+	}
+	
+`;
+// const HowToContentWrapper = styled.div`
+// 	background-color: #ffffff88;
+// 	height: 240px;
 
-
+// `;
 const ProfilePageIntro = () => {
 
 	const {
@@ -17,10 +28,10 @@ const ProfilePageIntro = () => {
 	return (
 		<>
 			<ProfileTopBar />
-			{/* <HowTo>
+			<HowTo>
 				<h3 className='howto__title'>How to start:</h3>
 				<HowToContent />
-			</HowTo> */}
+			</HowTo>
 			{/* <Hints>
 				<Hint>
 					<h3 className='hints__title'>Shipping</h3>
