@@ -1,19 +1,26 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { RootState } from "../store/configureStore";
 import { baseUrl } from "../utils/constants";
 
 
 export const messageApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: baseUrl,
+     prepareHeaders: (headers, { getState }) => {
+      const token = (getState() as RootState).token.token;
+      if (token) {
+        headers.set("Authorization", `Basic ${token}`);
+      }
+      return headers;
+    },
   }),
   endpoints: (build) => ({
     addMessage: build.mutation({
-      query: ({ message, token }) => ({
+      query: (message) => ({
         url: "/profile/mailbox",
         method: "POST",
-        body: message,
-        headers: {
-          Authorization: `Basic ${token}`,
+        body:{
+         message
         },
       }),
     }),
@@ -131,14 +138,10 @@ export const messageApi = createApi({
       }
     >({
       query: (args) => {
-        const { limit, page, token, folder } = args;
+        const {limit, page,folder} = args;
         return {
           url: `/profile/mailbox?folder=${folder}&limit=${limit}&page=${page}`,
-          //params: { folder, limit, page },
           method: "GET",
-          headers: {
-            Authorization: `Basic ${token}`,
-          },
         };
       },
     }),
@@ -230,4 +233,6 @@ export const messageApi = createApi({
   }),
 });
 
-export const {useGetMailboxMessagesQuery} = messageApi
+export const {useGetMailboxMessagesQuery, 
+  useAddMessageMutation
+} = messageApi
