@@ -30,7 +30,7 @@ const ContainerStyled = styled.div`
 
 const InputOutcomingMessage = () => {
   const [messageState, setMessageState] = useState({
-    recepient: "",
+    recipient: "",
     subject: "",
     content: "",
   });
@@ -54,7 +54,7 @@ const InputOutcomingMessage = () => {
 
   return (
     <ContainerStyled>
-      <TextField fullWidth name="recepient" label="enter recepient" variant="filled" onChange={handleChange} />
+      <TextField fullWidth name="recipient" label="enter recipient" variant="filled" onChange={handleChange} />
       <TextField fullWidth name="subject" label="enter subject" variant="filled" onChange={handleChange} />
       <textarea name="content" style={{ outline: "0" }} onChange={handleChange} />
       {/* FIX ICONS!!! */}

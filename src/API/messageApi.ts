@@ -20,7 +20,7 @@ export const messageApi = createApi({
         url: "/profile/mailbox",
         method: "POST",
         body:{
-         message
+         ...message
         },
       }),
     }),
