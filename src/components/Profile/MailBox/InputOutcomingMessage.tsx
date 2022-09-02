@@ -1,7 +1,12 @@
-import { TextField } from "@mui/material";
+import { Button, Stack, TextField } from "@mui/material";
 import { Container } from "@mui/system";
 import React, { useState } from "react";
 import styled from "styled-components";
+import SendIcon from '@mui/icons-material/Send';
+
+import DraftsIcon from '@mui/icons-material/Drafts';
+import { useAddMessageMutation } from "../../../API/messageApi";
+
 
 // const ContainerStyled = styled(Container)`
 const ContainerStyled = styled.div`
@@ -27,19 +32,42 @@ const InputOutcomingMessage = () => {
   const [messageState, setMessageState] = useState({
     recepient: "",
     subject: "",
-    message: "",
+    content: "",
   });
+
+  const [addMessage, {isError, isLoading}] = useAddMessageMutation({})
 
   const handleChange = ({
     target: { name, value },
-  }: React.ChangeEvent<HTMLInputElement>) =>
+  }: React.ChangeEvent<HTMLTextAreaElement>) =>
     setMessageState((prev) => ({ ...prev, [name]: value }));
+
+    const handleAddMessage = () => {
+      console.log(messageState);
+      const response = addMessage(
+     messageState
+      ).unwrap()
+      console.log(response);
+      
+    }
+  
 
   return (
     <ContainerStyled>
       <TextField fullWidth name="recepient" label="enter recepient" variant="filled" onChange={handleChange} />
       <TextField fullWidth name="subject" label="enter subject" variant="filled" onChange={handleChange} />
-      <textarea name="message" />
+      <textarea name="content" style={{ outline: "0"}} onChange={handleChange} />
+     {/* FIX ICONS!!! */}
+      <Stack direction="row" spacing={1}  >
+      <Button  startIcon={< DraftsIcon/>}>
+        Save to drafts
+      </Button>
+      <Button   endIcon={<SendIcon />}
+      onClick={handleAddMessage}
+      >
+        Send
+      </Button>
+    </Stack>
     </ContainerStyled>
   );
 };
