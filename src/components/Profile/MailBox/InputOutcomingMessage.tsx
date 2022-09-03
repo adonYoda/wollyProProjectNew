@@ -45,6 +45,10 @@ const InputOutcomingMessage = () => {
     console.log(messageState);
     const response = await addMessage(messageState).unwrap();
     console.log(response);
+<<<<<<< HEAD
+=======
+    setMessageState(prev => ({ ...prev, recipient: '', subject: '', content: '' }));
+>>>>>>> 5d788071a2867007c9a4678cdfca17be57ec3fd1
   };
 
   return (
@@ -55,6 +59,7 @@ const InputOutcomingMessage = () => {
         label="enter recipient"
         variant="filled"
         onChange={handleChange}
+        value={messageState.recipient}
       />
       <TextField
         fullWidth
@@ -62,11 +67,13 @@ const InputOutcomingMessage = () => {
         label="enter subject"
         variant="filled"
         onChange={handleChange}
+        value={messageState.subject}
       />
       <textarea
         name="content"
         style={{ outline: "0" }}
         onChange={handleChange}
+        value={messageState.content}
       />
       <Stack direction="row" spacing={1}>
         <Button
@@ -87,5 +94,4 @@ const InputOutcomingMessage = () => {
     </ContainerStyled>
   );
 };
-
 export default InputOutcomingMessage;

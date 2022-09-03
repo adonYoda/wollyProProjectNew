@@ -97,7 +97,7 @@ const SignIn: React.FC<Props> = ({ token }) => {
         </span>}
         <div className="circle">
           <Avatar alt={user.login} src={user.profilePicture} />
-        </div>{" "}
+        </div>
       </MyButton>
 
       {!token && <DropdownMenuLogIn anchorRef={anchorRef} open={open} setOpen={setOpen} />}
