@@ -45,10 +45,9 @@ const InputOutcomingMessage = () => {
     console.log(messageState);
     const response = await addMessage(messageState).unwrap();
     console.log(response);
-<<<<<<< HEAD
-=======
+
     setMessageState(prev => ({ ...prev, recipient: '', subject: '', content: '' }));
->>>>>>> 5d788071a2867007c9a4678cdfca17be57ec3fd1
+
   };
 
   return (

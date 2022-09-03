@@ -17,7 +17,7 @@ const MessagePreview: React.FC<Props> = ({data}) => {
     
       <List style={{width: '100%', height: '100%'}}> 
       {data.map(({author, subject, content}, id) => (
-          <ListItem button key={id} style={{width: '100%', height: '100%'}} >
+          <ListItem button key={id} style={{width: '100%', height: '100%', backgroundColor: 'green'}} >
             <ListItemAvatar>
               <Avatar alt="Profile Picture" src={""} />
             </ListItemAvatar>
