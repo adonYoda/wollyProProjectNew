@@ -1,12 +1,18 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { RootState } from "../store/configureStore";
+import { Dispatch } from "../types";
 import { baseUrl } from "../utils/constants";
 
 
+type Id = {
+  id: number
+}
+
 export const messageApi = createApi({
+  tagTypes: ["Messages"],
   baseQuery: fetchBaseQuery({
     baseUrl: baseUrl,
-     prepareHeaders: (headers, { getState }) => {
+    prepareHeaders: (headers, { getState }) => {
       const token = (getState() as RootState).token.token;
       if (token) {
         headers.set("Authorization", `Basic ${token}`);
@@ -19,8 +25,8 @@ export const messageApi = createApi({
       query: (message) => ({
         url: "/profile/mailbox",
         method: "POST",
-        body:{
-         ...message
+        body: {
+          ...message,
         },
       }),
     }),
@@ -125,114 +131,133 @@ export const messageApi = createApi({
       },
     }),
 
-
-
-//================================REFACTOR QUERIES================================
+    //================================REFACTOR QUERIES================================
     getMailboxMessages: build.query<
       any,
       {
         limit: number;
         page: number;
-        token: string;
         folder: string;
       }
     >({
       query: (args) => {
-        const {limit, page,folder} = args;
+        const { limit, page, folder } = args;
         return {
           url: `/profile/mailbox?folder=${folder}&limit=${limit}&page=${page}`,
           method: "GET",
         };
       },
+      providesTags: (result) => result
+      ? [
+        ...result.map((id: any) => ({ type: 'Messages', id })),
+        { type: 'Messages', id: 'LIST' },
+      ]
+    : [{ type: 'Messages', id: 'LIST' }],
     }),
-//     getSentMessage: build.mutation<
-//       any,
-//       {
-//         limit: number;
-//         page: number;
-//         token: string;
-//       }
-//     >({
-//       query: (args) => {
-//         const { limit, page, token } = args;
-//         const folder = "sent";
-//         return {
-//           url: `/profile/mailbox?folder=sent&limit=${limit}&page=${page}`,
-//           params: { folder, limit, page },
-//           method: "GET",
-//           headers: {
-//             Authorization: `Basic ${token}`,
-//           },
-//         };
-//       },
-//     }),
-//     getStaredMessage: build.mutation<
-//       any,
-//       {
-//         limit: number;
-//         page: number;
-//         token: string;
-//       }
-//     >({
-//       query: (args) => {
-//         const { limit, page, token } = args;
-//         const folder = "stared";
-//         return {
-//           url: `/profile/mailbox?folder=stared&limit=${limit}&page=${page}`,
-//           params: { folder, limit, page },
-//           method: "GET",
-//           headers: {
-//             Authorization: `Basic ${token}`,
-//           },
-//         };
-//       },
-//     }),
-//     getUnreadMessage: build.mutation<
-//       any,
-//       {
-//         limit: number;
-//         page: number;
-//         token: string;
-//       }
-//     >({
-//       query: (args) => {
-//         const { limit, page, token } = args;
-//         const folder = "unread";
-//         return {
-//           url: `/profile/mailbox?folder=unread&limit=${limit}&page=${page}`,
-//           params: { folder, limit, page },
-//           method: "GET",
-//           headers: {
-//             Authorization: `Basic ${token}`,
-//           },
-//         };
-//       },
-//     }),
-//     getTrashedMessage: build.mutation<
-//     any,
-//     {
-//       limit: number;
-//       page: number;
-//       token: string;
-//     }
-//   >({
-//     query: (args) => {
-//       const { limit, page, token } = args;
-//       const folder = "trash";
-//       return {
-//         url: `/profile/mailbox?folder=${folder}&limit=${limit}&page=${page}`,
-//         params: { folder, limit, page },
-//         method: "GET",
-//         headers: {
-//           Authorization: `Basic ${token}`,
-//         },
-//       };
-//     },
-//   }),
-  //================================================================
+    //     getSentMessage: build.mutation<
+    //       any,
+    //       {
+    //         limit: number;
+    //         page: number;
+    //         token: string;
+    //       }
+    //     >({
+    //       query: (args) => {
+    //         const { limit, page, token } = args;
+    //         const folder = "sent";
+    //         return {
+    //           url: `/profile/mailbox?folder=sent&limit=${limit}&page=${page}`,
+    //           params: { folder, limit, page },
+    //           method: "GET",
+    //           headers: {
+    //             Authorization: `Basic ${token}`,
+    //           },
+    //         };
+    //       },
+    //     }),
+    //     getStaredMessage: build.mutation<
+    //       any,
+    //       {
+    //         limit: number;
+    //         page: number;
+    //         token: string;
+    //       }
+    //     >({
+    //       query: (args) => {
+    //         const { limit, page, token } = args;
+    //         const folder = "stared";
+    //         return {
+    //           url: `/profile/mailbox?folder=stared&limit=${limit}&page=${page}`,
+    //           params: { folder, limit, page },
+    //           method: "GET",
+    //           headers: {
+    //             Authorization: `Basic ${token}`,
+    //           },
+    //         };
+    //       },
+    //     }),
+    //     getUnreadMessage: build.mutation<
+    //       any,
+    //       {
+    //         limit: number;
+    //         page: number;
+    //         token: string;
+    //       }
+    //     >({
+    //       query: (args) => {
+    //         const { limit, page, token } = args;
+    //         const folder = "unread";
+    //         return {
+    //           url: `/profile/mailbox?folder=unread&limit=${limit}&page=${page}`,
+    //           params: { folder, limit, page },
+    //           method: "GET",
+    //           headers: {
+    //             Authorization: `Basic ${token}`,
+    //           },
+    //         };
+    //       },
+    //     }),
+    //     getTrashedMessage: build.mutation<
+    //     any,
+    //     {
+    //       limit: number;
+    //       page: number;
+    //       token: string;
+    //     }
+    //   >({
+    //     query: (args) => {
+    //       const { limit, page, token } = args;
+    //       const folder = "trash";
+    //       return {
+    //         url: `/profile/mailbox?folder=${folder}&limit=${limit}&page=${page}`,
+    //         params: { folder, limit, page },
+    //         method: "GET",
+    //         headers: {
+    //           Authorization: `Basic ${token}`,
+    //         },
+    //       };
+    //     },
+    //   }),
+    //================================================================
   }),
 });
 
-export const {useGetMailboxMessagesQuery, 
-  useAddMessageMutation
-} = messageApi
+export const { useGetMailboxMessagesQuery, useAddMessageMutation } = messageApi;
+
+// export const getMessages = (args: any) => {
+//   return () => {
+//     const { limit, page, folder } = args;
+//     const token = localStorage.getItem("token");
+//     fetch(`/profile/mailbox?folder=${folder}&limit=10&page=${page}`, {
+//       method: "GET",
+//       headers: { Authorization: `Basic ${token}` },
+//     })
+//     .then((response)=> {
+//       if(response.ok){
+//         return response.json();
+//       }else {console.log('ERROR');
+//       }
+//     })
+    
+//   };
+// };

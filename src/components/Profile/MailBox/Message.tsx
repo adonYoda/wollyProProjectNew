@@ -9,14 +9,14 @@ const Container = styled.div`
     background-color: green;
 `
 interface Props {
-  data: any
+  data: []
 }
 
 
 const Message: React.FC<Props>= ({data}) => {
   return (
     <Container>
-        <MessagePreview messages = {data} />
+        <MessagePreview  data={data}/>
         {/* <MessageFull/> */}
     </Container>
   )

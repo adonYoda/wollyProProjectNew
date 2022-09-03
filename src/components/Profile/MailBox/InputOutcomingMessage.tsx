@@ -41,13 +41,10 @@ const InputOutcomingMessage = () => {
   }: React.ChangeEvent<HTMLTextAreaElement>) =>
     setMessageState((prev) => ({ ...prev, [name]: value }));
 
-  const handleAddMessage = () => {
+  const handleAddMessage = async () => {
     console.log(messageState);
-    const response = addMessage(messageState).unwrap();
+    const response = await addMessage(messageState).unwrap();
     console.log(response);
-    setMessageState((prev) => ({ ...prev, recipient: "",
-    subject: "",
-    content: "", }));
   };
 
   return (
@@ -71,7 +68,6 @@ const InputOutcomingMessage = () => {
         style={{ outline: "0" }}
         onChange={handleChange}
       />
-      {/* FIX ICONS!!! */}
       <Stack direction="row" spacing={1}>
         <Button
           onClick={() =>

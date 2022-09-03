@@ -3,20 +3,20 @@ import { Container } from '@mui/system'
 import React from 'react'
 
 interface Props {
-  messages: any
+  data: []
 }
 
 
-const MessagePreview: React.FC<Props> = ({messages}) => {
+const MessagePreview: React.FC<Props> = ({data}) => {
 
-  console.log(messages);
+  
   
 
 
   return (
     
       <List style={{width: '100%', height: '100%'}}> 
-      {/* {messages.map(({author, subject, content}, id) => (
+      {data.map(({author, subject, content}, id) => (
           <ListItem button key={id} style={{width: '100%', height: '100%'}} >
             <ListItemAvatar>
               <Avatar alt="Profile Picture" src={""} />
@@ -26,7 +26,7 @@ const MessagePreview: React.FC<Props> = ({messages}) => {
           </ListItem>
         ))
         }
-      */}
+     
       </List>
    
   )

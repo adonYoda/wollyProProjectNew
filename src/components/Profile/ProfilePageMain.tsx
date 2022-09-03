@@ -23,10 +23,13 @@ const ProfilePageMain = () => {
 		setUpPage,
 	} = profilePages;
 
+	
+
+
 	return (
 		<Routes>
 			<Route path={introPage} element={<ProfilePageIntro />} />
-			<Route path={mailBoxPage} element={<MailPage />} />
+			<Route path={mailBoxPage} element={<MailPage />}/>
 			{/* <Route path={paymentMethodsPage} element={<PaymentMethodPage />} /> */}
 			{/* <Route path={purchaseHistoryPage} element={<PurchaseHistoryPage />} /> */}
 			{/* <Route path={savedPage} element={<SavedPage />} /> */}
