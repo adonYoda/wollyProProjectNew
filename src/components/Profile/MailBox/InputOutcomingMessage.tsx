@@ -6,6 +6,8 @@ import SendIcon from "@mui/icons-material/Send";
 
 import DraftsIcon from "@mui/icons-material/Drafts";
 import { useAddMessageMutation } from "../../../API/messageApi";
+import { useDispatch } from "react-redux";
+import  { setDrafts } from "../../../store/draftMessageSlice";
 
 // const ContainerStyled = styled(Container)`
 const ContainerStyled = styled.div`
@@ -33,6 +35,8 @@ const InputOutcomingMessage = () => {
     subject: "",
     content: "",
   });
+
+  const dispatch = useDispatch()
 
   const [addMessage, { isError, isLoading }] = useAddMessageMutation({});
 
@@ -76,9 +80,9 @@ const InputOutcomingMessage = () => {
       />
       <Stack direction="row" spacing={1}>
         <Button
-          onClick={() =>
-            localStorage.setItem("drafts", JSON.stringify(messageState))
-          }
+          // onClick={() =>
+          //   dispatch(setDrafts([messageState]))
+          // }
           startIcon={<DraftsIcon style={{ fill: "#1976D2" }} />}
         >
           Save to drafts
