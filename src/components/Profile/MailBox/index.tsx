@@ -3,7 +3,8 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { useGetMailboxMessagesQuery } from "../../../API/messageApi";
-import { IState } from "../../../types";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import InputOutcomingMessage from "./InputOutcomingMessage";
 import ListDividers from "./MenuMailBox";
 import Message from "./Message";
@@ -16,46 +17,49 @@ const Container = styled.div`
 `;
 interface Props {}
 
-const MailPage: React.FC<Props> =  () => {
+const MailPage: React.FC<Props> = () => {
   const [folder, setFolder] = useState<string>("inbox");
-  const [flag, setFlag] = useState(false)
+  const [flag, setFlag] = useState(false);
+  const [page, setPage] = useState(0);
 
-  
-
-  const {data=[], isLoading}= useGetMailboxMessagesQuery({
-    limit: 15,
-    page: 0,
+  const { data = [], isLoading } = useGetMailboxMessagesQuery({
+    limit: 4,
+    page: page,
     folder: folder,
   });
- if(isLoading){
-  console.log("LOADING");
- }else{
-  console.log(data);
- }
+  if (isLoading) {
+    console.log("LOADING");
+  } else {
+    console.log(data);
+  }
 
- useEffect(() => {
-   console.log(data);
-   
- 
-   
- }, [data])
- 
-  
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
+
   return (
-    <Container>
-      <Grid container spacing={2}>
-        <Grid style={{ padding: "1" }} item xs={4}>
-          <ListDividers changeFolder={setFolder} changeFlag={setFlag} />
+    <Grid container>
+      <Container>
+        <Grid container spacing={2}>
+          <Grid style={{ padding: "0px" }} item xs={4}>
+            <ListDividers changeFolder={setFolder} changeFlag={setFlag} />
+          </Grid>
+          <Grid item style={{ padding: "0px" }} xs={8}>
+            {flag && <InputOutcomingMessage />}
+            {!flag && <Message data={data} />}
+          </Grid>
         </Grid>
-        <Grid item xs={8}>
-           { flag && <InputOutcomingMessage/>}
-          { !flag && <Message 
-              data ={data} 
-          />}
-        </Grid>
+      </Container>
+      <Grid container justifyContent="flex-end" direction="row" padding={2} >
+        <RemoveCircleIcon cursor= 'pointer'  onClick={()=>{
+          setPage((prev)=> prev-1)
+        }} />
+        page
+        <AddCircleIcon cursor= 'pointer' onClick={()=>{
+          setPage((prev)=> prev+1)
+        }}/>
       </Grid>
-    
-    </Container>
+    </Grid>
   );
 };
 

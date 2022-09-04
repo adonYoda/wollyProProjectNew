@@ -6,7 +6,6 @@ import MessagePreview from './MessagePreview'
 const Container = styled.div`
     width: 100%;
     height: 105px;
-    background-color: green;
 `
 interface Props {
   data: []
