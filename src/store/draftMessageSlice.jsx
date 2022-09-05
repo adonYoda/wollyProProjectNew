@@ -2,16 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const draftMessageSlice = createSlice({
   name: "draftMessage",
-  initialState: [
-    {
-      recipient: "",
-      subject: "",
-      content: "",
-    },
-  ],
+  initialState:
+    { draftMessage: JSON.parse(localStorage.getItem("drafts")) } || [],
   reducers: {
     setDrafts(state, action) {
-      state.draftMessage = action.payload.draftMessage;
+      state.draftMessage =
+        JSON.parse(localStorage.getItem("drafts")) ||
+        action.payload.draftMessage;
     },
   },
 });
