@@ -25,6 +25,15 @@ export const accountingApi = createApi({
         };
       },
     }),
+    currentUser: build.mutation({
+      query: (token) => ({
+        url: "/user",
+        method: "POST",
+        headers: {
+          Authorization: `Basic ${token}`,
+        },
+      }),
+    }),
     addUser: build.mutation({
       query: (body) => ({
         url: "/registration",
@@ -39,4 +48,4 @@ export const accountingApi = createApi({
   }),
 });
 
-export const { useGetUserMutation, useAddUserMutation } = accountingApi;
+export const { useGetUserMutation, useAddUserMutation, useCurrentUserMutation } = accountingApi;
