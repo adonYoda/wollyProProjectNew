@@ -11,7 +11,7 @@ const middlewares = [accountingApi.middleware, messageApi.middleware]
 
 
 export const store = configureStore({
-  
+
   reducer: {
     [accountingApi.reducerPath]: accountingApi.reducer,
     [messageApi.reducerPath]: messageApi.reducer,
@@ -19,13 +19,17 @@ export const store = configureStore({
     token: tokenReducer,
     // drafts: draftsReducer,
   },
-  
+
   middleware: (getDefaultMiddleware: any) =>
     getDefaultMiddleware().concat(accountingApi.middleware),
 });
 
-store.subscribe(() => localStorage.setItem('user', JSON.stringify(store.getState().user)));
-// store.subscribe(() => localStorage.setItem('drafts', JSON.stringify(store.getState().drafts)));
+store.subscribe(() => {
+  localStorage.setItem('user', JSON.stringify(store.getState().user));
+  store.getState().token.token === null ? localStorage.removeItem('token') : localStorage.setItem('token', JSON.stringify(store.getState().token));
+
+  // localStorage.setItem('drafts', JSON.stringify(store.getState().drafts))
+});
 
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch

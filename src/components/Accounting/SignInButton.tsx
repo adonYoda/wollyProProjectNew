@@ -8,7 +8,7 @@ import { IState, IUserProfile } from "../../types";
 import MenuProfile from "./MenuProfile";
 
 const widthButton = 185;
-const MyButton = styled(Button) <{ isLogin: boolean }>`
+const MyButton = styled(Button) <{ islogin: string }>`
   flex: 0 0 ${widthButton}px;
   height: 50px;
   position: relative;
@@ -16,11 +16,11 @@ const MyButton = styled(Button) <{ isLogin: boolean }>`
   & span {
     font-size: 18px;
     line-height: 1.2;
-    color: ${({ isLogin }) => isLogin ? '#fff' : '#bbb'};
+    color: ${({ islogin }) => islogin ? '#fff' : '#bbb'};
     text-transform: none;
     width: 100%;
     text-align: left;
-    padding: ${({ isLogin }) => isLogin ? '0px 5px 0px 50px' : '0px 0px 0px 30px'};
+    padding: ${({ islogin }) => islogin ? '0px 5px 0px 50px' : '0px 0px 0px 30px'};
     & span {
       color: white;
       padding: 0px 0px 0px 0px;
@@ -30,8 +30,8 @@ const MyButton = styled(Button) <{ isLogin: boolean }>`
     content: '';
     width: 100%;
     height: 100%;
-    box-shadow: ${({ isLogin }) => isLogin ? 'none' : '0 0 1px 1px #bbb'};
-    background-color: ${({ isLogin }) => isLogin ? '#bbbbbb30' : 'none'};
+    box-shadow: ${({ islogin }) => islogin ? 'none' : '0 0 1px 1px #bbb'};
+    background-color: ${({ islogin }) => islogin ? '#bbbbbb30' : 'none'};
     border-radius: 100px;
     position: absolute;
     top: 0;
@@ -41,8 +41,8 @@ const MyButton = styled(Button) <{ isLogin: boolean }>`
     position: absolute;
     top: 0;
     right: -3px;
-    right: ${({ isLogin }) => isLogin ? '100%' : '-3px'};
-    transform: ${({ isLogin }) => isLogin ? `translateX(100%)` : 'translateX(0px)'};
+    right: ${({ islogin }) => islogin ? '100%' : '-3px'};
+    transform: ${({ islogin }) => islogin ? `translateX(100%)` : 'translateX(0px)'};
     width: 51px;
     height: 51px;
     background-color: #bbb;
@@ -89,7 +89,7 @@ const SignIn: React.FC<Props> = ({ token }) => {
         aria-expanded={open ? "true" : undefined}
         aria-haspopup="true"
         onClick={handleToggle}
-        isLogin={!!token}
+        islogin={(!!token).toString()}
         className='login_button'
       >
         {token ? <span>Hello, {user.login}!</span> : <span>
