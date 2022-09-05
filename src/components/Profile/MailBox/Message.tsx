@@ -6,17 +6,16 @@ import MessagePreview from './MessagePreview'
 const Container = styled.div`
     width: 100%;
     height: 105px;
-    background-color: green;
 `
 interface Props {
-  data: any
+  data: []
 }
 
 
 const Message: React.FC<Props>= ({data}) => {
   return (
     <Container>
-        <MessagePreview messages = {data} />
+        <MessagePreview  data={data}/>
         {/* <MessageFull/> */}
     </Container>
   )
