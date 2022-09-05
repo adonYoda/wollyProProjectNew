@@ -80,13 +80,15 @@ export const messageApi = createApi({
       }),
     }),
     starMessage: build.mutation({
-      query: ({ token, message, body }) => ({
-        url: `/profile/mailbox/${message.id}`,
+      query: ({ id, stared }) => ({
+        url: `/profile/mailbox/${id}`,
         method: "PUT",
-        body,
-        headers: {
-          Authorization: `Basic ${token}`,
-        },
+        body: {
+          "stared": stared
+        }
+        // headers: {
+        //   Authorization: `Basic ${token}`,
+        // },
       }),
     }),
     unstarMessage: build.mutation({
@@ -158,5 +160,5 @@ export const messageApi = createApi({
   }),
 });
 
-export const { useGetMailboxMessagesQuery, useAddMessageMutation } = messageApi;
+export const { useGetMailboxMessagesQuery, useAddMessageMutation, useStarMessageMutation } = messageApi;
 
