@@ -91,16 +91,6 @@ export const messageApi = createApi({
         // },
       }),
     }),
-    unstarMessage: build.mutation({
-      query: ({ token, message, body }) => ({
-        url: `/profile/mailbox/${message.id}`,
-        method: "PUT",
-        body,
-        headers: {
-          Authorization: `Basic ${token}`,
-        },
-      }),
-    }),
     findMessageById: build.mutation({
       query: ({ token, message }) => ({
         url: `/profile/mailbox/${message.id}`,
