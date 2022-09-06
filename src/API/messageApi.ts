@@ -84,7 +84,7 @@ export const messageApi = createApi({
         url: `/profile/mailbox/${id}`,
         method: "PUT",
         body: {
-          "stared": stared
+          "stared": !!stared
         }
         // headers: {
         //   Authorization: `Basic ${token}`,
@@ -140,11 +140,11 @@ export const messageApi = createApi({
         };
       },
       providesTags: (result) => result
-      ? [
-        ...result.map((id: any) => ({ type: 'Messages', id })),
-        { type: 'Messages', id: 'LIST' },
-      ]
-    : [{ type: 'Messages', id: 'LIST' }],
+        ? [
+          ...result.map((id: any) => ({ type: 'Messages', id })),
+          { type: 'Messages', id: 'LIST' },
+        ]
+        : [{ type: 'Messages', id: 'LIST' }],
     }),
     //================================================================
   }),

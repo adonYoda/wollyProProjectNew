@@ -10,22 +10,22 @@ interface Props {
 }
 
 
-const MessagePreview: React.FC<Props> = ({data}) => {
+const MessagePreview: React.FC<Props> = ({ data }) => {
 
-  const [star, setStar] = useState(false)
-  
+  const [isStared, setIsStared] = useState(false)
 
+  const [starMessage] = useStarMessageMutation();
 
   return (
-    
-      <List style={{width: '100%', height: '100%', padding: '0px'}}> 
-      {data.map(({author, subject, content, stared, id}) => (<>
-          <ListItem button key={id} style={{width: '100%', height: '100%', backgroundColor: '#8EBAFF'}} >
-            <ListItemAvatar>
-              <Avatar alt={author} src={author} />
-            </ListItemAvatar>
-            <ListItemText primary={subject} secondary={
-              <React.Fragment>
+
+    <List style={{ width: '100%', height: '100%', padding: '0px' }}>
+      {data.map(({ author, subject, content, stared, id }) => (<>
+        <ListItem button key={id} style={{ width: '100%', height: '100%', backgroundColor: '#8EBAFF' }} >
+          <ListItemAvatar>
+            <Avatar alt={author} src={author} />
+          </ListItemAvatar>
+          <ListItemText primary={subject} secondary={
+            <React.Fragment>
               <Typography
                 sx={{ display: 'inline' }}
                 component="span"
@@ -34,28 +34,29 @@ const MessagePreview: React.FC<Props> = ({data}) => {
               >
                 {author}
               </Typography>
-             {` - ${content}`}
+              {` - ${content}`}
             </React.Fragment>
-            } />
-            <Rating defaultValue={+star} max={1}
-            onClick={()=>{
-              try{
-                setStar((prev)=>!prev)
-                const star = useStarMessageMutation({id, stared})
+          } />
+          <Rating defaultValue={+stared} max={1}
+            onClick={() => {
+              try {
+                setIsStared((prev) => !prev)
+                const star = starMessage({ id, isStared })
+                console.log(star)
               }
-              catch{
-          
+              catch {
+
               }
             }}
-            />
-          </ListItem>
-           <Divider/>
-           </>
-        ))
-        }
-     
-      </List>
-   
+          />
+        </ListItem>
+        <Divider />
+      </>
+      ))
+      }
+
+    </List>
+
   )
 }
 
