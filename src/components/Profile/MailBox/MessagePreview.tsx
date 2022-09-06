@@ -41,7 +41,7 @@ const MessagePreview: React.FC<Props> = ({data}) => {
             onClick={()=>{
               try{
                 setStar((prev)=>!prev)
-                const star = useStarMessageMutation({id, stared})
+                //const star = useStarMessageMutation({id, stared})
               }
               catch{
           
