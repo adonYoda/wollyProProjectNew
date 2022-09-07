@@ -16,7 +16,8 @@ const MessagePreview: React.FC<Props> = ({ data }) => {
   const [addStar, {isError}] = useStarMessageMutation();
   const [isStared, setValue] = useState<boolean | null>(false)
   const handleClick = async (id: any, stared: any) => {
-   const starMessage =  addStar({id, stared}).unwrap()
+    
+   const starMessage = await addStar({id, isStared}).unwrap()
     console.log(starMessage);
     
   }
@@ -42,11 +43,12 @@ const MessagePreview: React.FC<Props> = ({ data }) => {
               {` - ${content}`}
             </React.Fragment>
           } />
-         {isStared && <Rating defaultValue={1} max={1} onClick = {() => {handleClick(id, stared)
-        setValue((prev)=> !prev) 
+         {isStared && <Rating defaultValue={1} max={1} onClick = {() => {
+          handleClick(id, stared)
+        setValue(stared) 
         }}/>
          || <Rating defaultValue={0} max={1} onClick = {() => {handleClick(id, stared)
-          setValue((prev)=> !prev) 
+          setValue(stared) 
          }} />}
         </ListItem>
         <Divider />
