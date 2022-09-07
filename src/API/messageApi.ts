@@ -80,15 +80,15 @@ export const messageApi = createApi({
       }),
     }),
     starMessage: build.mutation({
-      query: ({ id, stared }) => ({
+      query: ({ id, stared, token }: any) => ({
         url: `/profile/mailbox/${id}`,
         method: "PUT",
         body: {
           "stared": stared
-        }
-        // headers: {
-        //   Authorization: `Basic ${token}`,
-        // },
+        },
+        headers: {
+          Authorization: `Basic ${token}`,
+        },
       }),
     }),
     findMessageById: build.mutation({
@@ -140,11 +140,11 @@ export const messageApi = createApi({
         };
       },
       providesTags: (result) => result
-      ? [
-        ...result.map((id: any) => ({ type: 'Messages', id })),
-        { type: 'Messages', id: 'LIST' },
-      ]
-    : [{ type: 'Messages', id: 'LIST' }],
+        ? [
+          ...result.map((id: any) => ({ type: 'Messages', id })),
+          { type: 'Messages', id: 'LIST' },
+        ]
+        : [{ type: 'Messages', id: 'LIST' }],
     }),
     //================================================================
   }),
