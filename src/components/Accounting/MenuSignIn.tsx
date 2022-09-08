@@ -24,6 +24,8 @@ import { putUser } from "../../store/userSlice";
 import { setToken } from "../../store/tokenSlice";
 import { createToken, profilePage, registrationPage } from "../../utils/constants";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
+import { IState } from "../../types/index"
 
 interface Props {
 	anchorRef: any;
@@ -36,8 +38,9 @@ const PopperStyled = styled(Popper)`
 `;
 
 const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
+	const loginStorage = useSelector((state: IState) => state.user!.login);
 	const [formState, setFormState] = useState({
-		login: "",
+		login: loginStorage ? loginStorage : "",
 		password: "",
 	});
 
@@ -120,6 +123,7 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
 										label="Login"
 										name="login"
 										onChange={handleChange}
+										value={formState.login}
 									/>
 									<FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
 										<InputLabel htmlFor="outlined-adornment-password">
