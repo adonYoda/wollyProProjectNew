@@ -13,13 +13,13 @@ interface Props {
 
 
 const MessagePreview: React.FC<Props> = ({ data }) => {
-  const [addStar, {isError}] = useStarMessageMutation();
+  const [addStar, { isError }] = useStarMessageMutation();
   const [isStared, setValue] = useState<boolean | null>(false)
   const handleClick = async (id: any, stared: any) => {
-    
-   const starMessage = await addStar({id, isStared}).unwrap()
+
+    const starMessage = await addStar({ id, isStared }).unwrap()
     console.log(starMessage);
-    
+
   }
 
   return (
@@ -43,13 +43,17 @@ const MessagePreview: React.FC<Props> = ({ data }) => {
               {` - ${content}`}
             </React.Fragment>
           } />
-         {isStared && <Rating defaultValue={1} max={1} onClick = {() => {
+          {/* {isStared && <Rating defaultValue={1} max={1} onClick = {() => {
           handleClick(id, stared)
         setValue(stared) 
         }}/>
          || <Rating defaultValue={0} max={1} onClick = {() => {handleClick(id, stared)
           setValue(stared) 
-         }} />}
+         }} />} */}
+          <Rating defaultValue={stared} max={1} onClick={() => {
+            handleClick(id, !stared)
+            setValue(!stared)
+          }} />
         </ListItem>
         <Divider />
       </>
