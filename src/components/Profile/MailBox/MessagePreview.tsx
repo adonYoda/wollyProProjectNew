@@ -1,11 +1,6 @@
-import { Functions } from '@mui/icons-material'
 import { Avatar, Divider, List, ListItem, ListItemAvatar, ListItemText, Rating, Typography } from '@mui/material'
-import { Container } from '@mui/system'
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
 import { useStarMessageMutation } from '../../../API/messageApi'
-import { RootState } from '../../../store/configureStore'
-import { IState, IUserProfile } from '../../../types'
 
 interface Props {
   data: []
@@ -14,8 +9,9 @@ interface Props {
 
 const MessagePreview: React.FC<Props> = ({ data }) => {
   const [addStar, { isError }] = useStarMessageMutation();
-  const [isStared, setValue] = useState<boolean | null>(false)
-  const handleClick = async (id: any, stared: any) => {
+  const [isStared, setValue] = useState<boolean | null>(false);
+
+  const handleClick = async (id: string, stared: boolean) => {
 
     const starMessage = await addStar({ id, isStared }).unwrap()
     console.log(starMessage);
@@ -43,13 +39,6 @@ const MessagePreview: React.FC<Props> = ({ data }) => {
               {` - ${content}`}
             </React.Fragment>
           } />
-          {/* {isStared && <Rating defaultValue={1} max={1} onClick = {() => {
-          handleClick(id, stared)
-        setValue(stared) 
-        }}/>
-         || <Rating defaultValue={0} max={1} onClick = {() => {handleClick(id, stared)
-          setValue(stared) 
-         }} />} */}
           <Rating defaultValue={stared} max={1} onClick={() => {
             handleClick(id, !stared)
             setValue(!stared)
