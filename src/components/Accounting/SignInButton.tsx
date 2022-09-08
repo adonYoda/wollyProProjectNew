@@ -12,7 +12,7 @@ const MyButton = styled(Button) <{ islogin: boolean }>`
   flex: 0 0 ${widthButton}px;
   height: 50px;
   position: relative;
-  
+  margin: 0px 100px 0px 0px !important;
   & span {
     font-size: 18px;
     line-height: 1.2;
