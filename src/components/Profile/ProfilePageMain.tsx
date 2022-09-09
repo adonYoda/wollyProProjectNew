@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router'
 import styled from 'styled-components';
 import { profilePage, profilePages } from '../../utils/constants'
 import MailPage from './MailBox';
-import ProfilePageIntro from './ProfilePageIntro';
+import ProfilePageIntro from './Intro/ProfilePageIntro';
 
 const Wrapper = styled.div`
 	
@@ -23,13 +23,13 @@ const ProfilePageMain = () => {
 		setUpPage,
 	} = profilePages;
 
-	
+
 
 
 	return (
 		<Routes>
 			<Route path={introPage} element={<ProfilePageIntro />} />
-			<Route path={mailBoxPage} element={<MailPage />}/>
+			<Route path={mailBoxPage} element={<MailPage />} />
 			{/* <Route path={paymentMethodsPage} element={<PaymentMethodPage />} /> */}
 			{/* <Route path={purchaseHistoryPage} element={<PurchaseHistoryPage />} /> */}
 			{/* <Route path={savedPage} element={<SavedPage />} /> */}

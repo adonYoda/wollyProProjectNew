@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { MyContainer } from "../styles/Container.styled";
-import ProfilePageTitle from "./Profile/ProfilePageTitle";
+import ProfilePageTitle from "./Profile/Intro/ProfilePageTitle";
 import { useSelector } from "react-redux";
 import { IState } from "../types";
 import { homePage, profilePage, registrationPage } from "../utils/constants";
