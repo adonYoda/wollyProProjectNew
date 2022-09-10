@@ -8,7 +8,7 @@ import { IState, IUserProfile } from "../../types";
 import MenuProfile from "./MenuProfile";
 
 const widthButton = 185;
-const MyButton = styled(Button) <{ islogin: boolean }>`
+const MyButton = styled(Button) <{ islogin: string }>`
   flex: 0 0 ${widthButton}px;
   height: 50px;
   position: relative;
@@ -89,7 +89,7 @@ const SignIn: React.FC<Props> = ({ token }) => {
         aria-expanded={open ? "true" : undefined}
         aria-haspopup="true"
         onClick={handleToggle}
-        islogin={!!token}
+        islogin={token}
         className='login-button'
       >
         {token ? <span>Hello, {user.login}!</span> : <span>

@@ -8,14 +8,18 @@ import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import InputOutcomingMessage from "./InputOutcomingMessage";
 import ListDividers from "./MenuMailBox";
 import Message from "./Message";
+import { messagePageSizes } from "../../../utils/constants";
+
 
 const Container = styled.div`
-  width: 850px;
-  height: 400px;
+  width: 100%;
+  height: calc(${messagePageSizes.heightRow} * ${messagePageSizes.limitMessagesOnPage}px);
   display: flex;
   margin: 0 5px;
 `;
-interface Props {}
+
+
+interface Props { }
 
 const MailPage: React.FC<Props> = () => {
   const [folder, setFolder] = useState<string>("inbox");
@@ -23,12 +27,12 @@ const MailPage: React.FC<Props> = () => {
   const [page, setPage] = useState(0);
 
   const { data = [], isLoading } = useGetMailboxMessagesQuery({
-    limit: 4,
+    limit: messagePageSizes.limitMessagesOnPage,
     page: page,
     folder: folder,
   });
   if (isLoading) {
-    console.log("LOADING");
+    console.log("Index MailBox RENDER");
   } else {
     console.log(data);
   }
@@ -38,28 +42,28 @@ const MailPage: React.FC<Props> = () => {
   }, [data]);
 
   return (
-    <Grid container>
+    <>
       <Container>
-        <Grid container spacing={2}>
+        <Grid container style={{ display: 'flex', justifyContent: 'space-between' }} >
           <Grid style={{ padding: "0px" }} item xs={4}>
             <ListDividers changeFolder={setFolder} changeFlag={setFlag} />
           </Grid>
-          <Grid item style={{ padding: "0px" }} xs={8}>
+          <Grid item style={{ padding: "0px" }} xs={7}>
             {flag && <InputOutcomingMessage />}
             {!flag && <Message data={data} />}
           </Grid>
         </Grid>
       </Container>
       <Grid container justifyContent="flex-end" direction="row" padding={2} >
-        <RemoveCircleIcon cursor= 'pointer'  onClick={()=>{
-          setPage((prev)=> prev-1)
+        <RemoveCircleIcon cursor='pointer' onClick={() => {
+          setPage((prev) => prev - 1)
         }} />
         page
-        <AddCircleIcon cursor= 'pointer' onClick={()=>{
-          setPage((prev)=> prev+1)
-        }}/>
+        <AddCircleIcon cursor='pointer' onClick={() => {
+          setPage((prev) => prev + 1)
+        }} />
       </Grid>
-    </Grid>
+    </>
   );
 };
 
