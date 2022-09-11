@@ -17,7 +17,7 @@ const Message: React.FC<Props> = ({ data }) => {
   console.log('Message RENDER')
   return (<>
     <List style={{ width: '100%', height: '100%', padding: '0px' }}>
-      {data.map(({ author, subject, content, stared, id }) => <MessagePreview key={id} author={author} subject={subject} content={content} stared={stared} id={id} />)}
+      {data.map(({ author, subject, content, stared, id, dateCreated }) => <MessagePreview key={id} author={author} subject={subject} content={content} stared={stared} id={id} dateCreated={dateCreated} />)}
     </List>
     {/* <MessageFull/> */}
   </>)

@@ -10,21 +10,32 @@ interface Props {
   content: string,
   stared: boolean,
   id: string,
+  dateCreated: string,
 }
 const ListItemStyled = styled(ListItem)`
   max-height: ${messagePageSizes.heightRow}px;
 `;
 
 
-const MessagePreview: React.FC<Props> = ({ author, subject, content, stared, id }) => {
+const MessagePreview: React.FC<Props> = ({ author, subject, content, stared, id, dateCreated }) => {
   const [addStar, { isError }] = useStarMessageMutation();
   const [isStared, setValue] = useState<boolean | null>(false);
+
+//==============================
+
+const temp = new Date(dateCreated)
+const date = temp.toLocaleString('en-US');
+
+
+//==============================
+
 
   const handleClick = async (id: string, stared: boolean) => {
 
     const starMessage = await addStar({ id, isStared }).unwrap()
     console.log(starMessage);
-
+    console.log(date);
+    
   }
 
   return (<>
@@ -43,6 +54,7 @@ const MessagePreview: React.FC<Props> = ({ author, subject, content, stared, id 
             {author}
           </Typography>
           {` - ${content}`}
+          <div>{`${date}`}</div>
         </React.Fragment>
       } />
       <Rating defaultValue={stared ? 1 : 0} max={1} onClick={() => {

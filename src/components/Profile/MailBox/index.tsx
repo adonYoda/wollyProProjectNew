@@ -45,10 +45,10 @@ const MailPage: React.FC<Props> = () => {
     <>
       <Container>
         <Grid container style={{ display: 'flex', justifyContent: 'space-between' }} >
-          <Grid style={{ padding: "0px" }} item xs={4}>
+          <Grid style={{ padding: "0px", marginLeft: "-100px" }} item xs={4}>
             <ListDividers changeFolder={setFolder} changeFlag={setFlag} />
           </Grid>
-          <Grid item style={{ padding: "0px" }} xs={7}>
+          <Grid item style={{ padding: "0px" }} xs={9}>
             {flag && <InputOutcomingMessage />}
             {!flag && <Message data={data} />}
           </Grid>
