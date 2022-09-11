@@ -14,6 +14,15 @@ interface Props {
 }
 const ListItemStyled = styled(ListItem)`
   max-height: ${messagePageSizes.heightRow}px;
+  & .msg-preview{
+    &__text {
+      color: black;
+    }
+    &__date {
+      color: black;
+      margin: 0px 25px 0px 0px;
+    }
+  }
 `;
 
 
@@ -21,13 +30,13 @@ const MessagePreview: React.FC<Props> = ({ author, subject, content, stared, id,
   const [addStar, { isError }] = useStarMessageMutation();
   const [isStared, setValue] = useState<boolean | null>(false);
 
-//==============================
+  //==============================
 
-const temp = new Date(dateCreated)
-const date = temp.toLocaleString('en-US');
+  const temp = new Date(dateCreated)
+  const date = temp.toLocaleString('en-US');
 
 
-//==============================
+  //==============================
 
 
   const handleClick = async (id: string, stared: boolean) => {
@@ -35,7 +44,7 @@ const date = temp.toLocaleString('en-US');
     const starMessage = await addStar({ id, isStared }).unwrap()
     console.log(starMessage);
     console.log(date);
-    
+
   }
 
   return (<>
@@ -53,10 +62,10 @@ const date = temp.toLocaleString('en-US');
           >
             {author}
           </Typography>
-          {` - ${content}`}
-          <div>{`${date}`}</div>
+          <span className='msg-preview__text'>{` - ${content}`}</span>
         </React.Fragment>
       } />
+      <span className='msg-preview__date'>{`${date}`}</span>
       <Rating defaultValue={stared ? 1 : 0} max={1} onClick={() => {
         handleClick(id, !stared)
         setValue(!stared)
