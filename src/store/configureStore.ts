@@ -20,8 +20,8 @@ export const store = configureStore({
     // drafts: draftsReducer,
   },
 
-  middleware: (getDefaultMiddleware: any) =>
-    getDefaultMiddleware().concat(accountingApi.middleware, messageApi.middleware),
+  // middleware: (getDefaultMiddleware: any) =>
+  //   getDefaultMiddleware().concat(accountingApi.middleware, messageApi.middleware),
 });
 
 store.subscribe(() => {
