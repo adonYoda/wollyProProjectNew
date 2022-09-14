@@ -34,7 +34,7 @@ const Message: React.FC<Props> = ({ data }) => {
     <>
       <List style={{ width: "100%", height: "100%", padding: "0px" }}>
         {flag ? (
-          <MessageFull dataMessage={dataMessage} />
+          <MessageFull handlerFlag={handlerFlag} dataMessage={dataMessage} />
         ) : (
           <>
             {data.map(

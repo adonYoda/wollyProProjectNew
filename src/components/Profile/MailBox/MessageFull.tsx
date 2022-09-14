@@ -4,18 +4,34 @@ import styled from "styled-components";
 import { IMessage } from "../../../types";
 
 interface Props {
- dataMessage: IMessage|undefined;
+  dataMessage: IMessage | undefined;
+  handlerFlag: (flag: boolean) => void;
 }
 
 const MyContainer = styled(Container)`
   background-color: aqua;
   width: 100%;
   height: 100%;
+  position: relative;
+  & .msg-btn-close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 26px;
+    line-height: 40px;
+    background-color: transparent;
+    transition: 0.2s all 0s ease-out;
+    cursor: pointer;
+    &:hover {
+      transform: rotate(360deg) scale(1.3);
+
+    }
+  }
 `
 
-const MessageFull: React.FC<Props> = ({dataMessage}) => {
+const MessageFull: React.FC<Props> = ({ dataMessage, handlerFlag }) => {
 
-  const {author, subject, content, stared, id, dateCreated} = {...dataMessage}
+  const { author, subject, content, stared, id, dateCreated } = { ...dataMessage }
 
 
   return (
@@ -27,7 +43,7 @@ const MessageFull: React.FC<Props> = ({dataMessage}) => {
         sx={{ display: "inline" }}
         component="span"
         color="text.primary"
-        
+
       >
         {author}
       </Typography>
@@ -42,6 +58,7 @@ const MessageFull: React.FC<Props> = ({dataMessage}) => {
       <Typography>
         {content}
       </Typography>
+      <button className='msg-btn-close' onClick={() => handlerFlag(false)}>&#128169;</button>
     </MyContainer>
   );
 };
