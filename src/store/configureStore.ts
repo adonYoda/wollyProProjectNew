@@ -26,10 +26,12 @@ export const store = configureStore({
 
 store.subscribe(() => {
   localStorage.setItem('user', JSON.stringify(store.getState().user));
-  store.getState().token.token === null ? localStorage.removeItem('token') : localStorage.setItem('token', JSON.stringify(store.getState().token));
+  store.getState().token === null ? localStorage.removeItem('token') : localStorage.setItem('token', JSON.stringify(store.getState().token));
 
   // localStorage.setItem('drafts', JSON.stringify(store.getState().drafts))
 });
+// store.subscribe(() => localStorage.setItem('user', JSON.stringify(store.getState().user)));
+// store.subscribe(() => store.getState().token.token === null ? localStorage.removeItem('token') : localStorage.setItem('token', JSON.stringify(store.getState().token)));
 
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch
