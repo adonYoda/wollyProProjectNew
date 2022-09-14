@@ -1,4 +1,4 @@
-import { Grid } from "@mui/material";
+import { Box, Grid, Skeleton } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
@@ -10,7 +10,6 @@ import ListDividers from "./MenuMailBox";
 import Message from "./Message";
 import { messagePageSizes } from "../../../utils/constants";
 
-
 const Container = styled.div`
   width: 100%;
   height: calc(${messagePageSizes.heightRow} * ${messagePageSizes.limitMessagesOnPage}px);
@@ -18,8 +17,7 @@ const Container = styled.div`
   margin: 0 5px;
 `;
 
-
-interface Props { }
+interface Props {}
 
 const MailPage: React.FC<Props> = () => {
   const [folder, setFolder] = useState<string>("inbox");
@@ -43,27 +41,41 @@ const MailPage: React.FC<Props> = () => {
 
   return (
     <>
-      <Container>
-        <Grid container style={{ display: 'flex', justifyContent: 'space-between' }} >
-          <Grid style={{ padding: "0px", marginLeft: "-100px" }} item xs={4}>
-            <ListDividers changeFolder={setFolder} changeFlag={setFlag} />
+          <Container>
+            <Grid
+              container
+              style={{ display: "flex", justifyContent: "space-between" }}
+            >
+              <Grid
+                style={{ padding: "0px", marginLeft: "-100px" }}
+                item
+                xs={4}
+              >
+                <ListDividers changeFolder={setFolder} changeFlag={setFlag} />
+              </Grid>
+              <Grid item style={{ padding: "0px" }} xs={9}>
+                {flag && <InputOutcomingMessage />}
+                {!flag && <Message data={data} />}
+              </Grid>
+            </Grid>
+          </Container>
+          <Grid container justifyContent="flex-end" direction="row" padding={2}>
+            <RemoveCircleIcon
+              cursor="pointer"
+              onClick={() => {
+                if(page>=1){
+                setPage((prev) => prev - 1);}
+              }}
+            />
+            page {page + 1} 
+            <AddCircleIcon
+              cursor="pointer"
+              onClick={() => {
+                setPage((prev) => prev + 1);
+              }}
+            />
           </Grid>
-          <Grid item style={{ padding: "0px" }} xs={9}>
-            {flag && <InputOutcomingMessage />}
-            {!flag && <Message data={data} />}
-          </Grid>
-        </Grid>
-      </Container>
-      <Grid container justifyContent="flex-end" direction="row" padding={2} >
-        <RemoveCircleIcon cursor='pointer' onClick={() => {
-          setPage((prev) => prev - 1)
-        }} />
-        page
-        <AddCircleIcon cursor='pointer' onClick={() => {
-          setPage((prev) => prev + 1)
-        }} />
-      </Grid>
-    </>
+        </>
   );
 };
 

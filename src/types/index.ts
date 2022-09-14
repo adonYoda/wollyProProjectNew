@@ -58,19 +58,25 @@ export interface Jewellery {
 
 
 export interface IMessage {
-  recipient: string;
+ author: string;
   subject: string;
   content: string;
+  stared: boolean;
+  id: string;
+  dateCreated: string;
 }
 
 export interface IMessageResponse extends IMessage {
   id: string;
   author: string;
-  dateCreated: Date;
+  dateCreated: string;
   read: boolean;
   stared: boolean;
   sent: boolean;
   trashed: boolean;
+  subject: string;
+  content: string;
+  recipient: string;
 }
 
 export interface IMessageQuery {

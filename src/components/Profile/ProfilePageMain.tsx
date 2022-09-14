@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { profilePage, profilePages } from '../../utils/constants'
 import MailPage from './MailBox';
 import ProfilePageIntro from './Intro/ProfilePageIntro';
+import MessageFull from './MailBox/MessageFull';
 
 const Wrapper = styled.div`
 	

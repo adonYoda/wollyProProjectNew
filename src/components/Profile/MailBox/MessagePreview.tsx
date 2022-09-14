@@ -1,7 +1,9 @@
 import { Avatar, Divider, List, ListItem, ListItemAvatar, ListItemText, Rating, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { useStarMessageMutation } from '../../../API/messageApi'
+import { IMessage } from '../../../types';
 import { messagePageSizes } from '../../../utils/constants';
 
 interface Props {
@@ -11,6 +13,8 @@ interface Props {
   stared: boolean,
   id: string,
   dateCreated: string,
+  handlerID: ({ author, subject, content, stared, id, dateCreated }: IMessage) => void
+  handlerFlag: (flag: boolean) => void;
 }
 const ListItemStyled = styled(ListItem)`
   max-height: ${messagePageSizes.heightRow}px;
@@ -26,7 +30,7 @@ const ListItemStyled = styled(ListItem)`
 `;
 
 
-const MessagePreview: React.FC<Props> = ({ author, subject, content, stared, id, dateCreated }) => {
+const MessagePreview: React.FC<Props> = ({ author, subject, content, stared, id, dateCreated, handlerID, handlerFlag }) => {
   const [addStar, { isError }] = useStarMessageMutation();
   const [isStared, setValue] = useState<boolean | null>(false);
 
@@ -48,7 +52,11 @@ const MessagePreview: React.FC<Props> = ({ author, subject, content, stared, id,
   }
 
   return (<>
-    <ListItemStyled style={{ width: '100%', height: '100%', backgroundColor: '#8EBAFF' }} >
+    <ListItemStyled style={{ width: '100%', height: '100%', backgroundColor: '#8EBAFF' }} 
+    onClick={()=> {handlerID({ author, subject, content, stared, id, dateCreated})
+    handlerFlag(true)
+  }}
+    >
       <ListItemAvatar>
         <Avatar alt={author} src={author} />
       </ListItemAvatar>
