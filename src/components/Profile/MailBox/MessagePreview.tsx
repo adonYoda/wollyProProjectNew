@@ -27,6 +27,7 @@ const ListItemStyled = styled(ListItem)`
       margin: 0px 25px 0px 0px;
     }
   }
+  cursor: pointer;
 `;
 
 
