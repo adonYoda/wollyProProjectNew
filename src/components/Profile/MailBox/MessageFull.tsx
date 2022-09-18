@@ -1,7 +1,9 @@
-import { Avatar, Container, Typography } from "@mui/material";
-import React from "react";
+import { Avatar, Button, Container, Typography } from "@mui/material";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { IMessage } from "../../../types";
+import DeleteIcon from '@mui/icons-material/Delete';
+import { useTrashMessageMutation } from "../../../API/messageApi";
 
 interface Props {
   dataMessage: IMessage | undefined;
@@ -30,9 +32,15 @@ const MyContainer = styled(Container)`
 `
 
 const MessageFull: React.FC<Props> = ({ dataMessage, handlerFlag }) => {
-
+  // const [isTrashed, setIsTrashed] = useState(false);
   const { author, subject, content, stared, id, dateCreated } = { ...dataMessage }
-
+  const [trashMessage, {isLoading, isError}] = useTrashMessageMutation()
+  const handleTrashMessage = async () => {
+    const message = await trashMessage({id, isTrashed: true})
+    await handlerFlag(false)
+    console.log(message);
+    
+  }
 
   return (
     <MyContainer>
@@ -59,6 +67,12 @@ const MessageFull: React.FC<Props> = ({ dataMessage, handlerFlag }) => {
         {content}
       </Typography>
       <button className='msg-btn-close' onClick={() => handlerFlag(false)}>&#128169;</button>
+      <Button
+          endIcon={<DeleteIcon style={{ fill: "#1976D2" }} />}
+          onClick={handleTrashMessage}
+        >
+          Delete
+        </Button>
     </MyContainer>
   );
 };

@@ -24,8 +24,9 @@ const Message: React.FC<Props> = ({ data }) => {
     stared,
     id,
     dateCreated,
+    trashed
   }: IMessage) => {
-    setDataMessage({ author, subject, content, stared, id, dateCreated });
+    setDataMessage({ author, subject, content, stared, id, dateCreated, trashed });
   };
   const handlerFlag = (flag: boolean) => {
     setFlag(flag);
@@ -38,7 +39,7 @@ const Message: React.FC<Props> = ({ data }) => {
         ) : (
           <>
             {data.map(
-              ({ author, subject, content, stared, id, dateCreated }) => (
+              ({ author, subject, content, stared, id, dateCreated, trashed }) => (
                 <MessagePreview
                   key={id}
                   author={author}
@@ -47,6 +48,7 @@ const Message: React.FC<Props> = ({ data }) => {
                   stared={stared}
                   id={id}
                   dateCreated={dateCreated}
+                  trashed={trashed}
                   handlerID={handlerID}
                   handlerFlag={handlerFlag}
                 />

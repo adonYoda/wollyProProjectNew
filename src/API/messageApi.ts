@@ -40,13 +40,15 @@ export const messageApi = createApi({
       }),
     }),
     trashMessage: build.mutation({
-      query: ({ token, message, body }) => ({
-        url: `/profile/mailbox/${message.id}`,
+      query: ({ id, isTrashed }) => ({
+        url: `/profile/mailbox/${id}`,
         method: "PUT",
-        body,
-        headers: {
-          Authorization: `Basic ${token}`,
-        },
+        body: {
+          "trashed": isTrashed
+        }
+        // headers: {
+        //   Authorization: `Basic ${token}`,
+        // },
       }),
     }),
     untrashMessage: build.mutation({
@@ -150,4 +152,4 @@ export const messageApi = createApi({
   }),
 });
 
-export const { useGetMailboxMessagesQuery, useAddMessageMutation, useStarMessageMutation } = messageApi;
+export const { useGetMailboxMessagesQuery, useAddMessageMutation, useStarMessageMutation, useTrashMessageMutation } = messageApi;

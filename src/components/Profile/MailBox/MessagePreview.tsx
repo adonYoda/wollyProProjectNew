@@ -13,6 +13,7 @@ interface Props {
   stared: boolean,
   id: string,
   dateCreated: string,
+  trashed: boolean,
   handlerID: ({ author, subject, content, stared, id, dateCreated }: IMessage) => void
   handlerFlag: (flag: boolean) => void;
 }
@@ -31,7 +32,7 @@ const ListItemStyled = styled(ListItem)`
 `;
 
 
-const MessagePreview: React.FC<Props> = ({ author, subject, content, stared, id, dateCreated, handlerID, handlerFlag }) => {
+const MessagePreview: React.FC<Props> = ({ author, subject, content, stared, id, dateCreated, trashed, handlerID, handlerFlag }) => {
   const [addStar, { isError }] = useStarMessageMutation();
   const [isStared, setValue] = useState<boolean | null>(false);
 
@@ -52,9 +53,12 @@ const MessagePreview: React.FC<Props> = ({ author, subject, content, stared, id,
 
   }
 
-  return (<>
+  return (
+   
+  <>
+  
     <ListItemStyled style={{ width: '100%', height: '100%', backgroundColor: '#8EBAFF' }}
-     onClick={()=> {handlerID({ author, subject, content, stared, id, dateCreated})
+     onClick={()=> {handlerID({ author, subject, content, stared, id, dateCreated, trashed})
      handlerFlag(true)
   }}
     >

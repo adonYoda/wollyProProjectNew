@@ -64,6 +64,7 @@ export interface IMessage {
   stared: boolean;
   id: string;
   dateCreated: string;
+  trashed: boolean;
 }
 
 export interface IMessageResponse extends IMessage {
