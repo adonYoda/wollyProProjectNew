@@ -52,9 +52,9 @@ const MessagePreview: React.FC<Props> = ({ author, subject, content, stared, id,
   }
 
   return (<>
-    <ListItemStyled style={{ width: '100%', height: '100%', backgroundColor: '#8EBAFF' }} 
-    onClick={()=> {handlerID({ author, subject, content, stared, id, dateCreated})
-    handlerFlag(true)
+    <ListItemStyled style={{ width: '100%', height: '100%', backgroundColor: '#8EBAFF' }}
+     onClick={()=> {handlerID({ author, subject, content, stared, id, dateCreated})
+     handlerFlag(true)
   }}
     >
       <ListItemAvatar>
