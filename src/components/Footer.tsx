@@ -26,6 +26,8 @@ const MyFooter = styled.div`
   background-color: #1b252c;
   border-top: 1px solid #545d63;
   border-bottom: 1px solid #545d63;
+  position: relative;
+  z-index: 2;
 `;
 const TextFollowUs = styled.div`
   color: #545d63;
