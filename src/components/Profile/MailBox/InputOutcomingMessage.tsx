@@ -82,7 +82,8 @@ const InputOutcomingMessage = () => {
 //========================================FIX IT==================================================       
           onClick ={() => {
          dispatch(setDrafts(messageState))
-         localStorage["drafts"] = JSON.stringify(drafts)
+         alert(`${messageState}`)
+        //  localStorage["drafts"] = JSON.stringify(drafts)
           }}
 //================================================================================================
           startIcon={<DraftsIcon style={{ fill: "#1976D2" }} />}

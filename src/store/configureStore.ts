@@ -17,7 +17,7 @@ export const store = configureStore({
     [messageApi.reducerPath]: messageApi.reducer,
     user: userReducer,
     token: tokenReducer,
-    // drafts: draftsReducer,
+    drafts: draftsReducer,
   },
 
   middleware: (getDefaultMiddleware: any) =>
@@ -28,7 +28,7 @@ store.subscribe(() => {
   localStorage.setItem('user', JSON.stringify(store.getState().user));
   store.getState().token === null ? localStorage.removeItem('token') : localStorage.setItem('token', JSON.stringify(store.getState().token));
 
-  // localStorage.setItem('drafts', JSON.stringify(store.getState().drafts))
+   localStorage.setItem('drafts', JSON.stringify(store.getState().drafts))
 });
 
 export type RootState = ReturnType<typeof store.getState>
