@@ -1,5 +1,4 @@
 import { Button, Stack, TextField } from "@mui/material";
-import { Container } from "@mui/system";
 import React, { useState } from "react";
 import styled from "styled-components";
 import SendIcon from "@mui/icons-material/Send";
@@ -7,6 +6,7 @@ import DraftsIcon from "@mui/icons-material/Drafts";
 import { useAddMessageMutation } from "../../../API/messageApi";
 import { useDispatch } from "react-redux";
 import  { setDrafts } from "../../../store/draftMessageSlice";
+import { useSelector } from "react-redux";
 
 const ContainerStyled = styled.div`
   background: white;
@@ -37,6 +37,7 @@ const InputOutcomingMessage = () => {
   const dispatch = useDispatch()
 
   const [addMessage, { isError, isLoading }] = useAddMessageMutation({});
+  const drafts = useSelector<any>(state => state.drafts);
 
   const handleChange = ({
     target: { name, value },
@@ -79,10 +80,10 @@ const InputOutcomingMessage = () => {
       <Stack direction="row" spacing={1}>
         <Button
 //========================================FIX IT==================================================       
-          onClick={() =>{
-            dispatch(setDrafts(messageState));
-            localStorage.setItem('drafts', JSON.stringify(messageState))}
-          }
+          onClick ={() => {
+         dispatch(setDrafts(messageState))
+         localStorage["drafts"] = JSON.stringify(drafts)
+          }}
 //================================================================================================
           startIcon={<DraftsIcon style={{ fill: "#1976D2" }} />}
         >
