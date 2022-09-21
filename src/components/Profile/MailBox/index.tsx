@@ -12,12 +12,10 @@ import { messagePageSizes } from "../../../utils/constants";
 
 const MyContainer = styled.div`
   width: 100%;
-  height: calc(
-    ${messagePageSizes.heightRow} * ${messagePageSizes.limitMessagesOnPage}px
-  );
+  height: calc(${messagePageSizes.heightRow} * ${messagePageSizes.limitMessagesOnPage}px);
   display: flex;
   margin: 0 5px;
-`;
+`
 
 interface Props {}
 
