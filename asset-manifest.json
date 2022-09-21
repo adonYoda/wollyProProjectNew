@@ -1,6 +1,8 @@
 {
   "files": {
-    "main.js": "/static/js/main.2e62e008.js",
+    "main.js": "/static/js/main.f3fee067.js",
+    "static/js/526.fd75408b.chunk.js": "/static/js/526.fd75408b.chunk.js",
+    "static/js/232.8a9d35b5.chunk.js": "/static/js/232.8a9d35b5.chunk.js",
     "static/js/787.33b376eb.chunk.js": "/static/js/787.33b376eb.chunk.js",
     "static/media/LoggoButton.svg": "/static/media/LoggoButton.3fe18cb1e1f851ffb1e99748d83eed76.svg",
     "static/media/4xStones_01.136.jpg": "/static/media/4xStones_01.136.f0301090ab7570f40099.jpg",
@@ -12,10 +14,12 @@
     "static/media/1_Stein_Ring.163.jpg": "/static/media/1_Stein_Ring.163.f7aab4f329652760d846.jpg",
     "static/media/temp.jpeg": "/static/media/temp.5b01a934272cbb272339.jpeg",
     "index.html": "/index.html",
-    "main.2e62e008.js.map": "/static/js/main.2e62e008.js.map",
+    "main.f3fee067.js.map": "/static/js/main.f3fee067.js.map",
+    "526.fd75408b.chunk.js.map": "/static/js/526.fd75408b.chunk.js.map",
+    "232.8a9d35b5.chunk.js.map": "/static/js/232.8a9d35b5.chunk.js.map",
     "787.33b376eb.chunk.js.map": "/static/js/787.33b376eb.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.2e62e008.js"
+    "static/js/main.f3fee067.js"
   ]
 }
