@@ -1,6 +1,5 @@
 import { Avatar, Divider, List, ListItem, ListItemAvatar, ListItemText, Rating, Typography } from '@mui/material'
-import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react'
 import styled from 'styled-components';
 import { useStarMessageMutation } from '../../../API/messageApi'
 import { IMessage } from '../../../types';

@@ -1,7 +1,7 @@
 import { List } from "@mui/material";
 import React, { useState } from "react";
 import styled from "styled-components";
-import { IMessage, IMessageResponse } from "../../../types";
+import { IMessage } from "../../../types";
 import MessageFull from "./MessageFull";
 import MessagePreview from "./MessagePreview";
 
