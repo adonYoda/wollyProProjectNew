@@ -40,7 +40,7 @@ const Message: React.FC<Props> = ({ data }) => {
           <>
             {data.map(
               ({ author, subject, content, stared, id, dateCreated, trashed }) => (
-                
+                // !trashed &&
                 <MessagePreview
                   key={id}
                   author={author}

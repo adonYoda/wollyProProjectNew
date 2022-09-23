@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {
 	Button,
+	CircularProgress,
 	ClickAwayListener,
 	FormControl,
 	Grid,
@@ -26,6 +27,7 @@ import { createToken, profilePage, registrationPage } from "../../utils/constant
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { IState } from "../../types/index"
+import { yellow } from "@mui/material/colors";
 
 interface Props {
 	anchorRef: any;
@@ -167,15 +169,15 @@ const DropdownMenu: React.FC<Props> = ({ anchorRef, open, setOpen }) => {
 
 													dispatch(putUser(user));
 													dispatch(setToken(token));
-													// localStorage.setItem("token", JSON.stringify(token));
 													navigate(profilePage);
 													handleClose(e);
 												} catch (err) {
 													alert(err);
 												}
 											}}
-										>
-											Sign In
+										>{isLoading?(<CircularProgress size={29}
+											 />):
+											("Sign In")}
 										</Button>
 									</div>
 									<div>

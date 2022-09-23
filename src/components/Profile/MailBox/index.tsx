@@ -66,25 +66,25 @@ const MailPage: React.FC<Props> = () => {
                 variant="circular"
                 width={40}
                 height={40}
-                sx={{ bgcolor: "grey.900" }}
+                sx={{ bgcolor: "grey.500" }}
               />
               <Skeleton
                 animation="wave"
                 width="100%"
                 height={60}
-                sx={{ bgcolor: "grey.900" }}
+                sx={{ bgcolor: "grey.500" }}
               />
               <Skeleton
                 variant="rectangular"
                 width="100%"
                 height={60}
-                sx={{ bgcolor: "grey.900" }}
+                sx={{ bgcolor: "grey.500" }}
               />
               <Skeleton
                 variant="rounded"
                 width="100%"
                 height={60}
-                sx={{ bgcolor: "grey.900" }}
+                sx={{ bgcolor: "grey.500" }}
               />
             </Grid>
           ) : (
