@@ -12,7 +12,7 @@ const draftMessageSlice = createSlice({
 
   reducers: {
     setDrafts(state, action) {
-      state.draftMessage = action.payload.draftMessage;
+      state.draftMessage = action.payload;
     },
   },
 });

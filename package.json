@@ -12,7 +12,7 @@
     "@mui/material": "^5.9.0",
     "@reduxjs/toolkit": "^1.8.3",
     "@splinetool/react-spline": "^2.2.2",
-    "@splinetool/runtime": "^0.9.106",
+    "@splinetool/runtime": "^0.9.107",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^14.2.1",

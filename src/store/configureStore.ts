@@ -21,7 +21,7 @@ export const store = configureStore({
   },
 
   middleware: (getDefaultMiddleware: any) =>
-    getDefaultMiddleware().concat(accountingApi.middleware, messageApi.middleware),
+    getDefaultMiddleware().concat(accountingApi.middleware),
 });
 
 store.subscribe(() => {
