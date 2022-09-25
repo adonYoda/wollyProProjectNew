@@ -37,7 +37,6 @@ const InputOutcomingMessage = () => {
   const dispatch = useDispatch()
 
   const [addMessage, { isError, isLoading }] = useAddMessageMutation({});
-  const drafts = useSelector<any>(state => state.draftMessage);
 
   const handleChange = ({
     target: { name, value },
@@ -45,10 +44,7 @@ const InputOutcomingMessage = () => {
     setMessageState((prev) => ({ ...prev, [name]: value }));
 
   const handleAddMessage = async () => {
-    console.log(messageState);
     const response = await addMessage(messageState).unwrap();
-    console.log(response);
-
     setMessageState(prev => ({ ...prev, recipient: '', subject: '', content: '' }));
 
   };
@@ -78,14 +74,10 @@ const InputOutcomingMessage = () => {
         value={messageState.content}
       />
       <Stack direction="row" spacing={1}>
-        <Button
-//========================================FIX IT==================================================       
+        <Button 
           onClick ={() => {
          dispatch(setDrafts(messageState))
-         alert(`${messageState}`)
-        //  localStorage["drafts"] = JSON.stringify(drafts)
           }}
-//================================================================================================
           startIcon={<DraftsIcon style={{ fill: "#1976D2" }} />}
         >
           Save to drafts

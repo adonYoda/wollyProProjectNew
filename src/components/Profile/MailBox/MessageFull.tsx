@@ -32,14 +32,11 @@ const MyContainer = styled(Container)`
 `
 
 const MessageFull: React.FC<Props> = ({ dataMessage, handlerFlag }) => {
-  // const [isTrashed, setIsTrashed] = useState(false);
   const { author, subject, content, stared, id, dateCreated } = { ...dataMessage }
   const [trashMessage, {isLoading, isError}] = useTrashMessageMutation()
   const handleTrashMessage = async () => {
     const message = await trashMessage({id, isTrashed: true})
     handlerFlag(false)
-    console.log(message);
-    
   }
 
   return (

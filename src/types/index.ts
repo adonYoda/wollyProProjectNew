@@ -20,7 +20,6 @@ export interface IAddress {
   types: string[];
 }
 
-
 export interface IState {
   user?: IUserProfile | null;
   token?: { token: string } | null;
@@ -31,9 +30,9 @@ export interface IAction {
   payload?: any;
 }
 
-export interface IUserProfile extends IUser { }
+export interface IUserProfile extends IUser {}
 
-export interface IUserRegister extends IUser { }
+export interface IUserRegister extends IUser {}
 
 export type GetState = () => IState;
 
@@ -44,7 +43,7 @@ export type FuncAction = (dispatch: Dispatch) => void;
 export interface Jewel {
   id: string;
   type: string;
-  option: string[]
+  option: string[];
   seller: string;
   description: string;
   price: string;
@@ -53,12 +52,11 @@ export interface Jewel {
 }
 
 export interface Jewellery {
-  [key: string]: Jewel
+  [key: string]: Jewel;
 }
 
-
 export interface IMessage {
- author: string;
+  author: string;
   subject: string;
   content: string;
   stared: boolean;
@@ -82,7 +80,13 @@ export interface IMessageResponse extends IMessage {
 
 export interface IMessageQuery {
   limit: number;
-    page: number;
-    token: string;
-    folder: string;
+  page: number;
+  token: string;
+  folder: string;
+}
+
+export interface Drafts {
+  recipient: string;
+  subject: string;
+  content: string;
 }
