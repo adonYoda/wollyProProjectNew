@@ -40,8 +40,8 @@ const Message: React.FC<Props> = ({ data, folder }) => {
   const handlerFlag = (flag: boolean) => {
     setFlag(flag);
   };
-  const drafts = useSelector<Drafts []>((state) => state.draftMessage);
-
+  const drafts = useSelector((state: any) => state.drafts);
+  console.log(drafts);
   return (
     <>
       <List style={{ width: "100%", height: "100%", padding: "0px" }}>
@@ -49,17 +49,17 @@ const Message: React.FC<Props> = ({ data, folder }) => {
           <MessageFull handlerFlag={handlerFlag} dataMessage={dataMessage} />
         ) : (
           <>
-            { folder == 'drafts' &&
-            drafts.map(({ recipient, subject, content }) => (
-              <MessagePreview
-                subject={subject}
-                content={content}
-                // id={id}
-                handlerID={handlerID}
-                handlerFlag={handlerFlag}
-              />
-            ))
-         } || (
+            {folder == 'drafts' &&
+              drafts.map(({ recipient, subject, content }: Drafts) => (
+                <MessagePreview
+                  subject={subject}
+                  content={content}
+                  // id={id}
+                  handlerID={handlerID}
+                  handlerFlag={handlerFlag}
+                />
+              ))
+            } || (
             {data.map(
               ({
                 author,

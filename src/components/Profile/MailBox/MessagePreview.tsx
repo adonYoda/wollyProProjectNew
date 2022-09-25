@@ -53,38 +53,39 @@ const MessagePreview: React.FC<Props> = ({ author, subject, content, stared, id,
   }
 
   return (
-   
-  <>
-  
-    <ListItemStyled style={{ width: '100%', height: '100%', backgroundColor: '#8EBAFF' }}
-     onClick={()=> {handlerID({ author, subject, content, stared, id, dateCreated, trashed})
-     handlerFlag(true)
-  }}
-    >
-      <ListItemAvatar>
-        <Avatar alt={author} src={author} />
-      </ListItemAvatar>
-      <ListItemText primary={subject} secondary={
-        <React.Fragment>
-          <Typography
-            sx={{ display: 'inline' }}
-            component="span"
-            variant="body2"
-            color="text.primary"
-          >
-            {author}
-          </Typography>
-          <span className='msg-preview__text'>{` - ${content}`}</span>
-        </React.Fragment>
-      } />
-      <span className='msg-preview__date'>{`${date}`}</span>
-      <Rating defaultValue={stared ? 1 : 0} max={1} onClick={() => {
-        handleClick(id, !stared)
-        setValue(!stared)
-      }} />
-    </ListItemStyled>
-    <Divider />
-  </>)
+
+    <>
+
+      <ListItemStyled style={{ width: '100%', height: '100%', backgroundColor: '#8EBAFF' }}
+        onClick={() => {
+          handlerID({ author, subject, content, stared, id, dateCreated, trashed })
+          handlerFlag(true)
+        }}
+      >
+        <ListItemAvatar>
+          <Avatar alt={author} src={author} />
+        </ListItemAvatar>
+        <ListItemText primary={subject} secondary={
+          <React.Fragment>
+            <Typography
+              sx={{ display: 'inline' }}
+              component="span"
+              variant="body2"
+              color="text.primary"
+            >
+              {author}
+            </Typography>
+            <span className='msg-preview__text'>{` - ${content}`}</span>
+          </React.Fragment>
+        } />
+        <span className='msg-preview__date'>{`${date}`}</span>
+        <Rating defaultValue={stared ? 1 : 0} max={1} onClick={() => {
+          handleClick(id, !stared)
+          setValue(!stared)
+        }} />
+      </ListItemStyled>
+      <Divider />
+    </>)
 }
 
 export default MessagePreview
