@@ -2,17 +2,10 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const draftMessageSlice = createSlice({
   name: "draftMessage",
-  initialState: {
-    id: {
-      recipient: "",
-      subject: "",
-      content: "",
-    },
-  },
-
+  initialState: [],
   reducers: {
     setDrafts(state, action) {
-      state.draftMessage = action.payload;
+      state.push(action.payload);
     },
   },
 });

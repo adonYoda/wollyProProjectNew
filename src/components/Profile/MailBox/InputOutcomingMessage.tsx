@@ -37,7 +37,7 @@ const InputOutcomingMessage = () => {
   const dispatch = useDispatch()
 
   const [addMessage, { isError, isLoading }] = useAddMessageMutation({});
-  const drafts = useSelector<any>(state => state.drafts);
+  const drafts = useSelector<any>(state => state.draftMessage);
 
   const handleChange = ({
     target: { name, value },
