@@ -37,7 +37,7 @@ const MessageFull: React.FC<Props> = ({ dataMessage, handlerFlag }) => {
   const [trashMessage, {isLoading, isError}] = useTrashMessageMutation()
   const handleTrashMessage = async () => {
     const message = await trashMessage({id, isTrashed: true})
-    await handlerFlag(false)
+    handlerFlag(false)
     console.log(message);
     
   }

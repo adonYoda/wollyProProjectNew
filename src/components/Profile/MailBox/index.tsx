@@ -90,7 +90,7 @@ const MailPage: React.FC<Props> = () => {
           ) : (
             <Grid item style={{ padding: "0px" }} xs={9}>
               {flag && <InputOutcomingMessage />}
-              {!flag && <Message data={data} />}
+              {!flag && <Message data={data} folder={folder} />}
             </Grid>
           )}
         </Grid>

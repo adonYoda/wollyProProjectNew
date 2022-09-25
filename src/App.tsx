@@ -1,4 +1,3 @@
-import { Application } from "@splinetool/runtime";
 import styled from "styled-components";
 import Background from "./components/Background";
 import Footer from "./components/Footer";
@@ -21,10 +20,10 @@ function App() {
   return (
 
     <MyApp>
+       {/* <Background /> */}
       <Header />
       <Main />
       <Footer />
-      {/* <Background /> */}
     </MyApp>
   );
 }

@@ -1,19 +1,19 @@
 import { List } from "@mui/material";
 import React, { useState } from "react";
-import styled from "styled-components";
 import { IMessage } from "../../../types";
 import MessageFull from "./MessageFull";
 import MessagePreview from "./MessagePreview";
 
-const Container = styled.div`
-  width: 100%;
-  height: 105px;
-`;
+// const Container = styled.div`
+//   width: 100%;
+//   height: 105px;
+// `;
 interface Props {
   data: [];
+  folder: string;
 }
 
-const Message: React.FC<Props> = ({ data }) => {
+const Message: React.FC<Props> = ({ data, folder }) => {
   console.log("Message RENDER");
   const [dataMessage, setDataMessage] = useState<IMessage | undefined>();
   const [flag, setFlag] = useState(false);
@@ -40,7 +40,7 @@ const Message: React.FC<Props> = ({ data }) => {
           <>
             {data.map(
               ({ author, subject, content, stared, id, dateCreated, trashed }) => (
-                // !trashed &&
+                (trashed == false && folder !== 'trash' &&
                 <MessagePreview
                   key={id}
                   author={author}
@@ -52,7 +52,18 @@ const Message: React.FC<Props> = ({ data }) => {
                   trashed={trashed}
                   handlerID={handlerID}
                   handlerFlag={handlerFlag}
-                />
+                />)|| (trashed == true && folder === 'trash' && <MessagePreview
+                key={id}
+                author={author}
+                subject={subject}
+                content={content}
+                stared={stared}
+                id={id}
+                dateCreated={dateCreated}
+                trashed={trashed}
+                handlerID={handlerID}
+                handlerFlag={handlerFlag}
+              />)
               )
             )}
           </>
