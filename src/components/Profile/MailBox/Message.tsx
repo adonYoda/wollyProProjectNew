@@ -1,24 +1,21 @@
 import { List } from "@mui/material";
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { Drafts, IMessage } from "../../../types";
-import MessageDraftPreview from "./MessageDraftPreview";
+import { IMessage } from "../../../types";
 import MessageFull from "./MessageFull";
 import MessagePreview from "./MessagePreview";
 
-// const Container = styled.div`
-//   width: 100%;
-//   height: 105px;
-// `;
 interface Props {
-  data: [];
-  folder: string;
+  dataMessage: IMessage[];
 }
 
-const Message: React.FC<Props> = ({ data, folder }) => {
-  console.log("Message RENDER");
-  const [dataMessage, setDataMessage] = useState<IMessage | undefined>();
+const Message: React.FC<Props> = ({ dataMessage }) => {
   const [flag, setFlag] = useState(false);
+  const [data, setData] = useState<IMessage | undefined>();
+
+  const handlerFlag = (flag: boolean) => {
+    setFlag(flag);
+  };
+
   const handlerID = ({
     author,
     subject,
@@ -28,7 +25,7 @@ const Message: React.FC<Props> = ({ data, folder }) => {
     dateCreated,
     trashed,
   }: IMessage) => {
-    setDataMessage({
+    setData({
       author,
       subject,
       content,
@@ -38,31 +35,15 @@ const Message: React.FC<Props> = ({ data, folder }) => {
       trashed,
     });
   };
-  const handlerFlag = (flag: boolean) => {
-    setFlag(flag);
-  };
-  const drafts = useSelector<any>((state) => state.draftMessage) as any[];
 
   return (
     <>
-      <List style={{ width: "100%", height: "100%", padding: "0px" }}>
+      {/* <List style={{ width: "100%", height: "100%", padding: "0px" }}>
         {flag ? (
-          <MessageFull handlerFlag={handlerFlag} dataMessage={dataMessage} />
+          <MessageFull handlerFlag={handlerFlag} data={data} />
         ) : (
           <>
-            {/* { folder == 'drafts' &&
-            drafts.map(({ recipient, subject, content }) => (
-              <MessageDraftPreview
-                recipient ={recipient}
-                subject={subject}
-                content={content}
-                // id={id}
-                handlerID={handlerID}
-                handlerFlag={handlerFlag}
-              />
-            ))
-         } || ( */}
-            {data.map(
+            {dataMessage.map(
               ({
                 author,
                 subject,
@@ -72,7 +53,7 @@ const Message: React.FC<Props> = ({ data, folder }) => {
                 dateCreated,
                 trashed,
               }) =>
-                (trashed == false && folder !== "trash" && (
+                trashed === true && (
                   <MessagePreview
                     key={id}
                     author={author}
@@ -85,26 +66,11 @@ const Message: React.FC<Props> = ({ data, folder }) => {
                     handlerID={handlerID}
                     handlerFlag={handlerFlag}
                   />
-                )) ||
-                (trashed == true && folder === "trash" && (
-                  <MessagePreview
-                    key={id}
-                    author={author}
-                    subject={subject}
-                    content={content}
-                    stared={stared}
-                    id={id}
-                    dateCreated={dateCreated}
-                    trashed={trashed}
-                    handlerID={handlerID}
-                    handlerFlag={handlerFlag}
-                  />
-                ))
+                )
             )}
-            
           </>
         )}
-      </List>
+      </List> */}
     </>
   );
 };

@@ -7,7 +7,7 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import InputOutcomingMessage from "./InputOutcomingMessage";
 import ListDividers from "./MenuMailBox";
-import Message from "./Message";
+import MainMessage from "./MainMessage";
 import { messagePageSizes } from "../../../utils/constants";
 
 const MyContainer = styled.div`
@@ -17,12 +17,14 @@ const MyContainer = styled.div`
   margin: 0 5px;
 `
 
-interface Props {}
+interface Props { }
 
 const MailPage: React.FC<Props> = () => {
   const [folder, setFolder] = useState<string>("inbox");
   const [flag, setFlag] = useState(false);
   const [page, setPage] = useState(0);
+  const [draftIndex, setDraftIndex] = useState<number>(-1);
+  const [category, setCategory] = useState<string>("")
 
   const { data = [], isLoading } = useGetMailboxMessagesQuery({
     limit: messagePageSizes.limitMessagesOnPage,
@@ -36,8 +38,8 @@ const MailPage: React.FC<Props> = () => {
   }
 
   useEffect(() => {
-    console.log(data);
-  }, [data]);
+    console.log(folder);
+  }, [folder]);
 
   return (
     <>
@@ -47,7 +49,7 @@ const MailPage: React.FC<Props> = () => {
           style={{ display: "flex", justifyContent: "space-between" }}
         >
           <Grid style={{ padding: "0px", marginLeft: "-100px" }} item xs={4}>
-            <ListDividers changeFolder={setFolder} changeFlag={setFlag} />
+            <ListDividers changeFolder={setFolder} changeFlag={setFlag} setCategory={setCategory}/>
           </Grid>
           {isLoading ? (
             <Grid
@@ -89,8 +91,7 @@ const MailPage: React.FC<Props> = () => {
             </Grid>
           ) : (
             <Grid item style={{ padding: "0px" }} xs={9}>
-              {flag && <InputOutcomingMessage />}
-              {!flag && <Message data={data} folder={folder} />}
+              <MainMessage data={data} folder={folder} setDraftIndex={setDraftIndex} category={category}/>
             </Grid>
           )}
         </Grid>

@@ -21,8 +21,10 @@ export interface IAddress {
 }
 
 export interface IState {
-  user?: IUserProfile | null;
+  user?: IUser;
   token?: { token: string } | null;
+  drafts?: IDraft[];
+
 }
 
 export interface IAction {
@@ -30,9 +32,9 @@ export interface IAction {
   payload?: any;
 }
 
-export interface IUserProfile extends IUser {}
+export interface IUserProfile extends IUser { }
 
-export interface IUserRegister extends IUser {}
+export interface IUserRegister extends IUser { }
 
 export type GetState = () => IState;
 
@@ -85,8 +87,10 @@ export interface IMessageQuery {
   folder: string;
 }
 
-export interface Drafts {
-  recipient: string;
-  subject: string;
-  content: string;
+
+export interface IDraft {
+  content: string,
+  recipient: string,
+  subject: string
 }
+
