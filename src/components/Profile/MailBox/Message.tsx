@@ -2,6 +2,7 @@ import { List } from "@mui/material";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Drafts, IMessage } from "../../../types";
+import MessageDraftPreview from "./MessageDraftPreview";
 import MessageFull from "./MessageFull";
 import MessagePreview from "./MessagePreview";
 
@@ -40,7 +41,7 @@ const Message: React.FC<Props> = ({ data, folder }) => {
   const handlerFlag = (flag: boolean) => {
     setFlag(flag);
   };
-  const drafts = useSelector<Drafts []>((state) => state.draftMessage);
+  const drafts = useSelector<any>((state) => state.draftMessage) as any[];
 
   return (
     <>
@@ -49,9 +50,10 @@ const Message: React.FC<Props> = ({ data, folder }) => {
           <MessageFull handlerFlag={handlerFlag} dataMessage={dataMessage} />
         ) : (
           <>
-            { folder == 'drafts' &&
+            {/* { folder == 'drafts' &&
             drafts.map(({ recipient, subject, content }) => (
-              <MessagePreview
+              <MessageDraftPreview
+                recipient ={recipient}
                 subject={subject}
                 content={content}
                 // id={id}
@@ -59,7 +61,7 @@ const Message: React.FC<Props> = ({ data, folder }) => {
                 handlerFlag={handlerFlag}
               />
             ))
-         } || (
+         } || ( */}
             {data.map(
               ({
                 author,
@@ -99,7 +101,7 @@ const Message: React.FC<Props> = ({ data, folder }) => {
                   />
                 ))
             )}
-            )
+            
           </>
         )}
       </List>
