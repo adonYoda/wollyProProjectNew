@@ -2,7 +2,7 @@ import { Avatar, Divider, List, ListItem, ListItemAvatar, ListItemText, Rating, 
 import React, { useState } from 'react'
 import styled from 'styled-components';
 import { useStarMessageMutation } from '../../../API/messageApi'
-import { IMessage } from '../../../types';
+import { IMessage, IMessageResponse } from '../../../types';
 import { messagePageSizes } from '../../../utils/constants';
 
 interface Props {
@@ -13,7 +13,10 @@ interface Props {
   id: string,
   dateCreated: string,
   trashed: boolean,
-  handlerID: ({ author, subject, content, stared, id, dateCreated }: IMessage) => void
+  sent: boolean,
+  recipient: string,
+  read: boolean,
+  handlerID: ({ author, subject, content, stared, id, dateCreated, sent, recipient, read }: IMessageResponse) => void
   handlerFlag: (flag: boolean) => void;
 }
 const ListItemStyled = styled(ListItem)`
@@ -31,7 +34,7 @@ const ListItemStyled = styled(ListItem)`
 `;
 
 
-const MessagePreview: React.FC<Props> = ({ author, subject, content, stared, id, dateCreated, trashed, handlerID, handlerFlag }) => {
+const MessagePreview: React.FC<Props> = ({ author, subject, content, stared, id, dateCreated, trashed, sent, recipient, read, handlerID, handlerFlag }) => {
   const [addStar, { isError }] = useStarMessageMutation();
   const [isStared, setValue] = useState<boolean | null>(false);
 
@@ -58,7 +61,7 @@ const MessagePreview: React.FC<Props> = ({ author, subject, content, stared, id,
 
       <ListItemStyled style={{ width: '100%', height: '100%', backgroundColor: '#8EBAFF' }}
         onClick={(e) => {
-          handlerID({ author, subject, content, stared, id, dateCreated, trashed })
+          handlerID({ author, subject, content, stared, id, dateCreated, trashed, sent, recipient, read })
           handlerFlag(true)
         }}
       >

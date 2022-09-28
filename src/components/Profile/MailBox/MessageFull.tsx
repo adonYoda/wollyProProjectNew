@@ -1,12 +1,12 @@
 import { Avatar, Button, Container, Typography } from "@mui/material";
 import React, { useState } from "react";
 import styled from "styled-components";
-import { IMessage } from "../../../types";
+import { IMessage, IMessageResponse } from "../../../types";
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useTrashMessageMutation } from "../../../API/messageApi";
 
 interface Props {
-  dataMessage: IMessage | undefined;
+  dataMessage: IMessageResponse | undefined;
   handlerFlag: (flag: boolean) => void;
 }
 

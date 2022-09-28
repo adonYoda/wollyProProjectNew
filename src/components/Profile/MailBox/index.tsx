@@ -7,7 +7,7 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import InputOutcomingMessage from "./InputOutcomingMessage";
 import ListDividers from "./MenuMailBox";
-import MainMessage from "./MainMessage";
+import Message from "./Message";
 import { messagePageSizes } from "../../../utils/constants";
 
 const MyContainer = styled.div`
@@ -24,7 +24,7 @@ const MailPage: React.FC<Props> = () => {
   const [flag, setFlag] = useState(false);
   const [page, setPage] = useState(0);
   const [draftIndex, setDraftIndex] = useState<number>(-1);
-  const [category, setCategory] = useState<string>("")
+  const [category, setCategory] = useState('inbox')
 
   const { data = [], isLoading } = useGetMailboxMessagesQuery({
     limit: messagePageSizes.limitMessagesOnPage,
@@ -49,7 +49,7 @@ const MailPage: React.FC<Props> = () => {
           style={{ display: "flex", justifyContent: "space-between" }}
         >
           <Grid style={{ padding: "0px", marginLeft: "-100px" }} item xs={4}>
-            <ListDividers changeFolder={setFolder} changeFlag={setFlag} setCategory={setCategory}/>
+            <ListDividers changeFolder={setFolder} changeFlag={setFlag} changeCategory = {setCategory} />
           </Grid>
           {isLoading ? (
             <Grid
@@ -64,34 +64,40 @@ const MailPage: React.FC<Props> = () => {
               item
               xs={9}
             >
-              <Skeleton
-                variant="circular"
-                width={40}
-                height={40}
-                sx={{ bgcolor: "grey.500" }}
+               <Skeleton
+                variant="rectangular"
+                sx={{ bgcolor: "grey.500", width: "100% ", height: 60 }}
               />
+              
               <Skeleton
-                animation="wave"
-                width="100%"
-                height={60}
-                sx={{ bgcolor: "grey.500" }}
+                variant="rectangular"
+                sx={{ bgcolor: "grey.500", width: "100% ", height: 60 }}
               />
               <Skeleton
                 variant="rectangular"
-                width="100%"
-                height={60}
-                sx={{ bgcolor: "grey.500" }}
+                sx={{ bgcolor: "grey.500", width: "100% ", height: 60 }}
               />
-              <Skeleton
-                variant="rounded"
-                width="100%"
-                height={60}
-                sx={{ bgcolor: "grey.500" }}
+               <Skeleton
+                variant="rectangular"
+                sx={{ bgcolor: "grey.500", width: "100% ", height: 60 }}
+              />
+               <Skeleton
+                variant="rectangular"
+                sx={{ bgcolor: "grey.500", width: "100% ", height: 60 }}
+              />
+               <Skeleton
+                variant="rectangular"
+                sx={{ bgcolor: "grey.500", width: "100% ", height: 60 }}
+              />
+               <Skeleton
+                variant="rectangular"
+                sx={{ bgcolor: "grey.500", width: "100% ", height: 60 }}
               />
             </Grid>
           ) : (
             <Grid item style={{ padding: "0px" }} xs={9}>
-              <MainMessage data={data} folder={folder} setDraftIndex={setDraftIndex} category={category}/>
+              {flag && <InputOutcomingMessage />}
+              {!flag && <Message data={data} folder={folder} setDraftIndex={setDraftIndex} category={category} />}
             </Grid>
           )}
         </Grid>
