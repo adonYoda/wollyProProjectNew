@@ -57,7 +57,7 @@ const MessagePreview: React.FC<Props> = ({ author, subject, content, stared, id,
     <>
 
       <ListItemStyled style={{ width: '100%', height: '100%', backgroundColor: '#8EBAFF' }}
-        onClick={() => {
+        onClick={(e) => {
           handlerID({ author, subject, content, stared, id, dateCreated, trashed })
           handlerFlag(true)
         }}
@@ -79,7 +79,8 @@ const MessagePreview: React.FC<Props> = ({ author, subject, content, stared, id,
           </React.Fragment>
         } />
         <span className='msg-preview__date'>{`${date}`}</span>
-        <Rating defaultValue={stared ? 1 : 0} max={1} onClick={() => {
+        <Rating defaultValue={stared ? 1 : 0} max={1} onClick={(e) => {
+          e.stopPropagation();
           handleClick(id, !stared)
           setValue(!stared)
         }} />

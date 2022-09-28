@@ -1,7 +1,8 @@
 import { List } from "@mui/material";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { Drafts, IMessage } from "../../../types";
+import { IDraft, IMessage, IState } from "../../../types";
+import DraftsPreview from "./DraftsPreview";
 import MessageFull from "./MessageFull";
 import MessagePreview from "./MessagePreview";
 
@@ -10,11 +11,12 @@ import MessagePreview from "./MessagePreview";
 //   height: 105px;
 // `;
 interface Props {
-  data: [];
+  data: IMessage[];
   folder: string;
+  setDraftIndex: (value: number) => void;
 }
 
-const Message: React.FC<Props> = ({ data, folder }) => {
+const Message: React.FC<Props> = ({ data, folder, setDraftIndex }) => {
   console.log("Message RENDER");
   const [dataMessage, setDataMessage] = useState<IMessage | undefined>();
   const [flag, setFlag] = useState(false);
@@ -40,8 +42,9 @@ const Message: React.FC<Props> = ({ data, folder }) => {
   const handlerFlag = (flag: boolean) => {
     setFlag(flag);
   };
-  const drafts = useSelector((state: any) => state.drafts);
+  const drafts = useSelector<IState, IDraft[] | undefined>((state) => state.drafts);
   console.log(drafts);
+
   return (
     <>
       <List style={{ width: "100%", height: "100%", padding: "0px" }}>
@@ -49,18 +52,14 @@ const Message: React.FC<Props> = ({ data, folder }) => {
           <MessageFull handlerFlag={handlerFlag} dataMessage={dataMessage} />
         ) : (
           <>
-            {folder == 'drafts' &&
-              drafts.map(({ recipient, subject, content }: Drafts) => (
-                <MessagePreview
-                  subject={subject}
-                  content={content}
-                  // id={id}
-                  handlerID={handlerID}
-                  handlerFlag={handlerFlag}
-                />
+
+            {folder === 'drafts' && drafts &&
+              drafts?.map((draft: IDraft, i: number) => (
+                <DraftsPreview key={i} index={i} {...draft} setDraftIndex={setDraftIndex} />
               ))
-            } || (
-            {data.map(
+            }
+
+            {folder !== 'drafts' && data.map(
               ({
                 author,
                 subject,
@@ -99,7 +98,6 @@ const Message: React.FC<Props> = ({ data, folder }) => {
                   />
                 ))
             )}
-            )
           </>
         )}
       </List>

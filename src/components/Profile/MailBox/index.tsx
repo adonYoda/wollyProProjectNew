@@ -17,12 +17,13 @@ const MyContainer = styled.div`
   margin: 0 5px;
 `
 
-interface Props {}
+interface Props { }
 
 const MailPage: React.FC<Props> = () => {
   const [folder, setFolder] = useState<string>("inbox");
   const [flag, setFlag] = useState(false);
   const [page, setPage] = useState(0);
+  const [draftIndex, setDraftIndex] = useState<number>(-1);
 
   const { data = [], isLoading } = useGetMailboxMessagesQuery({
     limit: messagePageSizes.limitMessagesOnPage,
@@ -36,8 +37,8 @@ const MailPage: React.FC<Props> = () => {
   }
 
   useEffect(() => {
-    console.log(data);
-  }, [data]);
+    console.log(folder);
+  }, [folder]);
 
   return (
     <>
@@ -90,7 +91,7 @@ const MailPage: React.FC<Props> = () => {
           ) : (
             <Grid item style={{ padding: "0px" }} xs={9}>
               {flag && <InputOutcomingMessage />}
-              {!flag && <Message data={data} folder={folder} />}
+              {!flag && <Message data={data} folder={folder} setDraftIndex={setDraftIndex} />}
             </Grid>
           )}
         </Grid>

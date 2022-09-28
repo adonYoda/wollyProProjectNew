@@ -33,7 +33,7 @@ const NestedList: React.FC<Props> = ({ changeFolder, changeFlag }) => {
       aria-labelledby="nested-list-subheader"
     >
       <ListItemButton
-        onClick={() => changeFlag(true) }
+        onClick={() => changeFlag(true)}
       >
         <ListItemIcon>
           <SendIcon />
@@ -42,9 +42,9 @@ const NestedList: React.FC<Props> = ({ changeFolder, changeFlag }) => {
       </ListItemButton>
       <ListItemButton
         onClick={() => {
-            changeFlag(false)
+          changeFlag(false)
           changeFolder("sent");
-          
+
         }}
       >
         <ListItemIcon>
@@ -52,7 +52,12 @@ const NestedList: React.FC<Props> = ({ changeFolder, changeFlag }) => {
         </ListItemIcon>
         <ListItemText primary="Sent" />
       </ListItemButton>
-      <ListItemButton>
+      <ListItemButton
+        onClick={() => {
+          changeFlag(false);
+          changeFolder("drafts");
+        }}
+      >
         <ListItemIcon>
           <DraftsIcon />
         </ListItemIcon>
@@ -60,10 +65,10 @@ const NestedList: React.FC<Props> = ({ changeFolder, changeFlag }) => {
       </ListItemButton>
       <ListItemButton
         onClick={() => {
-            changeFlag(false)
+          changeFlag(false);
           changeFolder("inbox");
           handleClick();
-          }}
+        }}
       >
         <ListItemIcon>
           <InboxIcon />
@@ -76,9 +81,9 @@ const NestedList: React.FC<Props> = ({ changeFolder, changeFlag }) => {
           <ListItemButton
             sx={{ pl: 4 }}
             onClick={() => {
-                changeFlag(false)
+              changeFlag(false)
               changeFolder("unread");
-             
+
             }}
           >
             <ListItemIcon>
@@ -89,7 +94,7 @@ const NestedList: React.FC<Props> = ({ changeFolder, changeFlag }) => {
           <ListItemButton
             sx={{ pl: 4 }}
             onClick={() => {
-                changeFlag(false)
+              changeFlag(false)
               changeFolder("stared");
             }}
           >
@@ -102,7 +107,7 @@ const NestedList: React.FC<Props> = ({ changeFolder, changeFlag }) => {
       </Collapse>
       <ListItemButton
         onClick={() => {
-            changeFlag(false)
+          changeFlag(false)
           changeFolder("trash");
         }}
       >

@@ -21,8 +21,10 @@ export interface IAddress {
 }
 
 export interface IState {
-  user?: IUserProfile | null;
+  user?: IUser;
   token?: { token: string } | null;
+  drafts?: IDraft[];
+
 }
 
 export interface IAction {
@@ -86,7 +88,7 @@ export interface IMessageQuery {
 }
 
 
-export interface Drafts {
+export interface IDraft {
   content: string,
   recipient: string,
   subject: string
