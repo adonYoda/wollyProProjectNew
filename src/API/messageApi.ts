@@ -62,25 +62,24 @@ export const messageApi = createApi({
       }),
     }),
     readMessage: build.mutation({
-      query: ({ token, message, body }) => ({
-        url: `/profile/mailbox/${message.id}`,
+      query: ({ id, isRead }) => ({
+        url: `/profile/mailbox/${id}`,
         method: "PUT",
-        body,
-        headers: {
-          Authorization: `Basic ${token}`,
-        },
+        body: {
+          "read": isRead
+        }
       }),
     }),
-    unreadMessage: build.mutation({
-      query: ({ token, message, body }) => ({
-        url: `/profile/mailbox/${message.id}`,
-        method: "PUT",
-        body,
-        headers: {
-          Authorization: `Basic ${token}`,
-        },
-      }),
-    }),
+    // unreadMessage: build.mutation({
+    //   query: ({ token, message, body }) => ({
+    //     url: `/profile/mailbox/${message.id}`,
+    //     method: "PUT",
+    //     body,
+    //     headers: {
+    //       Authorization: `Basic ${token}`,
+    //     },
+    //   }),
+    // }),
     starMessage: build.mutation({
       query: ({ id, isStared}: any) => ({
         url: `/profile/mailbox/${id}`,
@@ -152,4 +151,4 @@ export const messageApi = createApi({
   }),
 });
 
-export const { useGetMailboxMessagesQuery, useAddMessageMutation, useStarMessageMutation, useTrashMessageMutation } = messageApi;
+export const { useGetMailboxMessagesQuery, useAddMessageMutation, useStarMessageMutation, useTrashMessageMutation, useReadMessageMutation } = messageApi;

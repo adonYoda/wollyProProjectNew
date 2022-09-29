@@ -60,7 +60,7 @@ export const categoryName = {
   unread: "unread",
   stared: "stared",
   deleted: "deleted",
-
+  newMessage: "newMessage",
 
 }
 // </CategoryName> ==========================================================================================

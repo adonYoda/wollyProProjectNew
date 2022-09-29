@@ -44,7 +44,7 @@ const InputOutcomingMessage = () => {
     setMessageState((prev) => ({ ...prev, [name]: value }));
 
   const handleAddMessage = async () => {
-    const response = await addMessage(messageState).unwrap();
+    await addMessage(messageState).unwrap();
     setMessageState(prev => ({ ...prev, recipient: '', subject: '', content: '' }));
 
   };

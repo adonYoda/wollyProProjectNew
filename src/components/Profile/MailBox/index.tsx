@@ -21,7 +21,6 @@ interface Props { }
 
 const MailPage: React.FC<Props> = () => {
   const [folder, setFolder] = useState<string>("inbox");
-  const [flag, setFlag] = useState(false);
   const [page, setPage] = useState(0);
   const [draftIndex, setDraftIndex] = useState<number>(-1);
   const [category, setCategory] = useState('inbox')
@@ -49,7 +48,7 @@ const MailPage: React.FC<Props> = () => {
           style={{ display: "flex", justifyContent: "space-between" }}
         >
           <Grid style={{ padding: "0px", marginLeft: "-100px" }} item xs={4}>
-            <ListDividers changeFolder={setFolder} changeFlag={setFlag} changeCategory = {setCategory} refetch={refetch} />
+            <ListDividers changeFolder={setFolder} changeCategory = {setCategory} refetch={refetch} />
           </Grid>
           {isLoading ? (
             <Grid
@@ -96,8 +95,8 @@ const MailPage: React.FC<Props> = () => {
             </Grid>
           ) : (
             <Grid item style={{ padding: "0px" }} xs={9}>
-              {flag && <InputOutcomingMessage />}
-              {!flag && <Message data={data} folder={folder} setDraftIndex={setDraftIndex} category={category} setFlagMessage={setFlag} refetch={refetch} />}
+              {category === "newMessage" && <InputOutcomingMessage />}
+              {category !== "newMessage" && <Message data={data} folder={folder} setDraftIndex={setDraftIndex} category={category} refetch={refetch} />}
             </Grid>
           )}
         </Grid>

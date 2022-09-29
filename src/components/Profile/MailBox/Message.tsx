@@ -16,7 +16,6 @@ interface Props {
 	folder: string;
 	setDraftIndex: (value: number) => void;
 	category: string;
-	setFlagMessage: (flag: boolean) => void;
 	refetch: () => void;
 }
 
@@ -25,7 +24,6 @@ const Message: React.FC<Props> = ({
 	folder,
 	setDraftIndex,
 	category,
-	setFlagMessage,
 	refetch
 }) => {
 	console.log("Message RENDER");
@@ -71,7 +69,7 @@ const Message: React.FC<Props> = ({
 			case categoryName.deleted:
 				return dataEl.trashed == true;
 			case categoryName.sent:
-				return dataEl.sent == true && dataEl.trashed == false;
+				return dataEl.sent == true && dataEl.trashed === true;
 			case categoryName.stared:
 				return dataEl.stared == true && dataEl.trashed == false;
 			case categoryName.unread:
@@ -81,7 +79,7 @@ const Message: React.FC<Props> = ({
 			// case categoryName.inbox:
 			// 	return dataEl.read == false && dataEl.trashed == false;
 			default:
-				return dataEl.read == false && dataEl.trashed == false;
+				return dataEl.trashed == false;
 		}
 	}
 	//=======================================================================================================
@@ -90,10 +88,10 @@ const Message: React.FC<Props> = ({
 		<>
 			<List style={{ width: "100%", height: "100%", padding: "0px" }}>
 				{flag ? (
-					<MessageFull handlerFlag={handlerFlag} dataMessage={dataMessage} setFlagMessage={setFlagMessage} refetch={refetch} />
+					<MessageFull handlerFlag={handlerFlag} dataMessage={dataMessage} refetch={refetch} />
 				) : (
 					<>
-						{
+						{category !== categoryName.drafts ? (
 							data.map((dataEl) => testFunc(category, dataEl) && (
 								<MessagePreview
 									{...dataEl}
@@ -101,7 +99,15 @@ const Message: React.FC<Props> = ({
 									handlerFlag={handlerFlag}
 								/>
 							))
-						 }
+						) : (drafts &&
+							drafts.map((draft, i) => (
+								<DraftsPreview
+									{...draft}
+									index={i}
+									setDraftIndex={setDraftIndex}
+								/>
+							))
+						)}
 					</>
 				)}
 			</List>
@@ -110,49 +116,3 @@ const Message: React.FC<Props> = ({
 };
 
 export default Message;
-
-// {folder === 'drafts' && drafts &&
-// drafts?.map((draft: IDraft, i: number) => (
-//   <DraftsPreview key={i} index={i} {...draft} setDraftIndex={setDraftIndex} />
-// ))
-// }
-
-// {folder !== 'drafts' && data.map(
-// ({
-//   author,
-//   subject,
-//   content,
-//   stared,
-//   id,
-//   dateCreated,
-//   trashed,
-// }) =>
-//   (trashed == false && folder !== "trash" && (
-//     <MessagePreview
-//       key={id}
-//       author={author}
-//       subject={subject}
-//       content={content}
-//       stared={stared}
-//       id={id}
-//       dateCreated={dateCreated}
-//       trashed={trashed}
-//       handlerID={handlerID}
-//       handlerFlag={handlerFlag}
-//     />
-//   )) ||
-//   (trashed == true && folder === "trash" && (
-//     <MessagePreview
-//       key={id}
-//       author={author}
-//       subject={subject}
-//       content={content}
-//       stared={stared}
-//       id={id}
-//       dateCreated={dateCreated}
-//       trashed={trashed}
-//       handlerID={handlerID}
-//       handlerFlag={handlerFlag}
-//     />
-//   ))
-// )}

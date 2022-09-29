@@ -17,12 +17,11 @@ import { categoryName } from "../../../utils/constants";
 
 interface Props {
   changeFolder: (args: string) => void;
-  changeFlag: (flag: boolean) => void;
   changeCategory: (category: string) => void;
   refetch: () => void;
 }
 
-const NestedList: React.FC<Props> = ({ changeFolder, changeFlag, changeCategory, refetch }) => {
+const NestedList: React.FC<Props> = ({ changeFolder, changeCategory}) => {
   const [open, setOpen] = React.useState(false);
 
   const handleClick = () => {
@@ -36,7 +35,7 @@ const NestedList: React.FC<Props> = ({ changeFolder, changeFlag, changeCategory,
       aria-labelledby="nested-list-subheader"
     >
       <ListItemButton
-        onClick={() => changeFlag(true)}
+        onClick={() => changeCategory(categoryName.newMessage)}
       >
         <ListItemIcon>
           <SendIcon />
@@ -45,7 +44,6 @@ const NestedList: React.FC<Props> = ({ changeFolder, changeFlag, changeCategory,
       </ListItemButton>
       <ListItemButton
         onClick={() => {
-          changeFlag(false)
           changeFolder("sent");
           changeCategory(categoryName.sent);
         }}
@@ -57,7 +55,6 @@ const NestedList: React.FC<Props> = ({ changeFolder, changeFlag, changeCategory,
       </ListItemButton>
       <ListItemButton
         onClick={() => {
-          changeFlag(false);
           changeCategory(categoryName.drafts)
         }}
       >
@@ -68,10 +65,9 @@ const NestedList: React.FC<Props> = ({ changeFolder, changeFlag, changeCategory,
       </ListItemButton>
       <ListItemButton
         onClick={() => {
-          changeFlag(false);
           changeFolder("inbox");
           handleClick();
-          changeCategory(categoryName.drafts);
+          changeCategory(categoryName.inbox);
         }}
       >
         <ListItemIcon>
@@ -85,7 +81,6 @@ const NestedList: React.FC<Props> = ({ changeFolder, changeFlag, changeCategory,
           <ListItemButton
             sx={{ pl: 4 }}
             onClick={() => {
-              changeFlag(false)
               changeFolder("unread");
               changeCategory(categoryName.unread);
             }}
@@ -98,7 +93,6 @@ const NestedList: React.FC<Props> = ({ changeFolder, changeFlag, changeCategory,
           <ListItemButton
             sx={{ pl: 4 }}
             onClick={() => {
-              changeFlag(false)
               changeFolder("stared");
               changeCategory(categoryName.stared);
             }}
@@ -112,7 +106,6 @@ const NestedList: React.FC<Props> = ({ changeFolder, changeFlag, changeCategory,
       </Collapse>
       <ListItemButton
         onClick={() => {
-          changeFlag(false)
           changeFolder("trash");
           changeCategory(categoryName.deleted);
         }}
