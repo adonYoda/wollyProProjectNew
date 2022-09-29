@@ -58,7 +58,6 @@ const NestedList: React.FC<Props> = ({ changeFolder, changeFlag, changeCategory,
       <ListItemButton
         onClick={() => {
           changeFlag(false);
-          changeFolder("drafts");
           changeCategory(categoryName.drafts)
         }}
       >
@@ -72,7 +71,7 @@ const NestedList: React.FC<Props> = ({ changeFolder, changeFlag, changeCategory,
           changeFlag(false);
           changeFolder("inbox");
           handleClick();
-          changeCategory(categoryName.drafts);
+          changeCategory(categoryName.inbox);
         }}
       >
         <ListItemIcon>

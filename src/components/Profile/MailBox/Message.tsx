@@ -102,11 +102,11 @@ const Message: React.FC<Props> = ({
 								/>
 							))
 						) : (drafts &&
-							drafts.map((draft) => (
-								<MessagePreview
+							drafts.map((draft, i) => (
+								<DraftsPreview
 									{...draft}
-									handlerID={handlerID}
-									handlerFlag={handlerFlag}
+									index={i}
+									setDraftIndex={setDraftIndex}
 								/>
 							))
 						)}
