@@ -3,21 +3,22 @@ import React, { useState } from 'react'
 import styled from 'styled-components';
 import { useStarMessageMutation } from '../../../API/messageApi'
 import { IMessage, IMessageResponse } from '../../../types';
-import { messagePageSizes } from '../../../utils/constants';
+import { categoryName, messagePageSizes } from '../../../utils/constants';
 
 interface Props {
-  author: string,
+  author?: string,
   subject: string,
   content: string,
-  stared: boolean,
-  id: string,
-  dateCreated: string,
-  trashed: boolean,
-  sent: boolean,
+  stared?: boolean,
+  id?: string,
+  dateCreated?: string,
+  trashed?: boolean,
+  sent?: boolean,
   recipient: string,
-  read: boolean,
-  handlerID: ({ author, subject, content, stared, id, dateCreated, sent, recipient, read }: IMessageResponse) => void
-  handlerFlag: (flag: boolean) => void;
+  read?: boolean,
+  category?: string,
+  handlerID?: ({ author, subject, content, stared, id, dateCreated, sent, recipient, read }: IMessageResponse) => void
+  handlerFlag?: (flag: boolean) => void;
 }
 const ListItemStyled = styled(ListItem)`
   max-height: ${messagePageSizes.heightRow}px;
@@ -34,7 +35,7 @@ const ListItemStyled = styled(ListItem)`
 `;
 
 
-const MessagePreview: React.FC<Props> = ({ author, subject, content, stared, id, dateCreated, trashed, sent, recipient, read, handlerID, handlerFlag }) => {
+const MessagePreview: React.FC<Props> = ({ author, subject, content, stared, id, dateCreated, trashed, sent, recipient, read, handlerID, handlerFlag, category }) => {
   const [addStar, { isError }] = useStarMessageMutation();
   const [isStared, setValue] = useState<boolean | null>(false);
 
@@ -61,8 +62,10 @@ const MessagePreview: React.FC<Props> = ({ author, subject, content, stared, id,
 
       <ListItemStyled style={{ width: '100%', height: '100%', backgroundColor: '#8EBAFF' }}
         onClick={(e) => {
-          handlerID({ author, subject, content, stared, id, dateCreated, trashed, sent, recipient, read })
-          handlerFlag(true)
+          if (category !== categoryName.drafts) {
+            handlerID({ author, subject, content, stared, id, dateCreated, trashed, sent, recipient, read })
+            handlerFlag(true)
+          }
         }}
       >
         <ListItemAvatar>

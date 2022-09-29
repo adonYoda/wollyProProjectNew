@@ -52,6 +52,18 @@ export const colors = {
   }
 }
 // </COLORS> ===========================================================================================
+// <CategoryName> ===========================================================================================
+export const categoryName = {
+  sent: "sent",
+  drafts: "drafts",
+  inbox: "inbox",
+  unread: "unread",
+  stared: "stared",
+  deleted: "deleted",
+
+
+}
+// </CategoryName> ==========================================================================================
 export const jewellery: Jewellery = {
   Title1: {
     id: "1",
