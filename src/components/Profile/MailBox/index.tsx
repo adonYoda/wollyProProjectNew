@@ -26,7 +26,7 @@ const MailPage: React.FC<Props> = () => {
   const [draftIndex, setDraftIndex] = useState<number>(-1);
   const [category, setCategory] = useState('inbox')
 
-  const { data = [], isLoading } = useGetMailboxMessagesQuery({
+  const { data = [], isLoading, refetch } = useGetMailboxMessagesQuery({
     limit: messagePageSizes.limitMessagesOnPage,
     page: page,
     folder: folder,
@@ -49,7 +49,7 @@ const MailPage: React.FC<Props> = () => {
           style={{ display: "flex", justifyContent: "space-between" }}
         >
           <Grid style={{ padding: "0px", marginLeft: "-100px" }} item xs={4}>
-            <ListDividers changeFolder={setFolder} changeFlag={setFlag} changeCategory = {setCategory} />
+            <ListDividers changeFolder={setFolder} changeFlag={setFlag} changeCategory = {setCategory} refetch={refetch} />
           </Grid>
           {isLoading ? (
             <Grid
@@ -97,7 +97,7 @@ const MailPage: React.FC<Props> = () => {
           ) : (
             <Grid item style={{ padding: "0px" }} xs={9}>
               {flag && <InputOutcomingMessage />}
-              {!flag && <Message data={data} folder={folder} setDraftIndex={setDraftIndex} category={category} />}
+              {!flag && <Message data={data} folder={folder} setDraftIndex={setDraftIndex} category={category} setFlagMessage={setFlag} refetch={refetch} />}
             </Grid>
           )}
         </Grid>

@@ -18,9 +18,10 @@ interface Props {
   changeFolder: (args: string) => void;
   changeFlag: (flag: boolean) => void;
   changeCategory: (category: string) => void;
+  refetch: ()=> void;
 }
 
-const NestedList: React.FC<Props> = ({ changeFolder, changeFlag, changeCategory }) => {
+const NestedList: React.FC<Props> = ({ changeFolder, changeFlag, changeCategory, refetch }) => {
   const [open, setOpen] = React.useState(false);
 
   const handleClick = () => {
@@ -45,7 +46,8 @@ const NestedList: React.FC<Props> = ({ changeFolder, changeFlag, changeCategory 
         onClick={() => {
           changeFlag(false)
           changeFolder("sent");
-          changeCategory("sent")
+          changeCategory("sent");
+          refetch()
         }}
       >
         <ListItemIcon>
@@ -70,7 +72,8 @@ const NestedList: React.FC<Props> = ({ changeFolder, changeFlag, changeCategory 
           changeFlag(false);
           changeFolder("inbox");
           handleClick();
-          changeCategory("inbox")
+          changeCategory("inbox");
+          refetch()
         }}
       >
         <ListItemIcon>
@@ -86,7 +89,8 @@ const NestedList: React.FC<Props> = ({ changeFolder, changeFlag, changeCategory 
             onClick={() => {
               changeFlag(false)
               changeFolder("unread");
-              changeCategory("unread")
+              changeCategory("unread");
+              refetch()
             }}
           >
             <ListItemIcon>
@@ -99,7 +103,8 @@ const NestedList: React.FC<Props> = ({ changeFolder, changeFlag, changeCategory 
             onClick={() => {
               changeFlag(false)
               changeFolder("stared");
-              changeCategory("stared")
+              changeCategory("stared");
+              refetch()
             }}
           >
             <ListItemIcon>
@@ -113,7 +118,8 @@ const NestedList: React.FC<Props> = ({ changeFolder, changeFlag, changeCategory 
         onClick={() => {
           changeFlag(false)
           changeFolder("trash");
-          changeCategory("deleted")
+          changeCategory("deleted");
+          refetch()
         }}
       >
         <ListItemIcon>

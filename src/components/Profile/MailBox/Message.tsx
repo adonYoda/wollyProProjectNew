@@ -15,6 +15,8 @@ interface Props {
   folder: string;
   setDraftIndex: (value: number) => void;
   category: string;
+  setFlagMessage: (flag: boolean) => void;
+  refetch: ()=>void;
 }
 
 const Message: React.FC<Props> = ({
@@ -22,6 +24,8 @@ const Message: React.FC<Props> = ({
   folder,
   setDraftIndex,
   category,
+  setFlagMessage,
+  refetch
 }) => {
   console.log("Message RENDER");
   const [dataMessage, setDataMessage] = useState<
@@ -65,7 +69,7 @@ const Message: React.FC<Props> = ({
     <>
       <List style={{ width: "100%", height: "100%", padding: "0px" }}>
         {flag ? (
-          <MessageFull handlerFlag={handlerFlag} dataMessage={dataMessage} />
+          <MessageFull handlerFlag={handlerFlag} dataMessage={dataMessage} setFlagMessage={setFlagMessage} refetch={refetch} />
         ) : (
           <>
             {category === "deleted" &&

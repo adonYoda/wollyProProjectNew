@@ -8,6 +8,8 @@ import { useTrashMessageMutation } from "../../../API/messageApi";
 interface Props {
   dataMessage: IMessageResponse | undefined;
   handlerFlag: (flag: boolean) => void;
+  setFlagMessage: (flag: boolean) => void;
+  refetch: ()=>void;
 }
 
 const MyContainer = styled(Container)`
@@ -31,12 +33,13 @@ const MyContainer = styled(Container)`
   }
 `
 
-const MessageFull: React.FC<Props> = ({ dataMessage, handlerFlag }) => {
+const MessageFull: React.FC<Props> = ({ dataMessage, handlerFlag, setFlagMessage, refetch }) => {
   const { author, subject, content, stared, id, dateCreated } = { ...dataMessage }
   const [trashMessage, {isLoading, isError}] = useTrashMessageMutation()
   const handleTrashMessage = async () => {
     const message = await trashMessage({id, isTrashed: true})
     handlerFlag(false)
+    refetch()
   }
 
   return (
