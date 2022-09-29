@@ -60,8 +60,8 @@ const MessagePreview: React.FC<Props> = ({ author, subject, content, stared, id,
 		<>
 
 			<ListItemStyled style={{ width: '100%', height: '100%', backgroundColor: '#8EBAFF' }}
-				onClick={(e) => {
-          readMessage({id, isRead: true}).unwrap()
+				onClick={ async (e) => {
+        const response = await readMessage({id, isRead: true}).unwrap()
 					handlerID({ author, subject, content, stared, id, dateCreated, trashed, sent, recipient, read })
 					handlerFlag(true)
 				}}

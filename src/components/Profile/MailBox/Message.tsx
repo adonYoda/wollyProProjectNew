@@ -69,7 +69,7 @@ const Message: React.FC<Props> = ({
 			case categoryName.deleted:
 				return dataEl.trashed == true;
 			case categoryName.sent:
-				return dataEl.sent == true && dataEl.trashed === true;
+				return dataEl.sent == true && dataEl.trashed == false;
 			case categoryName.stared:
 				return dataEl.stared == true && dataEl.trashed == false;
 			case categoryName.unread:
