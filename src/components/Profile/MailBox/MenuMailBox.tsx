@@ -47,7 +47,6 @@ const NestedList: React.FC<Props> = ({ changeFolder, changeFlag, changeCategory,
           changeFlag(false)
           changeFolder("sent");
           changeCategory("sent");
-          refetch()
         }}
       >
         <ListItemIcon>
@@ -73,7 +72,6 @@ const NestedList: React.FC<Props> = ({ changeFolder, changeFlag, changeCategory,
           changeFolder("inbox");
           handleClick();
           changeCategory("inbox");
-          refetch()
         }}
       >
         <ListItemIcon>
@@ -90,7 +88,6 @@ const NestedList: React.FC<Props> = ({ changeFolder, changeFlag, changeCategory,
               changeFlag(false)
               changeFolder("unread");
               changeCategory("unread");
-              refetch()
             }}
           >
             <ListItemIcon>
@@ -104,7 +101,6 @@ const NestedList: React.FC<Props> = ({ changeFolder, changeFlag, changeCategory,
               changeFlag(false)
               changeFolder("stared");
               changeCategory("stared");
-              refetch()
             }}
           >
             <ListItemIcon>
@@ -119,7 +115,6 @@ const NestedList: React.FC<Props> = ({ changeFolder, changeFlag, changeCategory,
           changeFlag(false)
           changeFolder("trash");
           changeCategory("deleted");
-          refetch()
         }}
       >
         <ListItemIcon>
