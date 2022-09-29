@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components';
 import { useStarMessageMutation } from '../../../API/messageApi'
 import { IMessage, IMessageResponse } from '../../../types';
-import { messagePageSizes } from '../../../utils/constants';
+import { categoryName, messagePageSizes } from '../../../utils/constants';
 
 interface Props {
   author: string,
@@ -34,7 +34,7 @@ const ListItemStyled = styled(ListItem)`
 `;
 
 
-const MessagePreview: React.FC<Props> = ({ author, subject, content, stared, id, dateCreated, trashed, sent, recipient, read, handlerID, handlerFlag }) => {
+const MessagePreview: React.FC<Props> = ({ author, subject, content, stared, id, dateCreated, trashed, sent, recipient, read, handlerID, handlerFlag}) => {
   const [addStar, { isError }] = useStarMessageMutation();
   const [isStared, setValue] = useState<boolean | null>(false);
 
@@ -61,8 +61,8 @@ const MessagePreview: React.FC<Props> = ({ author, subject, content, stared, id,
 
       <ListItemStyled style={{ width: '100%', height: '100%', backgroundColor: '#8EBAFF' }}
         onClick={(e) => {
-          handlerID({ author, subject, content, stared, id, dateCreated, trashed, sent, recipient, read })
-          handlerFlag(true)
+            handlerID({ author, subject, content, stared, id, dateCreated, trashed, sent, recipient, read })
+            handlerFlag(true)
         }}
       >
         <ListItemAvatar>
