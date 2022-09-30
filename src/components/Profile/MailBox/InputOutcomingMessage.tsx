@@ -58,6 +58,7 @@ const InputOutcomingMessage = () => {
         variant="filled"
         onChange={handleChange}
         value={messageState.recipient}
+        autoComplete="off"
       />
       <TextField
         fullWidth
@@ -66,12 +67,14 @@ const InputOutcomingMessage = () => {
         variant="filled"
         onChange={handleChange}
         value={messageState.subject}
+        autoComplete="off"
       />
       <textarea
         name="content"
         style={{ outline: "0" }}
         onChange={handleChange}
         value={messageState.content}
+        autoComplete="off"
       />
       <Stack direction="row" spacing={1}>
         <Button 

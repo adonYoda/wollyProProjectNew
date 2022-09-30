@@ -15,17 +15,21 @@ const MyContainer = styled.div`
   height: calc(${messagePageSizes.heightRow} * ${messagePageSizes.limitMessagesOnPage}px);
   display: flex;
   margin: 0 5px;
-`
+`;
 
-interface Props { }
+interface Props {}
 
 const MailPage: React.FC<Props> = () => {
   const [folder, setFolder] = useState<string>("inbox");
   const [page, setPage] = useState(0);
   const [draftIndex, setDraftIndex] = useState<number>(-1);
-  const [category, setCategory] = useState('inbox')
+  const [category, setCategory] = useState("inbox");
 
-  const { data = [], isLoading, refetch } = useGetMailboxMessagesQuery({
+  const {
+    data = [],
+    isLoading,
+    refetch,
+  } = useGetMailboxMessagesQuery({
     limit: messagePageSizes.limitMessagesOnPage,
     page: page,
     folder: folder,
@@ -48,7 +52,11 @@ const MailPage: React.FC<Props> = () => {
           style={{ display: "flex", justifyContent: "space-between" }}
         >
           <Grid style={{ padding: "0px", marginLeft: "-100px" }} item xs={4}>
-            <ListDividers changeFolder={setFolder} changeCategory = {setCategory} refetch={refetch} />
+            <ListDividers
+              changeFolder={setFolder}
+              changeCategory={setCategory}
+              refetch={refetch}
+            />
           </Grid>
           {isLoading ? (
             <Grid
@@ -63,11 +71,11 @@ const MailPage: React.FC<Props> = () => {
               item
               xs={9}
             >
-               <Skeleton
+              <Skeleton
                 variant="rectangular"
                 sx={{ bgcolor: "grey.500", width: "100% ", height: 60 }}
               />
-              
+
               <Skeleton
                 variant="rectangular"
                 sx={{ bgcolor: "grey.500", width: "100% ", height: 60 }}
@@ -76,19 +84,19 @@ const MailPage: React.FC<Props> = () => {
                 variant="rectangular"
                 sx={{ bgcolor: "grey.500", width: "100% ", height: 60 }}
               />
-               <Skeleton
+              <Skeleton
                 variant="rectangular"
                 sx={{ bgcolor: "grey.500", width: "100% ", height: 60 }}
               />
-               <Skeleton
+              <Skeleton
                 variant="rectangular"
                 sx={{ bgcolor: "grey.500", width: "100% ", height: 60 }}
               />
-               <Skeleton
+              <Skeleton
                 variant="rectangular"
                 sx={{ bgcolor: "grey.500", width: "100% ", height: 60 }}
               />
-               <Skeleton
+              <Skeleton
                 variant="rectangular"
                 sx={{ bgcolor: "grey.500", width: "100% ", height: 60 }}
               />
@@ -96,13 +104,21 @@ const MailPage: React.FC<Props> = () => {
           ) : (
             <Grid item style={{ padding: "0px" }} xs={9}>
               {category === "newMessage" && <InputOutcomingMessage />}
-              {category !== "newMessage" && <Message data={data} folder={folder} setDraftIndex={setDraftIndex} category={category} refetch={refetch} />}
+              {category !== "newMessage" && (
+                <Message
+                  page={page}
+                  data={data}
+                  folder={folder}
+                  setDraftIndex={setDraftIndex}
+                  category={category}
+                  refetch={refetch}
+                  setPage={setPage}
+                />
+              )}
             </Grid>
           )}
         </Grid>
-      </MyContainer>
-
-      <Grid container justifyContent="flex-end" direction="row" padding={2}>
+        {/* <Grid container justifyContent="flex-end" direction="row" padding={2}>
         <RemoveCircleIcon
           cursor="pointer"
           onClick={() => {
@@ -118,7 +134,8 @@ const MailPage: React.FC<Props> = () => {
             setPage((prev) => prev + 1);
           }}
         />
-      </Grid>
+      </Grid> */}
+      </MyContainer>
     </>
   );
 };

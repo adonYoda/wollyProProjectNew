@@ -42,6 +42,7 @@ interface Props {
 }
 const ListItemStyled = styled(ListItem)<{ read: boolean }>`
   max-height: ${messagePageSizes.heightRow}px;
+  background-color: ${({ read }) => (read ? "#cadcf8" : "#8EBAFF")};
   & .msg-preview {
     &__text {
       color: ${({ read }) => (read ? "grey" : "black")};
@@ -88,7 +89,7 @@ const MessagePreview: React.FC<Props> = ({
     <>
       <ListItemStyled
         read={read}
-        style={{ width: "100%", height: "100%", backgroundColor: "#8EBAFF" }}
+        style={{ width: "100%", height: "100%" }}
         onClick={ (e) => {
           handlerFlag(true);
           const response = readMessage({ id, isRead: true }).unwrap();
