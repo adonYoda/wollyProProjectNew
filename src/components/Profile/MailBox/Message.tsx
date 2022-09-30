@@ -56,9 +56,9 @@ const Message: React.FC<Props> = ({
 			recipient,
 		});
 	};
-	const handlerFlag = (flag: boolean) => {
-		setFlag(flag);
-	};
+	// const handlerFlag = (flag: boolean) => {
+	// 	setFlag(flag);
+	// };
 	const drafts = useSelector<IState, IDraft[] | undefined>(
 		(state) => state.drafts
 	);
@@ -84,19 +84,21 @@ const Message: React.FC<Props> = ({
 	}
 	//=======================================================================================================
 
+
 	return (
 		<>
 			<List style={{ width: "100%", height: "100%", padding: "0px" }}>
 				{flag ? (
-					<MessageFull handlerFlag={handlerFlag} dataMessage={dataMessage} refetch={refetch} />
+					<MessageFull handlerFlag={setFlag} dataMessage={dataMessage} refetch={refetch} />
 				) : (
 					<>
 						{category !== categoryName.drafts ? (
-							data.map((dataEl) => testFunc(category, dataEl) && (
+							data.filter(m=>testFunc(category, m)).map((dataEl) => 
+              (
 								<MessagePreview
 									{...dataEl}
 									handlerID={handlerID}
-									handlerFlag={handlerFlag}
+									handlerFlag={setFlag}
 								/>
 							))
 						) : (drafts &&

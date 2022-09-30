@@ -19,14 +19,14 @@ interface Props {
 	handlerID: ({ author, subject, content, stared, id, dateCreated, sent, recipient, read }: IMessageResponse) => void
 	handlerFlag: (flag: boolean) => void;
 }
-const ListItemStyled = styled(ListItem)`
+const ListItemStyled = styled(ListItem)<{read: boolean}>`
   max-height: ${messagePageSizes.heightRow}px;
   & .msg-preview{
     &__text {
-      color: black;
+      color: ${({read})=>read ? ("grey") : ("black")};
     }
     &__date {
-      color: black;
+      color: ${({read})=>read ? ("grey") : ("black")};
       margin: 0px 25px 0px 0px;
     }
   }
@@ -59,7 +59,7 @@ const MessagePreview: React.FC<Props> = ({ author, subject, content, stared, id,
 
 		<>
 
-			<ListItemStyled style={{ width: '100%', height: '100%', backgroundColor: '#8EBAFF' }}
+			<ListItemStyled read={read} style={{ width: '100%', height: '100%', backgroundColor: '#8EBAFF' }}
 				onClick={ async (e) => {
         const response = await readMessage({id, isRead: true}).unwrap()
 					handlerID({ author, subject, content, stared, id, dateCreated, trashed, sent, recipient, read })
