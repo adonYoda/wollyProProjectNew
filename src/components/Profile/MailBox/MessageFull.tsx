@@ -65,7 +65,9 @@ const MessageFull: React.FC<Props> = ({ dataMessage, handlerFlag, refetch }) => 
       <Typography>
         {content}
       </Typography>
-      <button className='msg-btn-close' onClick={() => handlerFlag(false)}>&#128169;</button>
+      <button className='msg-btn-close' onClick={() => {handlerFlag(false)
+      refetch()}
+      }>&#128169;</button>
       <Button
           endIcon={<DeleteIcon style={{ fill: "#1976D2" }} />}
           onClick={handleTrashMessage}
