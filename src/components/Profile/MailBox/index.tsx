@@ -9,20 +9,32 @@ import InputOutcomingMessage from "./InputOutcomingMessage";
 import ListDividers from "./MenuMailBox";
 import Message from "./Message";
 import { messagePageSizes } from "../../../utils/constants";
+import { style } from "@mui/system";
+
+const gridWidth = 250;
 
 const MyContainer = styled.div`
   width: 100%;
   height: calc(${messagePageSizes.heightRow} * ${messagePageSizes.limitMessagesOnPage}px);
   display: flex;
-  margin: 0 5px;
+  /* margin: 0 5px; */
 `
+const GridWrap = styled(Grid)`
+  display: flex;
+  flex-wrap: nowrap;
+`
+const GridNav = styled(Grid)`
+  flex: 0 0 ${gridWidth}px;
+`;
+const GridMain = styled(Grid)`
+  flex: 1 1 calc(100% - ${gridWidth}px);
+`;
 
 interface Props { }
 
 const MailPage: React.FC<Props> = () => {
   const [folder, setFolder] = useState<string>("inbox");
   const [page, setPage] = useState(0);
-  const [draftIndex, setDraftIndex] = useState<number>(-1);
   const [category, setCategory] = useState('inbox')
 
   const { data = [], isLoading, refetch } = useGetMailboxMessagesQuery({
@@ -43,31 +55,20 @@ const MailPage: React.FC<Props> = () => {
   return (
     <>
       <MyContainer>
-        <Grid
+        <GridWrap
           container
           style={{ display: "flex", justifyContent: "space-between" }}
         >
-          <Grid style={{ padding: "0px", marginLeft: "-100px" }} item xs={4}>
-            <ListDividers changeFolder={setFolder} changeCategory = {setCategory} refetch={refetch} />
-          </Grid>
+          <GridNav item>
+            <ListDividers changeFolder={setFolder} changeCategory={setCategory} refetch={refetch} />
+          </GridNav>
           {isLoading ? (
-            <Grid
-              style={{
-                width: "100%",
-                height: "100%",
-                display: "flex",
-                padding: "0px",
-                flexDirection: "column",
-                justifyContent: "space-between",
-              }}
-              item
-              xs={9}
-            >
-               <Skeleton
+            <GridMain item>
+              <Skeleton
                 variant="rectangular"
                 sx={{ bgcolor: "grey.500", width: "100% ", height: 60 }}
               />
-              
+
               <Skeleton
                 variant="rectangular"
                 sx={{ bgcolor: "grey.500", width: "100% ", height: 60 }}
@@ -76,30 +77,29 @@ const MailPage: React.FC<Props> = () => {
                 variant="rectangular"
                 sx={{ bgcolor: "grey.500", width: "100% ", height: 60 }}
               />
-               <Skeleton
+              <Skeleton
                 variant="rectangular"
                 sx={{ bgcolor: "grey.500", width: "100% ", height: 60 }}
               />
-               <Skeleton
+              <Skeleton
                 variant="rectangular"
                 sx={{ bgcolor: "grey.500", width: "100% ", height: 60 }}
               />
-               <Skeleton
+              <Skeleton
                 variant="rectangular"
                 sx={{ bgcolor: "grey.500", width: "100% ", height: 60 }}
               />
-               <Skeleton
+              <Skeleton
                 variant="rectangular"
                 sx={{ bgcolor: "grey.500", width: "100% ", height: 60 }}
               />
-            </Grid>
+            </GridMain>
           ) : (
-            <Grid item style={{ padding: "0px" }} xs={9}>
-              {category === "newMessage" && <InputOutcomingMessage />}
-              {category !== "newMessage" && <Message data={data} folder={folder} setDraftIndex={setDraftIndex} category={category} refetch={refetch} />}
-            </Grid>
+            <GridMain item>
+              <Message data={data} folder={folder} setCategory={setCategory} category={category} refetch={refetch} />
+            </GridMain>
           )}
-        </Grid>
+        </GridWrap>
       </MyContainer>
 
       <Grid container justifyContent="flex-end" direction="row" padding={2}>

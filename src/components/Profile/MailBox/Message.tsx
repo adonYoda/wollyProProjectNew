@@ -1,9 +1,10 @@
 import { List } from "@mui/material";
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import { IDraft, IMessage, IMessageResponse, IState } from "../../../types";
 import { categoryName } from "../../../utils/constants";
 import DraftsPreview from "./DraftsPreview";
+import InputOutcomingMessage from "./InputOutcomingMessage";
 import MessageFull from "./MessageFull";
 import MessagePreview from "./MessagePreview";
 
@@ -14,23 +15,28 @@ import MessagePreview from "./MessagePreview";
 interface Props {
 	data: IMessageResponse[];
 	folder: string;
-	setDraftIndex: (value: number) => void;
 	category: string;
 	refetch: () => void;
+	setCategory: (category: string) => void;
 }
 
 const Message: React.FC<Props> = ({
 	data,
 	folder,
-	setDraftIndex,
 	category,
-	refetch
+	refetch,
+	setCategory
 }) => {
-	console.log("Message RENDER");
-	const [dataMessage, setDataMessage] = useState<
-		IMessageResponse | undefined
-	>();
+
+	const [dataMessage, setDataMessage] = useState<IMessageResponse | undefined>();
 	const [flag, setFlag] = useState(false);
+	const [draft, setDraft] = useState<IDraft>();
+
+	const drafts = useSelector<IState, IDraft[] | undefined>(
+		(state) => state.drafts
+	);
+	console.log(drafts);
+
 	const handlerID = ({
 		author,
 		subject,
@@ -59,10 +65,7 @@ const Message: React.FC<Props> = ({
 	// const handlerFlag = (flag: boolean) => {
 	// 	setFlag(flag);
 	// };
-	const drafts = useSelector<IState, IDraft[] | undefined>(
-		(state) => state.drafts
-	);
-	console.log(drafts);
+
 	//=======================================================================================================
 	const testFunc = (category: string, dataEl: IMessageResponse) => {
 		switch (category) {
@@ -92,24 +95,26 @@ const Message: React.FC<Props> = ({
 					<MessageFull handlerFlag={setFlag} dataMessage={dataMessage} refetch={refetch} />
 				) : (
 					<>
-						{category !== categoryName.drafts ? (
-							data.filter(m=>testFunc(category, m)).map((dataEl) => 
-              (
-								<MessagePreview
-									{...dataEl}
-									handlerID={handlerID}
-									handlerFlag={setFlag}
-								/>
-							))
-						) : (drafts &&
-							drafts.map((draft, i) => (
-								<DraftsPreview
-									{...draft}
-									index={i}
-									setDraftIndex={setDraftIndex}
-								/>
-							))
-						)}
+						{(category === categoryName.newMessage) ? (<InputOutcomingMessage draft={draft} setDraft={setDraft} />) : (
+							category !== categoryName.drafts && category !== categoryName.newMessage ? (
+								data.filter(m => testFunc(category, m)).map((dataEl) =>
+								(
+									<MessagePreview
+										{...dataEl}
+										handlerID={handlerID}
+										handlerFlag={setFlag}
+									/>
+								))
+							) : (drafts &&
+								drafts.map((draft, i) => (
+									<DraftsPreview
+										{...draft}
+										index={i}
+										setCategory={setCategory}
+										setDraft={setDraft}
+									/>
+								))
+							))}
 					</>
 				)}
 			</List>

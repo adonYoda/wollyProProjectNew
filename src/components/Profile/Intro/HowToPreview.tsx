@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router";
 import styled from "styled-components";
+import { containerWidth } from "../../../utils/constants";
 
 interface Props {
 	path: string;
@@ -20,6 +21,9 @@ const Wrapper = styled.div`
 				background-color: transparent;
 			}
 		}
+	}
+	@media (max-width: ${containerWidth}px) {
+		padding: 20px 60px 20px 30px;
 	}
 `;
 const Img = styled.div`
@@ -54,6 +58,9 @@ const Subtitle = styled.p`
 	color: #fff;
 	margin: 0 0 10px 0;
 	position: relative;
+	@media (max-width: ${containerWidth}px) {
+		padding-right: 30px;
+	}
 `;
 const Title = styled.h4`
 	text-transform: none;

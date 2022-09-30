@@ -33,6 +33,12 @@ export const profilePages = {
   setUpPage: "/setup",
 }
 // </URLs> ==============================================================================
+// <Media sizes> ===========================================================================================
+export const maxWidth = 1920;
+export const containerWidth = 1596;
+export const mdWidth = 1200;
+export const mdWidth2 = 940;
+// </Media sizes> ==========================================================================================
 // <MessagePages> ===========================================================================================
 export const messagePageSizes = {
   heightRow: 100,

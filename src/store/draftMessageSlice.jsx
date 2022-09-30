@@ -4,11 +4,14 @@ const draftMessageSlice = createSlice({
   name: "draftMessage",
   initialState: JSON.parse(localStorage.getItem('drafts')) || [],
   reducers: {
-    setDrafts(state, action) {
+    addDraft(state, action) {
       state.push(action.payload);
+    },
+    removeDraft(state, action) {
+      state.splice(action.payload, 1);
     },
   },
 });
 
-export const { setDrafts } = draftMessageSlice.actions;
+export const { addDraft, removeDraft } = draftMessageSlice.actions;
 export default draftMessageSlice.reducer;
