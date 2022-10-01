@@ -31,12 +31,9 @@ export const messageApi = createApi({
       }),
     }),
     deleteMessage: build.mutation({
-      query: ({ token, message }) => ({
-        url: `/profile/mailbox/${message.id}`,
+      query: ( id ) => ({
+        url: `/profile/mailbox/${id}`,
         method: "DELETE",
-        headers: {
-          Authorization: `Basic ${token}`,
-        },
       }),
     }),
     trashMessage: build.mutation({
@@ -87,9 +84,6 @@ export const messageApi = createApi({
         body: {
           "stared": isStared
         },
-        // headers: {
-        //   Authorization: `Basic ${token}`,
-        // },
       }),
     }),
     findMessageById: build.mutation({
@@ -151,4 +145,4 @@ export const messageApi = createApi({
   }),
 });
 
-export const { useGetMailboxMessagesQuery, useAddMessageMutation, useStarMessageMutation, useTrashMessageMutation, useReadMessageMutation } = messageApi;
+export const { useDeleteMessageMutation , useGetMailboxMessagesQuery, useAddMessageMutation, useStarMessageMutation, useTrashMessageMutation, useReadMessageMutation } = messageApi;

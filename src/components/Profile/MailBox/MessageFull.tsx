@@ -3,7 +3,8 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { IMessage, IMessageResponse } from "../../../types";
 import DeleteIcon from '@mui/icons-material/Delete';
-import { useTrashMessageMutation } from "../../../API/messageApi";
+import { useDeleteMessageMutation, useTrashMessageMutation } from "../../../API/messageApi";
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 interface Props {
   dataMessage: IMessageResponse | undefined;
@@ -33,10 +34,17 @@ const MyContainer = styled(Container)`
 `
 
 const MessageFull: React.FC<Props> = ({ dataMessage, handlerFlag, refetch }) => {
-  const { author, subject, content, stared, id, dateCreated } = { ...dataMessage }
+  const { author, subject, content, stared, id, dateCreated, trashed } = { ...dataMessage }
   const [trashMessage, {isLoading, isError}] = useTrashMessageMutation()
+  const [deleteMessage] = useDeleteMessageMutation()
   const handleTrashMessage = async () => {
     const message = await trashMessage({id, isTrashed: true})
+    handlerFlag(false)
+    refetch()
+  }
+
+  const handlerDeleteMessage = async () => {
+    const response = await deleteMessage(id)
     handlerFlag(false)
     refetch()
   }
@@ -68,12 +76,20 @@ const MessageFull: React.FC<Props> = ({ dataMessage, handlerFlag, refetch }) => 
       <button className='msg-btn-close' onClick={() => {handlerFlag(false)
       refetch()}
       }>&#128169;</button>
-      <Button
+{
+      trashed === false ?
+     ( <Button
           endIcon={<DeleteIcon style={{ fill: "#1976D2" }} />}
           onClick={handleTrashMessage}
         >
           Delete
-        </Button>
+        </Button>) :
+       ( <Button
+          endIcon={<DeleteForeverIcon style={{ fill: "#1976D2" }} />}
+          onClick={handlerDeleteMessage}
+        >
+          Delete Forever
+        </Button>)}
     </MyContainer>
   );
 };
