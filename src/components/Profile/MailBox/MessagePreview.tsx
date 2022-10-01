@@ -40,8 +40,8 @@ interface Props {
   }: IMessageResponse) => void;
   handlerFlag: (flag: boolean) => void;
 }
-const ListItemStyled = styled(ListItem)<{ read: boolean }>`
-  max-height: ${messagePageSizes.heightRow}px;
+const ListItemStyled = styled(ListItem) <{ read: boolean }>`
+  height: ${messagePageSizes.heightRow}px !important;
   background-color: ${({ read }) => (read ? "#c0d4f4" : "#8EBAFF")};
   & .msg-preview {
     &__text {
@@ -50,6 +50,7 @@ const ListItemStyled = styled(ListItem)<{ read: boolean }>`
     &__date {
       color: ${({ read }) => (read ? "grey" : "black")};
       margin: 0px 25px 0px 0px;
+      text-align: right;
     }
   }
   cursor: pointer;
@@ -89,7 +90,6 @@ const MessagePreview: React.FC<Props> = ({
     <>
       <ListItemStyled
         read={read}
-        style={{ width: "100%", height: "100%" }}
         onClick={(e) => {
           handlerFlag(true);
           const response = readMessage({ id, isRead: true }).unwrap();
@@ -111,7 +111,7 @@ const MessagePreview: React.FC<Props> = ({
           <Avatar alt={author} src={author} />
         </ListItemAvatar>
         <ListItemText
-          primary={subject === null ?  " " : `${subject}`}
+          primary={subject === null ? " " : `${subject}`}
           secondary={
             <React.Fragment>
               <Typography
@@ -120,7 +120,7 @@ const MessagePreview: React.FC<Props> = ({
                 variant="body2"
                 color="text.primary"
               >
-                {author === null ? " " : `${author}` }
+                {author === null ? " " : `${author}`}
               </Typography>
               <span className="msg-preview__text">
                 {content === null ? " " : ` - ${content}`}
