@@ -9,9 +9,12 @@ import ListDividers from "./MenuMailBox";
 import Message from "./Message";
 import { messagePageSizes } from "../../../utils/constants";
 import { style } from "@mui/system";
-import { MyContainer } from "../../../styles/Container.styled";
 
 const gridWidth = 250;
+
+const ContainerStyled = styled.div`
+  
+`;
 
 const GridWrap = styled(Grid)`
   display: flex;
@@ -48,7 +51,7 @@ const MailPage: React.FC<Props> = () => {
 
   return (
     <>
-      <MyContainer>
+      <ContainerStyled>
         <GridWrap
           container
           style={{ display: "flex", justifyContent: "space-between" }}
@@ -94,7 +97,7 @@ const MailPage: React.FC<Props> = () => {
             </GridMain>
           )}
         </GridWrap>
-      </MyContainer>
+      </ContainerStyled>
 
 
     </>

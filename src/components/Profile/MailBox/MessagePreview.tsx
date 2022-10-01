@@ -41,6 +41,7 @@ interface Props {
   handlerFlag: (flag: boolean) => void;
 }
 const ListItemStyled = styled(ListItem) <{ read: boolean }>`
+  width: 100%;
   height: ${messagePageSizes.heightRow}px !important;
   background-color: ${({ read }) => (read ? "#c0d4f4" : "#8EBAFF")};
   & .msg-preview {

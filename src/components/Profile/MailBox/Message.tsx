@@ -14,6 +14,7 @@ import styled from "styled-components";
 
 const MyList = styled(List)`
   min-height: ${messagePageSizes.heightRow * messagePageSizes.limitMessagesOnPage}px;
+  width: 100%;
 `;
 
 interface Props {
@@ -139,7 +140,7 @@ const Message: React.FC<Props> = ({
 							</Grid>
 						</>
 					) : (
-						<List>
+						<MyList>
 							{drafts && drafts.map((draft, i) => (
 								<DraftsPreview
 									{...draft}
@@ -148,7 +149,7 @@ const Message: React.FC<Props> = ({
 									setDraft={setDraft}
 								/>
 							))}
-						</List>
+						</MyList>
 					)}
 				</>
 			)}

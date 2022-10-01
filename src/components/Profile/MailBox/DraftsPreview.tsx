@@ -18,6 +18,8 @@ interface Props {
   setDraft: (draft: IDraft) => void;
 }
 const ListItemStyled = styled(ListItem)`
+  width: 100%;
+
   max-height: ${messagePageSizes.heightRow}px;
   & .msg-preview{
     &__text {
