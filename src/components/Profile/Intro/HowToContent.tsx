@@ -4,7 +4,7 @@ import HowToPreview from "./HowToPreview";
 import HowToStartPage from "./HowToStartPage";
 import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded";
 import Slider from "react-slick";
-import { colors } from "../../../utils/constants";
+import { colors, containerWidth } from "../../../utils/constants";
 import tempImg from "../../../images/temp.jpeg";
 
 const contentPreview = [
@@ -93,6 +93,9 @@ const SliderStyled = styled(Slider)`
 			width: 100%;
 			height: 100%;
 		}
+		@media (max-width: ${containerWidth}px) {
+			max-width: 210px;
+		}
 	}
 	& .slick-arrow {
 		position: absolute;
@@ -148,8 +151,10 @@ const settings = {
 	prevArrow: <ArrowBackIosRoundedIcon />,
 	responsive: [
 		{
-			breakpoint: 1024,
-			settings: {},
+			breakpoint: containerWidth,
+			settings: {
+
+			},
 		},
 	],
 };

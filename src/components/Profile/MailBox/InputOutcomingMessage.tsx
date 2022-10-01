@@ -1,12 +1,13 @@
 import { Button, Stack, TextField } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import SendIcon from "@mui/icons-material/Send";
 import DraftsIcon from "@mui/icons-material/Drafts";
 import { useAddMessageMutation } from "../../../API/messageApi";
 import { useDispatch } from "react-redux";
-import  { setDrafts } from "../../../store/draftMessageSlice";
+import { addDraft, removeDraft } from "../../../store/draftMessageSlice";
 import { useSelector } from "react-redux";
+import { IDraft } from "../../../types";
 
 const ContainerStyled = styled.div`
   background: white;
@@ -27,11 +28,16 @@ const ContainerStyled = styled.div`
   }
 `;
 
-const InputOutcomingMessage = () => {
+interface Props {
+  draft?: IDraft;
+  setDraft: (draft: IDraft) => void;
+}
+
+const InputOutcomingMessage: React.FC<Props> = ({ draft, setDraft }) => {
   const [messageState, setMessageState] = useState({
-    recipient: "",
-    subject: "",
-    content: "",
+    recipient: draft?.recipient || "",
+    subject: draft?.subject || "",
+    content: draft?.content || "",
   });
 
   const dispatch = useDispatch()
@@ -45,9 +51,11 @@ const InputOutcomingMessage = () => {
 
   const handleAddMessage = async () => {
     const response = await addMessage(messageState).unwrap();
-    setMessageState(prev => ({ ...prev, recipient: '', subject: '', content: '' }));
-
   };
+
+  useEffect(() => {
+    return setDraft({ recipient: '', subject: '', content: '' });
+  }, [])
 
   return (
     <ContainerStyled>
@@ -58,7 +66,6 @@ const InputOutcomingMessage = () => {
         variant="filled"
         onChange={handleChange}
         value={messageState.recipient}
-        autoComplete="off"
       />
       <TextField
         fullWidth
@@ -67,19 +74,17 @@ const InputOutcomingMessage = () => {
         variant="filled"
         onChange={handleChange}
         value={messageState.subject}
-        autoComplete="off"
       />
       <textarea
         name="content"
         style={{ outline: "0" }}
         onChange={handleChange}
         value={messageState.content}
-        autoComplete="off"
       />
       <Stack direction="row" spacing={1}>
-        <Button 
-          onClick ={() => {
-         dispatch(setDrafts(messageState))
+        <Button
+          onClick={() => {
+            dispatch(addDraft(messageState))
           }}
           startIcon={<DraftsIcon style={{ fill: "#1976D2" }} />}
         >
@@ -87,7 +92,10 @@ const InputOutcomingMessage = () => {
         </Button>
         <Button
           endIcon={<SendIcon style={{ fill: "#1976D2" }} />}
-          onClick={handleAddMessage}
+          onClick={() => {
+            setMessageState({ recipient: '', subject: '', content: '' });
+            handleAddMessage();
+          }}
         >
           Send
         </Button>

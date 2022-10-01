@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
 import { MyContainer } from '../../styles/Container.styled';
+import { containerWidth } from '../../utils/constants';
 import ProfilePageMain from './ProfilePageMain';
 import ProfilePageSidebar from './ProfilePageSidebar';
 
@@ -18,7 +19,7 @@ const Content = styled.div`
 	display: flex;
 	flex: 1 1 100%;
 `;
-const ProfilePageMainStyled = styled.div`
+const ProfilePageMainWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	flex: 0 1 920px;
@@ -27,6 +28,10 @@ const ProfilePageMainStyled = styled.div`
 	margin-left: -${sidebarWidth}px;
 	left: 50%;
 	transform: translateX(-50%);
+	@media (max-width: ${containerWidth}px) {
+		flex: 0	1 750px;
+		width: 750px;
+	}
 `;
 
 const ProfilePage = () => {
@@ -38,9 +43,9 @@ const ProfilePage = () => {
 					<ProfilePageSidebarWrapper>
 						<ProfilePageSidebar />
 					</ProfilePageSidebarWrapper>
-					<ProfilePageMainStyled>
+					<ProfilePageMainWrapper>
 						<ProfilePageMain />
-					</ProfilePageMainStyled>
+					</ProfilePageMainWrapper>
 				</Content>
 			</MyContainer>
 		</ProfilePageWrapper>

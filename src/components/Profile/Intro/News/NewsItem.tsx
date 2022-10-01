@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router";
 import styled from "styled-components";
+import { containerWidth } from "../../../../utils/constants";
 
 const NewsItemWrapper = styled.div`
 	width: 130px;
@@ -10,6 +11,10 @@ const NewsItemWrapper = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	@media (max-width: ${containerWidth}px) {
+		width: 100px;
+		height: 100px;
+	}
 	cursor: pointer;
 	& img {
 		position: absolute;

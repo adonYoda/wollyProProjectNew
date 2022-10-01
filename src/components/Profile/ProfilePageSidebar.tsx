@@ -36,7 +36,6 @@ const ProfilePageSidebar = () => {
 		ordersPage,
 		myAccountPage,
 	} = profilePages;
-
 	return (
 		<>
 			<MyLink className='back_to_shop' to={homePage}>Back to Shop</MyLink>

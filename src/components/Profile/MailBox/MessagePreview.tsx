@@ -42,7 +42,7 @@ interface Props {
 }
 const ListItemStyled = styled(ListItem)<{ read: boolean }>`
   max-height: ${messagePageSizes.heightRow}px;
-  background-color: ${({ read }) => (read ? "#cadcf8" : "#8EBAFF")};
+  background-color: ${({ read }) => (read ? "#c0d4f4" : "#8EBAFF")};
   & .msg-preview {
     &__text {
       color: ${({ read }) => (read ? "grey" : "black")};

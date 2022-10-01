@@ -1,17 +1,21 @@
 import { Avatar, Divider, List, ListItem, ListItemAvatar, ListItemText, Rating, Typography } from '@mui/material'
+import DeleteIcon from '@mui/icons-material/Delete';
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { useStarMessageMutation } from '../../../API/messageApi'
+import { removeDraft } from '../../../store/draftMessageSlice';
 import { IDraft, IMessage, IState, IUser, IUserProfile } from '../../../types';
-import { messagePageSizes } from '../../../utils/constants';
+import { categoryName, messagePageSizes } from '../../../utils/constants';
 
 interface Props {
   recipient: string,
   subject: string,
   content: string,
   index: number,
-  setDraftIndex: (value: number) => void;
+  setCategory: (category: string) => void;
+  setDraft: (draft: IDraft) => void;
 }
 const ListItemStyled = styled(ListItem)`
   max-height: ${messagePageSizes.heightRow}px;
@@ -28,15 +32,20 @@ const ListItemStyled = styled(ListItem)`
 `;
 
 
-const DraftsPreview: React.FC<Props> = ({ recipient, subject, content, index, setDraftIndex }) => {
+const DraftsPreview: React.FC<Props> = ({ recipient, subject, content, index, setCategory, setDraft }) => {
 
   const user = useSelector<IState, IUser | undefined>((state) => state.user);
+
+  const dispatch = useDispatch();
 
 
   return (
     <>
       <ListItemStyled style={{ width: '100%', height: '100%', backgroundColor: '#8EBAFF' }}
-        onClick={() => setDraftIndex(index)}
+        onClick={() => {
+          setCategory(categoryName.newMessage);
+          setDraft({ recipient, subject, content });
+        }}
       >
         <ListItemAvatar>
           <Avatar alt={user!.login} src={user!.login} />
@@ -53,6 +62,10 @@ const DraftsPreview: React.FC<Props> = ({ recipient, subject, content, index, se
             </Typography>
           </React.Fragment>
         } />
+        <DeleteIcon onClick={(e) => {
+          e.stopPropagation();
+          dispatch(removeDraft(index));
+        }} />
       </ListItemStyled>
       <Divider />
     </>)
