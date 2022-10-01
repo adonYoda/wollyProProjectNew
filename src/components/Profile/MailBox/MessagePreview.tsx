@@ -90,7 +90,7 @@ const MessagePreview: React.FC<Props> = ({
       <ListItemStyled
         read={read}
         style={{ width: "100%", height: "100%" }}
-        onClick={ (e) => {
+        onClick={(e) => {
           handlerFlag(true);
           const response = readMessage({ id, isRead: true }).unwrap();
           handlerID({
@@ -111,7 +111,7 @@ const MessagePreview: React.FC<Props> = ({
           <Avatar alt={author} src={author} />
         </ListItemAvatar>
         <ListItemText
-          primary={subject}
+          primary={subject === null ?  " " : `${subject}`}
           secondary={
             <React.Fragment>
               <Typography
@@ -120,9 +120,11 @@ const MessagePreview: React.FC<Props> = ({
                 variant="body2"
                 color="text.primary"
               >
-                {author}
+                {author === null ? " " : `${author}` }
               </Typography>
-              <span className="msg-preview__text">{` - ${content}`}</span>
+              <span className="msg-preview__text">
+                {content === null ? " " : ` - ${content}`}
+              </span>
             </React.Fragment>
           }
         />

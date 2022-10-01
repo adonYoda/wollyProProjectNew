@@ -21,7 +21,6 @@ interface Props {
   page: number;
 }
 
-
 const Message: React.FC<Props> = ({
   data,
   folder,
@@ -29,7 +28,7 @@ const Message: React.FC<Props> = ({
   refetch,
   setCategory,
   setPage,
-  page
+  page,
 }) => {
   const [dataMessage, setDataMessage] = useState<
     IMessageResponse | undefined
@@ -102,7 +101,7 @@ const Message: React.FC<Props> = ({
             refetch={refetch}
           />
         ) : (
-          <Grid sx={{  }} >
+          <Grid sx={{height: "100%", width: "100"}}>
             {category === categoryName.newMessage ? (
               <InputOutcomingMessage draft={draft} setDraft={setDraft} />
             ) : category !== categoryName.drafts &&
@@ -130,28 +129,26 @@ const Message: React.FC<Props> = ({
           </Grid>
         )}
       </List>
-	  {
-	  category !== categoryName.drafts &&
-              category !== categoryName.newMessage &&
-	 
-	  <Grid container justifyContent="flex-end" direction="row" padding={2}>
-        <RemoveCircleIcon
-          cursor="pointer"
-          onClick={() => {
-            page > 0 &&
-              setPage(page - 1);
-            
-          }}
-        />
-        page {page + 1}
-        <AddCircleIcon
-          cursor="pointer"
-          onClick={() => {
-			data.length > 0 &&
-            setPage(page + 1);
-          }}
-        />
-      </Grid>}
+      {category !== categoryName.drafts &&
+        category !== categoryName.newMessage &&
+		!flag &&
+		 (
+          <Grid container justifyContent="flex-end" direction="row" padding={2}>
+            <RemoveCircleIcon
+              cursor="pointer"
+              onClick={() => {
+                page > 0 && setPage(page - 1);
+              }}
+            />
+            page {page + 1}
+            <AddCircleIcon
+              cursor="pointer"
+              onClick={() => {
+                data.length > 0 && setPage(page + 1);
+              }}
+            />
+          </Grid>
+        )}
     </Grid>
   );
 };
