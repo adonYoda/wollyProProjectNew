@@ -9,6 +9,7 @@ import MessageFull from "./MessageFull";
 import MessagePreview from "./MessagePreview";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
+import styled from "styled-components";
 
 interface Props {
   data: IMessageResponse[];
@@ -19,6 +20,7 @@ interface Props {
   setPage: (page: number) => void;
   page: number;
 }
+
 
 const Message: React.FC<Props> = ({
   data,
@@ -100,7 +102,7 @@ const Message: React.FC<Props> = ({
             refetch={refetch}
           />
         ) : (
-          <>
+          <Grid sx={{  }} >
             {category === categoryName.newMessage ? (
               <InputOutcomingMessage draft={draft} setDraft={setDraft} />
             ) : category !== categoryName.drafts &&
@@ -125,7 +127,7 @@ const Message: React.FC<Props> = ({
                 />
               ))
             )}
-          </>
+          </Grid>
         )}
       </List>
 	  {
