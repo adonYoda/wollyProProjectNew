@@ -1,4 +1,4 @@
-import { Avatar, Button, Container, Typography } from "@mui/material";
+import { Avatar, Button, Container, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Typography } from "@mui/material";
 import React, { useState } from "react";
 import styled from "styled-components";
 import { IMessage, IMessageResponse } from "../../../types";
@@ -49,7 +49,21 @@ const MessageFull: React.FC<Props> = ({ dataMessage, handlerFlag, refetch }) => 
     refetch()
   }
 
+  //==========================================================================================================
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+  //==========================================================================================================
+  
+
   return (
+    <>
     <MyContainer>
       <Avatar src={author} alt={author} />
 
@@ -86,11 +100,43 @@ const MessageFull: React.FC<Props> = ({ dataMessage, handlerFlag, refetch }) => 
         </Button>) :
        ( <Button
           endIcon={<DeleteForeverIcon style={{ fill: "#1976D2" }} />}
-          onClick={handlerDeleteMessage}
+          onClick={()=> {handlerDeleteMessage()
+            handleClickOpen()}}
         >
           Delete Forever
         </Button>)}
     </MyContainer>
+   
+    
+      {/* <Button variant="outlined" sx={{backgroundColor: 'whitesmoke'}} onClick={handleClickOpen}>
+        Open alert dialog
+      </Button> */}
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Use Google's location service?"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Let Google help apps determine location. This means sending anonymous
+            location data to Google, even when no apps are running.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Disagree</Button>
+          <Button onClick={handleClose} autoFocus>
+            Agree
+          </Button>
+        </DialogActions>
+      </Dialog>
+    
+    </>
+    //==========================================================================================================
+    
   );
 };
 
