@@ -128,7 +128,11 @@ const Message: React.FC<Props> = ({
           </>
         )}
       </List>
-      <Grid container justifyContent="flex-end" direction="row" padding={2}>
+	  {
+	  category !== categoryName.drafts &&
+              category !== categoryName.newMessage &&
+	 
+	  <Grid container justifyContent="flex-end" direction="row" padding={2}>
         <RemoveCircleIcon
           cursor="pointer"
           onClick={() => {
@@ -141,10 +145,11 @@ const Message: React.FC<Props> = ({
         <AddCircleIcon
           cursor="pointer"
           onClick={() => {
+			data.length > 0 &&
             setPage(page + 1);
           }}
         />
-      </Grid>
+      </Grid>}
     </Grid>
   );
 };
