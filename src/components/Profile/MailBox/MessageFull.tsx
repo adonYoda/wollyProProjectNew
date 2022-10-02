@@ -5,6 +5,7 @@ import { IMessage, IMessageResponse } from "../../../types";
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useDeleteMessageMutation, useTrashMessageMutation } from "../../../API/messageApi";
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import RestoreFromTrashIcon from '@mui/icons-material/RestoreFromTrash';
 
 interface Props {
   dataMessage: IMessageResponse | undefined;
@@ -34,12 +35,12 @@ const MyContainer = styled(Container)`
 `
 
 const MessageFull: React.FC<Props> = ({ dataMessage, handlerFlag, refetch }) => {
-  const [isTrue, setIsTrue] = useState(false)
+  const [isTrashed, setIsTrashed] = useState(false)
   const { author, subject, content, stared, id, dateCreated, trashed } = { ...dataMessage }
   const [trashMessage, {isLoading, isError}] = useTrashMessageMutation()
   const [deleteMessage] = useDeleteMessageMutation()
-  const handleTrashMessage = async () => {
-    const message = await trashMessage({id, isTrashed: true})
+  const handleTrashMessage = async ({id, isTrashed}:{id: string|undefined, isTrashed: boolean}) => {
+    const message = await trashMessage({id, isTrashed})
     handlerFlag(false)
     refetch()
   }
@@ -100,17 +101,28 @@ const MessageFull: React.FC<Props> = ({ dataMessage, handlerFlag, refetch }) => 
       trashed === false ?
      ( <Button
           endIcon={<DeleteIcon style={{ fill: "#1976D2" }} />}
-          onClick={handleTrashMessage}
+          onClick={()=>handleTrashMessage({id, isTrashed:true})}
         >
           Delete
         </Button>) :
-       ( <Button
+       (
+        <>
+        <Button
           endIcon={<DeleteForeverIcon style={{ fill: "#1976D2" }} />}
           onClick={()=> {
             handleClickOpen()}}
         >
           Delete Forever
-        </Button>)}
+        </Button>
+        <Button
+          endIcon={<RestoreFromTrashIcon style={{ fill: "#1976D2" }} />}
+          onClick={()=> {
+            handleTrashMessage({id, isTrashed:false}) }}
+        >
+          Remove to Inbox
+        </Button>
+        </>
+        )}
     </MyContainer>
       <Dialog
         open={open}

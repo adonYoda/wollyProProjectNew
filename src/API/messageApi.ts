@@ -4,9 +4,6 @@ import { Dispatch } from "../types";
 import { baseUrl } from "../utils/constants";
 
 
-type Id = {
-  id: number
-}
 
 export const messageApi = createApi({
   tagTypes: ["Messages"],
@@ -43,21 +40,17 @@ export const messageApi = createApi({
         body: {
           "trashed": isTrashed
         }
-        // headers: {
-        //   Authorization: `Basic ${token}`,
-        // },
       }),
     }),
-    untrashMessage: build.mutation({
-      query: ({ token, message, body }) => ({
-        url: `/profile/mailbox/${message.id}`,
-        method: "PUT",
-        body,
-        headers: {
-          Authorization: `Basic ${token}`,
-        },
-      }),
-    }),
+    // untrashMessage: build.mutation({
+    //   query: ({ id, isTrashed }) => ({
+    //     url: `/profile/mailbox/${id}`,
+    //     method: "PUT",
+    //     body: {
+    //       "trashed": isTrashed
+    //     }
+    //   }),
+    // }),
     readMessage: build.mutation({
       query: ({ id, isRead }) => ({
         url: `/profile/mailbox/${id}`,
