@@ -119,6 +119,7 @@ const Message: React.FC<Props> = ({
 											{...dataEl}
 											handlerID={handlerID}
 											handlerFlag={setFlag}
+											refetch={refetch}
 										/>
 									))
 								}

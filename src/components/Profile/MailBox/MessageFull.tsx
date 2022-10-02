@@ -34,6 +34,7 @@ const MyContainer = styled(Container)`
 `
 
 const MessageFull: React.FC<Props> = ({ dataMessage, handlerFlag, refetch }) => {
+  const [isTrue, setIsTrue] = useState(false)
   const { author, subject, content, stared, id, dateCreated, trashed } = { ...dataMessage }
   const [trashMessage, {isLoading, isError}] = useTrashMessageMutation()
   const [deleteMessage] = useDeleteMessageMutation()
@@ -44,9 +45,13 @@ const MessageFull: React.FC<Props> = ({ dataMessage, handlerFlag, refetch }) => 
   }
 
   const handlerDeleteMessage = async () => {
-    const response = await deleteMessage(id)
-    handlerFlag(false)
-    refetch()
+   const response =  await deleteMessage(id)
+      
+      handlerFlag(false)
+      refetch()
+    
+    
+   
   }
 
   //==========================================================================================================
@@ -59,6 +64,7 @@ const MessageFull: React.FC<Props> = ({ dataMessage, handlerFlag, refetch }) => 
   const handleClose = () => {
     setOpen(false);
   };
+
   //==========================================================================================================
   
 
@@ -100,17 +106,12 @@ const MessageFull: React.FC<Props> = ({ dataMessage, handlerFlag, refetch }) => 
         </Button>) :
        ( <Button
           endIcon={<DeleteForeverIcon style={{ fill: "#1976D2" }} />}
-          onClick={()=> {handlerDeleteMessage()
+          onClick={()=> {
             handleClickOpen()}}
         >
           Delete Forever
         </Button>)}
     </MyContainer>
-   
-    
-      {/* <Button variant="outlined" sx={{backgroundColor: 'whitesmoke'}} onClick={handleClickOpen}>
-        Open alert dialog
-      </Button> */}
       <Dialog
         open={open}
         onClose={handleClose}
@@ -118,17 +119,19 @@ const MessageFull: React.FC<Props> = ({ dataMessage, handlerFlag, refetch }) => 
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {"Use Google's location service?"}
+          {"Delete message FOREVER!!!"}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Let Google help apps determine location. This means sending anonymous
-            location data to Google, even when no apps are running.
+          Are you sure?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Disagree</Button>
-          <Button onClick={handleClose} autoFocus>
+          <Button onClick={()=>{
+           handlerDeleteMessage()
+            handleClose()
+          }} autoFocus>
             Agree
           </Button>
         </DialogActions>

@@ -27,6 +27,7 @@ interface Props {
   sent: boolean;
   recipient: string;
   read: boolean;
+  refetch: ()=>void;
   handlerID: ({
     author,
     subject,
@@ -70,6 +71,7 @@ const MessagePreview: React.FC<Props> = ({
   read,
   handlerID,
   handlerFlag,
+  refetch
 }) => {
   const [addStar, { isError }] = useStarMessageMutation();
   const [isStared, setValue] = useState<boolean | null>(false);
@@ -137,6 +139,7 @@ const MessagePreview: React.FC<Props> = ({
             e.stopPropagation();
             handleClick(id, !stared);
             setValue(!stared);
+            refetch()
           }}
         />
       </ListItemStyled>
