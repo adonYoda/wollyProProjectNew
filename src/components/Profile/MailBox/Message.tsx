@@ -10,6 +10,7 @@ import MessagePreview from "./MessagePreview";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import styled from "styled-components";
+import { useReadMessageMutation } from "../../../API/messageApi";
 
 
 const MyList = styled(List)`
@@ -39,6 +40,7 @@ const Message: React.FC<Props> = ({
 	const [dataMessage, setDataMessage] = useState<
 		IMessageResponse | undefined
 	>();
+	const [readMessage, { isLoading }] = useReadMessageMutation();
 	const [flag, setFlag] = useState(false);
 	const [draft, setDraft] = useState<IDraft>();
 
@@ -104,6 +106,7 @@ const Message: React.FC<Props> = ({
 					handlerFlag={setFlag}
 					dataMessage={dataMessage}
 					refetch={refetch}
+					readMessage={readMessage}
 				/>
 			) : (
 				<>
@@ -120,6 +123,7 @@ const Message: React.FC<Props> = ({
 											handlerID={handlerID}
 											handlerFlag={setFlag}
 											refetch={refetch}
+											readMessage={readMessage}
 										/>
 									))
 								}

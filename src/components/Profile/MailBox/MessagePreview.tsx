@@ -28,6 +28,7 @@ interface Props {
   recipient: string;
   read: boolean;
   refetch: ()=>void;
+  readMessage: ({id, isRead}:{id:string, isRead:boolean})=>void;
   handlerID: ({
     author,
     subject,
@@ -71,11 +72,12 @@ const MessagePreview: React.FC<Props> = ({
   read,
   handlerID,
   handlerFlag,
-  refetch
+  refetch,
+  readMessage
 }) => {
   const [addStar, { isError }] = useStarMessageMutation();
   const [isStared, setValue] = useState<boolean | null>(false);
-  const [readMessage, { isLoading }] = useReadMessageMutation();
+  
   //==============================
 
   const temp = new Date(dateCreated);
@@ -95,7 +97,7 @@ const MessagePreview: React.FC<Props> = ({
         read={read}
         onClick={(e) => {
           handlerFlag(true);
-          const response = readMessage({ id, isRead: true }).unwrap();
+          const response = readMessage({ id, isRead: true });
           handlerID({
             author,
             subject,
