@@ -18,12 +18,13 @@ const ContainerStyled = styled.div`
 
 const GridWrap = styled(Grid)`
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
 `
 const GridNav = styled(Grid)`
   flex: 0 0 ${gridWidth}px;
 `;
 const GridMain = styled(Grid)`
+  overflow: hidden;
   flex: 1 1 calc(100% - ${gridWidth}px);
 `;
 

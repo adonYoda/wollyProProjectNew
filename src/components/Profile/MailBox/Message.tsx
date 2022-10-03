@@ -18,6 +18,10 @@ const MyList = styled(List)`
   width: 100%;
 `;
 
+const MyGrid = styled(Grid)`
+  flex-wrap: nowrap !important;
+`;
+
 interface Props {
 	data: IMessageResponse[];
 	folder: string;
@@ -100,7 +104,7 @@ const Message: React.FC<Props> = ({
 	//=======================================================================================================
 
 	return (
-		<Grid sx={{ height: "100%", width: "100%" }}>
+		<MyGrid sx={{ height: "100%", width: "100%" }}>
 			{flag ? (
 				<MessageFull
 					handlerFlag={setFlag}
@@ -158,7 +162,7 @@ const Message: React.FC<Props> = ({
 					)}
 				</>
 			)}
-		</Grid>
+		</MyGrid>
 	);
 };
 

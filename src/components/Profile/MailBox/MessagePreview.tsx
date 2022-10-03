@@ -27,8 +27,8 @@ interface Props {
   sent: boolean;
   recipient: string;
   read: boolean;
-  refetch: ()=>void;
-  readMessage: ({id, isRead}:{id:string, isRead:boolean})=>void;
+  refetch: () => void;
+  readMessage: ({ id, isRead }: { id: string, isRead: boolean }) => void;
   handlerID: ({
     author,
     subject,
@@ -47,8 +47,8 @@ const ListItemStyled = styled(ListItem) <{ read: boolean }>`
   height: ${messagePageSizes.heightRow}px !important;
   background-color: ${({ read }) => (read ? "#c0d4f4" : "#8EBAFF")};
   & .msg-preview {
-    &__text {
-      color: ${({ read }) => (read ? "grey" : "black")};
+    &__title {
+      color: black
     }
     &__date {
       color: ${({ read }) => (read ? "grey" : "black")};
@@ -57,6 +57,18 @@ const ListItemStyled = styled(ListItem) <{ read: boolean }>`
     }
   }
   cursor: pointer;
+  `;
+const MyListItemText = styled(ListItemText) <{ read: boolean }>`
+  white-space: nowrap; //запрет на перенос текста
+  height: 100%;
+  width: 100%;
+  overflow: hidden; //прятать выходящий за пределы текст
+  text-overflow: ellipsis; //образка длинных блоков с текстом
+  color: ${({ read }) => (read ? "grey" : "black")};
+  &>p{
+    display: inline !important;
+    color: ${({ read }) => (read ? "grey" : "black")};
+  }
 `;
 
 const MessagePreview: React.FC<Props> = ({
@@ -77,7 +89,7 @@ const MessagePreview: React.FC<Props> = ({
 }) => {
   const [addStar, { isError }] = useStarMessageMutation();
   const [isStared, setValue] = useState<boolean | null>(false);
-  
+
   //==============================
 
   const temp = new Date(dateCreated);
@@ -115,7 +127,8 @@ const MessagePreview: React.FC<Props> = ({
         <ListItemAvatar>
           <Avatar alt={author} src={author} />
         </ListItemAvatar>
-        <ListItemText
+        <MyListItemText
+          read={read}
           primary={subject === null ? " " : `${subject}`}
           secondary={
             <React.Fragment>
@@ -125,11 +138,11 @@ const MessagePreview: React.FC<Props> = ({
                 variant="body2"
                 color="text.primary"
               >
-                {author === null ? " " : `${author}`}
+                <span className="msg-preview__title">
+                  {author === null ? " " : `${author}`}
+                </span>
               </Typography>
-              <span className="msg-preview__text">
-                {content === null ? " " : ` - ${content}`}
-              </span>
+              {content === null ? " " : ` - ${content}`}
             </React.Fragment>
           }
         />
