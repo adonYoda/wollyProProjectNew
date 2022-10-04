@@ -1,40 +1,39 @@
-import { Box, Container, Grid, Skeleton } from "@mui/material";
+import { Grid, Skeleton } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { useGetMailboxMessagesQuery } from "../../../API/messageApi";
-
-import InputOutcomingMessage from "./InputOutcomingMessage";
 import ListDividers from "./MenuMailBox";
 import Message from "./Message";
 import { messagePageSizes } from "../../../utils/constants";
-import { style } from "@mui/system";
 
 const gridWidth = 250;
 
-const ContainerStyled = styled.div`
-  
-`;
+const ContainerStyled = styled.div``;
 
 const GridWrap = styled(Grid)`
   display: flex;
-  flex-wrap: nowrap;
-`
+  flex-wrap: nowrap !important;
+`;
 const GridNav = styled(Grid)`
   flex: 0 0 ${gridWidth}px;
 `;
 const GridMain = styled(Grid)`
+  overflow: hidden;
   flex: 1 1 calc(100% - ${gridWidth}px);
 `;
 
-interface Props { }
+interface Props {}
 
 const MailPage: React.FC<Props> = () => {
   const [folder, setFolder] = useState<string>("inbox");
   const [page, setPage] = useState(0);
-  const [category, setCategory] = useState('inbox')
+  const [category, setCategory] = useState("inbox");
 
-  const { data = [], isLoading, refetch } = useGetMailboxMessagesQuery({
+  const {
+    data = [],
+    isLoading,
+    refetch,
+  } = useGetMailboxMessagesQuery({
     limit: messagePageSizes.limitMessagesOnPage,
     page: page,
     folder: folder,
@@ -57,7 +56,11 @@ const MailPage: React.FC<Props> = () => {
           style={{ display: "flex", justifyContent: "space-between" }}
         >
           <GridNav item>
-            <ListDividers changeFolder={setFolder} changeCategory={setCategory} refetch={refetch} />
+            <ListDividers
+              changeFolder={setFolder}
+              changeCategory={setCategory}
+              refetch={refetch}
+            />
           </GridNav>
           {isLoading ? (
             <GridMain item>
@@ -93,13 +96,19 @@ const MailPage: React.FC<Props> = () => {
             </GridMain>
           ) : (
             <GridMain item>
-              <Message data={data} folder={folder} setCategory={setCategory} category={category} refetch={refetch} page={page} setPage={setPage} />
+              <Message
+                data={data}
+                folder={folder}
+                setCategory={setCategory}
+                category={category}
+                refetch={refetch}
+                page={page}
+                setPage={setPage}
+              />
             </GridMain>
           )}
         </GridWrap>
       </ContainerStyled>
-
-
     </>
   );
 };

@@ -5,8 +5,7 @@ import SendIcon from "@mui/icons-material/Send";
 import DraftsIcon from "@mui/icons-material/Drafts";
 import { useAddMessageMutation } from "../../../API/messageApi";
 import { useDispatch } from "react-redux";
-import { addDraft, removeDraft } from "../../../store/draftMessageSlice";
-import { useSelector } from "react-redux";
+import { addDraft } from "../../../store/draftMessageSlice";
 import { IDraft } from "../../../types";
 
 const ContainerStyled = styled.div`

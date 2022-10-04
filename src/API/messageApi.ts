@@ -1,9 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { RootState } from "../store/configureStore";
-import { Dispatch } from "../types";
 import { baseUrl } from "../utils/constants";
-
-
 
 export const messageApi = createApi({
   tagTypes: ["Messages"],
@@ -28,7 +25,7 @@ export const messageApi = createApi({
       }),
     }),
     deleteMessage: build.mutation({
-      query: ( id ) => ({
+      query: (id) => ({
         url: `/profile/mailbox/${id}`,
         method: "DELETE",
       }),
@@ -38,44 +35,25 @@ export const messageApi = createApi({
         url: `/profile/mailbox/${id}`,
         method: "PUT",
         body: {
-          "trashed": isTrashed
-        }
+          trashed: isTrashed,
+        },
       }),
     }),
-    // untrashMessage: build.mutation({
-    //   query: ({ id, isTrashed }) => ({
-    //     url: `/profile/mailbox/${id}`,
-    //     method: "PUT",
-    //     body: {
-    //       "trashed": isTrashed
-    //     }
-    //   }),
-    // }),
     readMessage: build.mutation({
       query: ({ id, isRead }) => ({
         url: `/profile/mailbox/${id}`,
         method: "PUT",
         body: {
-          "read": isRead
-        }
+          read: isRead,
+        },
       }),
     }),
-    // unreadMessage: build.mutation({
-    //   query: ({ token, message, body }) => ({
-    //     url: `/profile/mailbox/${message.id}`,
-    //     method: "PUT",
-    //     body,
-    //     headers: {
-    //       Authorization: `Basic ${token}`,
-    //     },
-    //   }),
-    // }),
     starMessage: build.mutation({
-      query: ({ id, isStared}: any) => ({
+      query: ({ id, isStared }: any) => ({
         url: `/profile/mailbox/${id}`,
         method: "PUT",
         body: {
-          "stared": isStared
+          stared: isStared,
         },
       }),
     }),
@@ -111,7 +89,7 @@ export const messageApi = createApi({
       },
     }),
 
-    //================================REFACTOR QUERIES================================
+    //================================QUERIES================================
     getMailboxMessages: build.query<
       any,
       {
@@ -127,15 +105,23 @@ export const messageApi = createApi({
           method: "GET",
         };
       },
-      providesTags: (result) => result
-        ? [
-          ...result.map((id: any) => ({ type: 'Messages', id })),
-          { type: 'Messages', id: 'LIST' },
-        ]
-        : [{ type: 'Messages', id: 'LIST' }],
+      providesTags: (result) =>
+        result
+          ? [
+              ...result.map((id: any) => ({ type: "Messages", id })),
+              { type: "Messages", id: "LIST" },
+            ]
+          : [{ type: "Messages", id: "LIST" }],
     }),
     //================================================================
   }),
 });
 
-export const { useDeleteMessageMutation , useGetMailboxMessagesQuery, useAddMessageMutation, useStarMessageMutation, useTrashMessageMutation, useReadMessageMutation } = messageApi;
+export const {
+  useDeleteMessageMutation,
+  useGetMailboxMessagesQuery,
+  useAddMessageMutation,
+  useStarMessageMutation,
+  useTrashMessageMutation,
+  useReadMessageMutation,
+} = messageApi;

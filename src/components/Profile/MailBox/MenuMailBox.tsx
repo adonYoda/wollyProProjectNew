@@ -21,7 +21,7 @@ interface Props {
   refetch: () => void;
 }
 
-const NestedList: React.FC<Props> = ({ changeFolder, changeCategory}) => {
+const NestedList: React.FC<Props> = ({ changeFolder, changeCategory }) => {
   const [open, setOpen] = React.useState(false);
 
   const handleClick = () => {
@@ -34,9 +34,7 @@ const NestedList: React.FC<Props> = ({ changeFolder, changeCategory}) => {
       component="nav"
       aria-labelledby="nested-list-subheader"
     >
-      <ListItemButton
-        onClick={() => changeCategory(categoryName.newMessage)}
-      >
+      <ListItemButton onClick={() => changeCategory(categoryName.newMessage)}>
         <ListItemIcon>
           <SendIcon />
         </ListItemIcon>
@@ -55,7 +53,7 @@ const NestedList: React.FC<Props> = ({ changeFolder, changeCategory}) => {
       </ListItemButton>
       <ListItemButton
         onClick={() => {
-          changeCategory(categoryName.drafts)
+          changeCategory(categoryName.drafts);
         }}
       >
         <ListItemIcon>

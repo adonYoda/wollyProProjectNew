@@ -9,9 +9,9 @@ import {
   DialogTitle,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import { IMessage, IMessageResponse } from "../../../types";
+import { IMessageResponse } from "../../../types";
 import DeleteIcon from "@mui/icons-material/Delete";
 import {
   useDeleteMessageMutation,
@@ -19,13 +19,19 @@ import {
 } from "../../../API/messageApi";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import RestoreFromTrashIcon from "@mui/icons-material/RestoreFromTrash";
-import MarkAsUnreadIcon from '@mui/icons-material/MarkAsUnread';
+import MarkAsUnreadIcon from "@mui/icons-material/MarkAsUnread";
 
 interface Props {
-  dataMessage: IMessageResponse|undefined;
+  dataMessage: IMessageResponse | undefined;
   handlerFlag: (flag: boolean) => void;
   refetch: () => void;
-  readMessage: ({id, isRead}:{id:string| undefined, isRead:boolean})=>void;
+  readMessage: ({
+    id,
+    isRead,
+  }: {
+    id: string | undefined;
+    isRead: boolean;
+  }) => void;
 }
 
 const MyContainer = styled(Container)`
@@ -48,14 +54,12 @@ const MyContainer = styled(Container)`
   }
 `;
 
-
 const MessageFull: React.FC<Props> = ({
   dataMessage,
   handlerFlag,
   refetch,
-  readMessage
+  readMessage,
 }) => {
-  const [isTrashed, setIsTrashed] = useState(false);
   const { author, subject, content, stared, id, dateCreated, trashed } = {
     ...dataMessage,
   };
@@ -125,22 +129,23 @@ const MessageFull: React.FC<Props> = ({
         </button>
         {trashed === false ? (
           <>
-          <Button
-            endIcon={<DeleteIcon style={{ fill: "#1976D2" }} />}
-            onClick={() => handleTrashMessage({ id, isTrashed: true })}
-          >
-            Delete
-          </Button>
-          <Button
-          endIcon={<MarkAsUnreadIcon style={{ fill: "#1976D2" }} />}
-          onClick={()=> {const response = readMessage({ id, isRead: false })
-          handlerFlag(false);
-          refetch()
-        }}
-        >
-          Mark as Unread
-        </Button>
-        </>
+            <Button
+              endIcon={<DeleteIcon style={{ fill: "#1976D2" }} />}
+              onClick={() => handleTrashMessage({ id, isTrashed: true })}
+            >
+              Delete
+            </Button>
+            <Button
+              endIcon={<MarkAsUnreadIcon style={{ fill: "#1976D2" }} />}
+              onClick={() => {
+                const response = readMessage({ id, isRead: false });
+                handlerFlag(false);
+                refetch();
+              }}
+            >
+              Mark as Unread
+            </Button>
+          </>
         ) : (
           <>
             <Button
@@ -177,7 +182,7 @@ const MessageFull: React.FC<Props> = ({
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Disagree</Button>
+          <Button onClick={handleClose}>No!</Button>
           <Button
             onClick={() => {
               handlerDeleteMessage();
@@ -185,12 +190,11 @@ const MessageFull: React.FC<Props> = ({
             }}
             autoFocus
           >
-            Agree
+            Yes!
           </Button>
         </DialogActions>
       </Dialog>
     </>
-    //==========================================================================================================
   );
 };
 
