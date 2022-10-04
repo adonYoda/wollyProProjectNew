@@ -48,6 +48,7 @@ const MyContainer = styled(Container)`
   }
 `;
 
+
 const MessageFull: React.FC<Props> = ({
   dataMessage,
   handlerFlag,

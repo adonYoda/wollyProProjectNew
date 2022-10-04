@@ -27,8 +27,8 @@ interface Props {
   sent: boolean;
   recipient: string;
   read: boolean;
-  refetch: ()=>void;
-  readMessage: ({id, isRead}:{id:string, isRead:boolean})=>void;
+  refetch: () => void;
+  readMessage: ({ id, isRead }: { id: string; isRead: boolean }) => void;
   handlerID: ({
     author,
     subject,
@@ -42,7 +42,7 @@ interface Props {
   }: IMessageResponse) => void;
   handlerFlag: (flag: boolean) => void;
 }
-const ListItemStyled = styled(ListItem) <{ read: boolean }>`
+const ListItemStyled = styled(ListItem)<{ read: boolean }>`
   width: 100%;
   height: ${messagePageSizes.heightRow}px !important;
   background-color: ${({ read }) => (read ? "#c0d4f4" : "#8EBAFF")};
@@ -73,11 +73,11 @@ const MessagePreview: React.FC<Props> = ({
   handlerID,
   handlerFlag,
   refetch,
-  readMessage
+  readMessage,
 }) => {
   const [addStar, { isError }] = useStarMessageMutation();
   const [isStared, setValue] = useState<boolean | null>(false);
-  
+
   //==============================
 
   const temp = new Date(dateCreated);
@@ -127,9 +127,9 @@ const MessagePreview: React.FC<Props> = ({
               >
                 {author === null ? " " : `${author}`}
               </Typography>
-              <span className="msg-preview__text">
+              <Typography  className="msg-preview__text">
                 {content === null ? " " : ` - ${content}`}
-              </span>
+              </Typography>
             </React.Fragment>
           }
         />
@@ -141,7 +141,7 @@ const MessagePreview: React.FC<Props> = ({
             e.stopPropagation();
             handleClick(id, !stared);
             setValue(!stared);
-            refetch()
+            refetch();
           }}
         />
       </ListItemStyled>
