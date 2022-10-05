@@ -39,7 +39,7 @@ interface Props {
   }: IMessageResponse) => void;
   handlerFlag: (flag: boolean) => void;
 }
-const ListItemStyled = styled(ListItem)<{ read: boolean }>`
+const ListItemStyled = styled(ListItem) <{ read: boolean }>`
   width: 100%;
   height: ${messagePageSizes.heightRow}px !important;
   background-color: ${({ read }) => (read ? "#c0d4f4" : "#8EBAFF")};
@@ -55,13 +55,13 @@ const ListItemStyled = styled(ListItem)<{ read: boolean }>`
   }
   cursor: pointer;
 `;
-const MyListItemText = styled(ListItemText)<{ read: boolean }>`
+const MyListItemText = styled(ListItemText) <{ read: boolean }>`
   white-space: nowrap; //запрет на перенос текста
   height: 100%;
   width: 100%;
   overflow: hidden; //прятать выходящий за пределы текст
   text-overflow: ellipsis; //образка длинных блоков с текстом
-  color: ${({ read }) => (read ? "grey" : "black")};
+  color: ${({ read }) => (read ? "grey" : "black")} !important;
   & > p {
     display: inline !important;
     color: ${({ read }) => (read ? "grey" : "black")};
