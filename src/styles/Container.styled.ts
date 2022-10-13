@@ -3,7 +3,7 @@ import { containerWidth } from "../utils/constants";
 
 
 export const MyContainer = styled.div`
-	max-width: ${containerWidth}px;
+	width: ${containerWidth}px;
 	margin: 0 auto;
 	padding: 0 15px;
 	position: relative;

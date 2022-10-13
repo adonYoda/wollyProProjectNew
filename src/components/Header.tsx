@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 import { IState } from "../types";
 import { homePage, profilePage, registrationPage } from "../utils/constants";
 
-const MyHeader = styled.div`
+const MyHeader = styled.header`
   min-width: 100%;
 `;
 const Content = styled.div`

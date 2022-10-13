@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { profilePage, profilePages } from "../../../utils/constants";
 import HowToContent from "./HowToContent";
 import NewsRow from "./News/NewsRow";
-import ProfileTopBar from "./ProfileTopBar";
+import ProfileTopBar from "../ProfileTopBar";
 
 const HowTo = styled.div`
 	margin: 0 0 142px 0;
