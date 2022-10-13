@@ -16,7 +16,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import {
   useDeleteMessageMutation,
   useTrashMessageMutation,
-} from "../../../API/messageApi";
+} from "../../../API/accountingApi";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import RestoreFromTrashIcon from "@mui/icons-material/RestoreFromTrash";
 import MarkAsUnreadIcon from "@mui/icons-material/MarkAsUnread";
@@ -24,7 +24,6 @@ import MarkAsUnreadIcon from "@mui/icons-material/MarkAsUnread";
 interface Props {
   dataMessage: IMessageResponse | undefined;
   handlerFlag: (flag: boolean) => void;
-  refetch: () => void;
   readMessage: ({
     id,
     isRead,
@@ -57,7 +56,6 @@ const MyContainer = styled(Container)`
 const MessageFull: React.FC<Props> = ({
   dataMessage,
   handlerFlag,
-  refetch,
   readMessage,
 }) => {
   const { author, subject, content, stared, id, dateCreated, trashed } = {
@@ -74,13 +72,11 @@ const MessageFull: React.FC<Props> = ({
   }) => {
     const message = await trashMessage({ id, isTrashed });
     handlerFlag(false);
-    refetch();
   };
 
   const handlerDeleteMessage = async () => {
     const response = await deleteMessage(id);
     handlerFlag(false);
-    refetch();
   };
 
   //==========================================================================================================
@@ -122,7 +118,6 @@ const MessageFull: React.FC<Props> = ({
           className="msg-btn-close"
           onClick={() => {
             handlerFlag(false);
-            refetch();
           }}
         >
           &#128169;
@@ -140,7 +135,6 @@ const MessageFull: React.FC<Props> = ({
               onClick={() => {
                 const response = readMessage({ id, isRead: false });
                 handlerFlag(false);
-                refetch();
               }}
             >
               Mark as Unread

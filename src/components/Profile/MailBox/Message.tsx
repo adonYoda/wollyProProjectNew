@@ -1,5 +1,5 @@
 import { Grid, List } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { IDraft, IMessageResponse, IState } from "../../../types";
 import { categoryName, messagePageSizes } from "../../../utils/constants";
@@ -10,7 +10,7 @@ import MessagePreview from "./MessagePreview";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import styled from "styled-components";
-import { useReadMessageMutation } from "../../../API/messageApi";
+import { useReadMessageMutation } from "../../../API/accountingApi";
 
 const MyList = styled(List)`
   min-height: ${messagePageSizes.heightRow *
@@ -26,7 +26,6 @@ interface Props {
   data: IMessageResponse[];
   folder: string;
   category: string;
-  refetch: () => void;
   setCategory: (category: string) => void;
   setPage: (page: number) => void;
   page: number;
@@ -36,7 +35,6 @@ const Message: React.FC<Props> = ({
   data,
   folder,
   category,
-  refetch,
   setCategory,
   setPage,
   page,
@@ -51,7 +49,6 @@ const Message: React.FC<Props> = ({
   const drafts = useSelector<IState, IDraft[] | undefined>(
     (state) => state.drafts
   );
-  console.log(drafts);
 
   const handlerID = ({
     author,
@@ -103,13 +100,16 @@ const Message: React.FC<Props> = ({
   };
   //=======================================================================================================
 
+  useEffect(() => {
+    console.log('Message')
+  })
+
   return (
     <MyGrid sx={{ height: "100%", width: "100%" }}>
       {flag ? (
         <MessageFull
           handlerFlag={setFlag}
           dataMessage={dataMessage}
-          refetch={refetch}
           readMessage={readMessage}
         />
       ) : (
@@ -124,10 +124,10 @@ const Message: React.FC<Props> = ({
                   .filter((m) => testFunc(category, m))
                   .map((dataEl) => (
                     <MessagePreview
+                      key={dataEl.id}
                       {...dataEl}
                       handlerID={handlerID}
                       handlerFlag={setFlag}
-                      refetch={refetch}
                       readMessage={readMessage}
                     />
                   ))}

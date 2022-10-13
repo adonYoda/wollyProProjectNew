@@ -1,7 +1,7 @@
 import { Grid, Skeleton } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
-import { useGetMailboxMessagesQuery } from "../../../API/messageApi";
+import { useGetMailboxMessagesQuery } from "../../../API/accountingApi";
 import ListDividers from "./MenuMailBox";
 import Message from "./Message";
 import { messagePageSizes } from "../../../utils/constants";
@@ -20,9 +20,16 @@ const GridNav = styled(Grid)`
 const GridMain = styled(Grid)`
   overflow: hidden;
   flex: 1 1 calc(100% - ${gridWidth}px);
+  `;
+const GridSkeleton = styled(Grid)`
+  overflow: hidden;
+  flex: 1 1 calc(100% - ${gridWidth}px);
+  & span {
+    margin: 5px;
+  }
 `;
 
-interface Props {}
+interface Props { }
 
 const MailPage: React.FC<Props> = () => {
   const [folder, setFolder] = useState<string>("inbox");
@@ -32,21 +39,22 @@ const MailPage: React.FC<Props> = () => {
   const {
     data = [],
     isLoading,
-    refetch,
+    isFetching
+    // refetch
   } = useGetMailboxMessagesQuery({
     limit: messagePageSizes.limitMessagesOnPage,
     page: page,
     folder: folder,
   });
-  if (isLoading) {
-    console.log("Index MailBox RENDER");
-  } else {
-    console.log(data);
-  }
 
-  useEffect(() => {
-    console.log(folder);
-  }, [folder]);
+
+  // useEffect(() => {
+  //   refetch();
+  // }, [folder]);
+
+  const quantityBlocks = useMemo(() => {
+    return new Array(messagePageSizes.limitMessagesOnPage).fill(' ')
+  }, [messagePageSizes.limitMessagesOnPage])
 
   return (
     <>
@@ -59,41 +67,17 @@ const MailPage: React.FC<Props> = () => {
             <ListDividers
               changeFolder={setFolder}
               changeCategory={setCategory}
-              refetch={refetch}
             />
           </GridNav>
           {isLoading ? (
-            <GridMain item>
-              <Skeleton
-                variant="rectangular"
-                sx={{ bgcolor: "grey.500", width: "100% ", height: 60 }}
-              />
-
-              <Skeleton
-                variant="rectangular"
-                sx={{ bgcolor: "grey.500", width: "100% ", height: 60 }}
-              />
-              <Skeleton
-                variant="rectangular"
-                sx={{ bgcolor: "grey.500", width: "100% ", height: 60 }}
-              />
-              <Skeleton
-                variant="rectangular"
-                sx={{ bgcolor: "grey.500", width: "100% ", height: 60 }}
-              />
-              <Skeleton
-                variant="rectangular"
-                sx={{ bgcolor: "grey.500", width: "100% ", height: 60 }}
-              />
-              <Skeleton
-                variant="rectangular"
-                sx={{ bgcolor: "grey.500", width: "100% ", height: 60 }}
-              />
-              <Skeleton
-                variant="rectangular"
-                sx={{ bgcolor: "grey.500", width: "100% ", height: 60 }}
-              />
-            </GridMain>
+            <GridSkeleton item>
+              {quantityBlocks.map((_, i) => (
+                <Skeleton
+                  variant="rectangular"
+                  sx={{ bgcolor: "grey.500", width: "100% ", height: messagePageSizes.heightRow }}
+                />
+              ))}
+            </GridSkeleton>
           ) : (
             <GridMain item>
               <Message
@@ -101,7 +85,6 @@ const MailPage: React.FC<Props> = () => {
                 folder={folder}
                 setCategory={setCategory}
                 category={category}
-                refetch={refetch}
                 page={page}
                 setPage={setPage}
               />

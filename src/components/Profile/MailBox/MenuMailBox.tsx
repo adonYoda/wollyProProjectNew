@@ -18,7 +18,6 @@ import { categoryName } from "../../../utils/constants";
 interface Props {
   changeFolder: (args: string) => void;
   changeCategory: (category: string) => void;
-  refetch: () => void;
 }
 
 const NestedList: React.FC<Props> = ({ changeFolder, changeCategory }) => {
