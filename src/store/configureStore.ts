@@ -2,26 +2,26 @@ import { configureStore } from "@reduxjs/toolkit";
 import { accountingApi } from "../API/accountingApi";
 import userReducer from "./userSlice";
 import tokenReducer from "./tokenSlice";
-import { messageApi } from "../API/messageApi";
+// import { messageApi } from "../API/messageApi";
 import draftsReducer from "./draftMessageSlice"
-import thunk from "redux-thunk";
 
 
+
+// const middlewares = [accountingApi.middleware, messageApi.middleware]
 
 
 export const store = configureStore({
 
   reducer: {
     [accountingApi.reducerPath]: accountingApi.reducer,
-    [messageApi.reducerPath]: messageApi.reducer,
+    // [messageApi.reducerPath]: messageApi.reducer,
     user: userReducer,
     token: tokenReducer,
     drafts: draftsReducer,
   },
 
   middleware: (getDefaultMiddleware: any) =>
-    getDefaultMiddleware().concat([accountingApi.middleware, messageApi.middleware])
-  
+    getDefaultMiddleware().concat(accountingApi.middleware),
 });
 
 store.subscribe(() => {
