@@ -16,6 +16,7 @@ export const createToken = (login: string, password: string) =>
   `${window.btoa(login + ":" + password)}`;
 // <URLs> ==============================================================================
 export const baseUrl = "https://wollypro.herokuapp.com";
+export const baseUrlStripe = "https://api.stripe.com";
 //export const baseUrl = "http://localhost:3001"
 export const homePage = "/";
 export const profilePage = "/profile";

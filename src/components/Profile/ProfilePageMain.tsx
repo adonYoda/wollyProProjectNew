@@ -5,6 +5,7 @@ import { profilePage, profilePages } from '../../utils/constants'
 import MailPage from './MailBox';
 import ProfilePageIntro from './Intro/ProfilePageIntro';
 import MessageFull from './MailBox/MessageFull';
+import PaymentMethodPage from './PaymentMethods';
 
 const Wrapper = styled.div`
 	
@@ -31,7 +32,7 @@ const ProfilePageMain = () => {
 		<Routes>
 			<Route path={introPage} element={<ProfilePageIntro />} />
 			<Route path={mailBoxPage} element={<MailPage />} />
-			{/* <Route path={paymentMethodsPage} element={<PaymentMethodPage />} /> */}
+			<Route path={paymentMethodsPage} element={<PaymentMethodPage />} />
 			{/* <Route path={purchaseHistoryPage} element={<PurchaseHistoryPage />} /> */}
 			{/* <Route path={savedPage} element={<SavedPage />} /> */}
 			{/* <Route path={ordersPage} element={<OrdersPage />} /> */}

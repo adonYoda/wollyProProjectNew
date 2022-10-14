@@ -21,8 +21,9 @@ const GridMain = styled(Grid)`
   overflow: hidden;
   flex: 1 1 calc(100% - ${gridWidth}px);
 `;
+interface Props {
 
-interface Props {}
+}
 
 const MailPage: React.FC<Props> = () => {
   const [folder, setFolder] = useState<string>("inbox");
@@ -38,16 +39,7 @@ const MailPage: React.FC<Props> = () => {
     page: page,
     folder: folder,
   });
-  if (isLoading) {
-    console.log("Index MailBox RENDER");
-  } else {
-    console.log(data);
-  }
-
-  useEffect(() => {
-    console.log(folder);
-  }, [folder]);
-
+  
   return (
     <>
       <ContainerStyled>
