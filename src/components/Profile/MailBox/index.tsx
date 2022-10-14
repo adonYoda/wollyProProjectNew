@@ -71,6 +71,7 @@ const MailPage: React.FC<Props> = () => {
             <GridSkeleton item>
               {quantityBlocks.map((_, i) => (
                 <Skeleton
+                  key={i}
                   variant="rectangular"
                   sx={{ bgcolor: "grey.500", width: "100% ", height: messagePageSizes.heightRow }}
                 />
