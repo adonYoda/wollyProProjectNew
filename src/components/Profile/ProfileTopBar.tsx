@@ -1,7 +1,7 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { profilePages } from '../../../utils/constants';
+import { profilePages } from '../../utils/constants';
 
 const TopBar = styled.div`
 	display: flex;
@@ -36,6 +36,8 @@ const MyLink = styled(Link)`
 `;
 
 const ProfileTopBar = () => {
+
+	const navigate = useNavigate();
 
 	const {
 		ordersPage,

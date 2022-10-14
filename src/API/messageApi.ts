@@ -3,7 +3,6 @@ import { RootState } from "../store/configureStore";
 import { baseUrl } from "../utils/constants";
 
 export const messageApi = createApi({
-  tagTypes: ["Messages"],
   baseQuery: fetchBaseQuery({
     baseUrl: baseUrl,
     prepareHeaders: (headers, { getState }) => {
@@ -14,7 +13,31 @@ export const messageApi = createApi({
       return headers;
     },
   }),
+  tagTypes: ['Messages'],
+
   endpoints: (build) => ({
+
+    //================================QUERIES================================
+    getMailboxMessages: build.query<
+      any,
+      {
+        limit: number;
+        page: number;
+        folder: string;
+      }
+    >({
+      query: (args) => {
+        const { limit, page, folder } = args;
+        return {
+          url: `/profile/mailbox?folder=${folder}&limit=${limit}&page=${page}`,
+          method: "GET",
+        };
+      },
+      providesTags: ["Messages"]
+    }),
+    //================================================================
+
+
     addMessage: build.mutation({
       query: (message) => ({
         url: "/profile/mailbox",
@@ -23,12 +46,14 @@ export const messageApi = createApi({
           ...message,
         },
       }),
+      invalidatesTags: ['Messages']
     }),
     deleteMessage: build.mutation({
       query: (id) => ({
         url: `/profile/mailbox/${id}`,
         method: "DELETE",
       }),
+      invalidatesTags: ['Messages']
     }),
     trashMessage: build.mutation({
       query: ({ id, isTrashed }) => ({
@@ -38,6 +63,7 @@ export const messageApi = createApi({
           trashed: isTrashed,
         },
       }),
+      invalidatesTags: ['Messages']
     }),
     readMessage: build.mutation({
       query: ({ id, isRead }) => ({
@@ -47,6 +73,7 @@ export const messageApi = createApi({
           read: isRead,
         },
       }),
+      invalidatesTags: ['Messages']
     }),
     starMessage: build.mutation({
       query: ({ id, isStared }: any) => ({
@@ -56,6 +83,7 @@ export const messageApi = createApi({
           stared: isStared,
         },
       }),
+      invalidatesTags: ['Messages']
     }),
     findMessageById: build.mutation({
       query: ({ token, message }) => ({
@@ -89,31 +117,7 @@ export const messageApi = createApi({
       },
     }),
 
-    //================================QUERIES================================
-    getMailboxMessages: build.query<
-      any,
-      {
-        limit: number;
-        page: number;
-        folder: string;
-      }
-    >({
-      query: (args) => {
-        const { limit, page, folder } = args;
-        return {
-          url: `/profile/mailbox?folder=${folder}&limit=${limit}&page=${page}`,
-          method: "GET",
-        };
-      },
-      providesTags: (result) =>
-        result
-          ? [
-              ...result.map((id: any) => ({ type: "Messages", id })),
-              { type: "Messages", id: "LIST" },
-            ]
-          : [{ type: "Messages", id: "LIST" }],
-    }),
-    //================================================================
+    
   }),
 });
 

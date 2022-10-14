@@ -4,10 +4,9 @@ import userReducer from "./userSlice";
 import tokenReducer from "./tokenSlice";
 import { messageApi } from "../API/messageApi";
 import draftsReducer from "./draftMessageSlice"
+import thunk from "redux-thunk";
 
 
-
-const middlewares = [accountingApi.middleware, messageApi.middleware]
 
 
 export const store = configureStore({
@@ -21,14 +20,15 @@ export const store = configureStore({
   },
 
   middleware: (getDefaultMiddleware: any) =>
-    getDefaultMiddleware().concat(accountingApi.middleware),
+    getDefaultMiddleware().concat([accountingApi.middleware, messageApi.middleware])
+  
 });
 
 store.subscribe(() => {
   localStorage.setItem('user', JSON.stringify(store.getState().user));
   store.getState().token === null ? localStorage.removeItem('token') : localStorage.setItem('token', JSON.stringify(store.getState().token));
 
-   localStorage.setItem('drafts', JSON.stringify(store.getState().drafts))
+  localStorage.setItem('drafts', JSON.stringify(store.getState().drafts))
 });
 
 export type RootState = ReturnType<typeof store.getState>

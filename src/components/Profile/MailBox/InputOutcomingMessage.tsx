@@ -3,10 +3,10 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import SendIcon from "@mui/icons-material/Send";
 import DraftsIcon from "@mui/icons-material/Drafts";
-import { useAddMessageMutation } from "../../../API/messageApi";
 import { useDispatch } from "react-redux";
 import { addDraft } from "../../../store/draftMessageSlice";
 import { IDraft } from "../../../types";
+import { useAddMessageMutation } from "../../../API/messageApi";
 
 const ContainerStyled = styled.div`
   background: white;

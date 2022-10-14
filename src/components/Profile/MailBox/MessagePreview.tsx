@@ -24,7 +24,6 @@ interface Props {
   sent: boolean;
   recipient: string;
   read: boolean;
-  refetch: () => void;
   readMessage: ({ id, isRead }: { id: string; isRead: boolean }) => void;
   handlerID: ({
     author,
@@ -81,12 +80,10 @@ const MessagePreview: React.FC<Props> = ({
   read,
   handlerID,
   handlerFlag,
-  refetch,
   readMessage,
 }) => {
-  const [addStar, { isError }] = useStarMessageMutation();
+  const [addStar, { isError, isSuccess, isLoading }] = useStarMessageMutation();
   const [isStared, setValue] = useState<boolean | null>(false);
-
   //==============================
 
   const temp = new Date(dateCreated);
@@ -99,6 +96,7 @@ const MessagePreview: React.FC<Props> = ({
     console.log(starMessage);
     console.log(date);
   };
+
 
   return (
     <>
@@ -151,7 +149,6 @@ const MessagePreview: React.FC<Props> = ({
             e.stopPropagation();
             handleClick(id, !stared);
             setValue(!stared);
-            refetch();
           }}
         />
       </ListItemStyled>
