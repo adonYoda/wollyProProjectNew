@@ -2,8 +2,8 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { RootState } from "../store/configureStore";
 import { baseUrl } from "../utils/constants";
 
-export const accountingApi = createApi({
-  tagTypes: ['Messages'],
+export const woolyProApi = createApi({
+  tagTypes: ["Messages"],
   baseQuery: fetchBaseQuery({
     baseUrl: baseUrl,
     prepareHeaders: (headers, { getState }) => {
@@ -42,10 +42,6 @@ export const accountingApi = createApi({
         method: "POST",
         body,
       }),
-      // transformResponse: (response: Response) => (dispatch: Dispatch) => {
-      //   dispatch(putUser(response.json()));
-      //   console.log(response);
-      // },
     }),
     addMessage: build.mutation({
       query: (message) => ({
@@ -55,14 +51,14 @@ export const accountingApi = createApi({
           ...message,
         },
       }),
-      invalidatesTags: ['Messages']
+      invalidatesTags: ["Messages"],
     }),
     deleteMessage: build.mutation({
       query: (id) => ({
         url: `/profile/mailbox/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: ['Messages']
+      invalidatesTags: ["Messages"],
     }),
     trashMessage: build.mutation({
       query: ({ id, isTrashed }) => ({
@@ -72,7 +68,7 @@ export const accountingApi = createApi({
           trashed: isTrashed,
         },
       }),
-      invalidatesTags: ['Messages']
+      invalidatesTags: ["Messages"],
     }),
     readMessage: build.mutation({
       query: ({ id, isRead }) => ({
@@ -82,7 +78,7 @@ export const accountingApi = createApi({
           read: isRead,
         },
       }),
-      invalidatesTags: ['Messages']
+      invalidatesTags: ["Messages"],
     }),
     starMessage: build.mutation({
       query: ({ id, isStared }: any) => ({
@@ -92,7 +88,7 @@ export const accountingApi = createApi({
           stared: isStared,
         },
       }),
-      invalidatesTags: ['Messages']
+      invalidatesTags: ["Messages"],
     }),
     findMessageById: build.mutation({
       query: ({ token, message }) => ({
@@ -142,14 +138,7 @@ export const accountingApi = createApi({
           method: "GET",
         };
       },
-      providesTags: ['Messages']
-      // providesTags: (result) =>
-      //   result
-      //     ? [
-      //       ...result.map((id: any) => ({ type: "Messages", id })),
-      //       { type: "Messages", id: "LIST" },
-      //     ]
-      //     : [{ type: "Messages", id: "LIST" }],
+      providesTags: ["Messages"],
     }),
   }),
 });
@@ -163,4 +152,5 @@ export const {
   useAddMessageMutation,
   useStarMessageMutation,
   useTrashMessageMutation,
-  useReadMessageMutation, } = accountingApi;
+  useReadMessageMutation,
+} = woolyProApi;
