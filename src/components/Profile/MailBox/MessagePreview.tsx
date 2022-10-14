@@ -42,6 +42,9 @@ const ListItemStyled = styled(ListItem) <{ read: boolean }>`
   width: 100%;
   height: ${messagePageSizes.heightRow}px !important;
   background-color: ${({ read }) => (read ? "#c0d4f4" : "#8EBAFF")};
+  &.unstar {
+    border: 5px solid red;
+  }
   & .msg-preview {
     &__title {
       color: black;
@@ -83,7 +86,7 @@ const MessagePreview: React.FC<Props> = ({
   readMessage,
 }) => {
   const [addStar, { isError, isSuccess, isLoading }] = useStarMessageMutation();
-  const [isStared, setValue] = useState<boolean | null>(false);
+  const [isStared, setIsStared] = useState<boolean | null>(stared);
   //==============================
 
   const temp = new Date(dateCreated);
@@ -91,7 +94,7 @@ const MessagePreview: React.FC<Props> = ({
 
   //==============================
 
-  const handleClick = async (id: string, stared: boolean) => {
+  const handleClick = async (id: string, isStared: boolean) => {
     const starMessage = await addStar({ id, isStared }).unwrap();
     console.log(starMessage);
     console.log(date);
@@ -143,12 +146,16 @@ const MessagePreview: React.FC<Props> = ({
         />
         <span className="msg-preview__date">{`${date}`}</span>
         <Rating
-          defaultValue={stared ? 1 : 0}
+          value={isStared ? 1 : 0}
+          // defaultValue={isStared ? 1 : 0}
           max={1}
+          onChange={(e) => setIsStared(prev => !prev)}
           onClick={(e) => {
             e.stopPropagation();
+            e.preventDefault();
+            setIsStared(!stared);
+            console.log('double click?');
             handleClick(id, !stared);
-            setValue(!stared);
           }}
         />
       </ListItemStyled>
