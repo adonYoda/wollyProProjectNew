@@ -1,7 +1,7 @@
 import { Grid, List } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { IDraft, IMessageResponse, IState } from "../../../types";
+import { IDraft, IMessageResponse, IState, RootMessage } from "../../../types";
 import { categoryName, messagePageSizes } from "../../../utils/constants";
 import DraftsPreview from "./DraftsPreview";
 import InputOutcomingMessage from "./InputOutcomingMessage";
@@ -23,7 +23,7 @@ const MyGrid = styled(Grid)`
 `;
 
 interface Props {
-  data: IMessageResponse[];
+  data: RootMessage;
   folder: string;
   category: string;
   setCategory: (category: string) => void;
@@ -101,8 +101,8 @@ const Message: React.FC<Props> = ({
   //=======================================================================================================
 
   useEffect(() => {
-    console.log('Message')
-  })
+    console.log("Message");
+  });
 
   return (
     <MyGrid sx={{ height: "100%", width: "100%" }}>
@@ -120,8 +120,7 @@ const Message: React.FC<Props> = ({
             category !== categoryName.newMessage ? (
             <>
               <MyList>
-                {data
-                  .filter((m) => testFunc(category, m))
+                {data.messages.filter((m) => testFunc(category, m))
                   .map((dataEl) => (
                     <MessagePreview
                       key={dataEl.id}
@@ -148,7 +147,7 @@ const Message: React.FC<Props> = ({
                 <AddCircleIcon
                   cursor="pointer"
                   onClick={() => {
-                    data.length > 0 && setPage(page + 1);
+                    data.messages.length > 0 && setPage(page + 1);
                   }}
                 />
               </Grid>

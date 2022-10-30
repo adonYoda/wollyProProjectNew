@@ -88,3 +88,11 @@ export interface IDraft {
   subject: string
 }
 
+
+export interface RootMessage {
+  pageNumber: number;
+  messagesOnPage: number;
+  totalPages: number;
+  totalMessages: number;
+  messages: IMessageResponse[];
+}

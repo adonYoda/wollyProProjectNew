@@ -1,13 +1,25 @@
 import React, { useState, useEffect } from "react";
-import {loadStripe} from '@stripe/stripe-js';
-import {Elements} from '@stripe/react-stripe-js';
-import CheckoutForm from './CheckoutForm';
-import "./Payment.css"
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+import CheckoutForm from "./CardMethod/CheckoutForm";
+import styled from "styled-components";
+//import "./Payment.css"
+const MyIndex = styled.div`
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  height: 100%;
+  width: 100%;
+  background-color: white;
+`;
 
-
-const stripePromise = loadStripe('pk_test_51LpwYfKTPEoHkIEJzBlguaLqQObTcIgeOtP3fVuD9ZC5m3KA8ejTFkzHC58kRRm4xmKaz6MyHQ5CwoGDfvLODz7g00O26Ipd75');
-function PaymentMethodPage()  {
-
+const stripePromise = loadStripe(
+  "pk_test_51LpwYfKTPEoHkIEJzBlguaLqQObTcIgeOtP3fVuD9ZC5m3KA8ejTFkzHC58kRRm4xmKaz6MyHQ5CwoGDfvLODz7g00O26Ipd75"
+);
+function PaymentCardMethodPage ()  {
   const [clientSecret, setClientSecret] = useState("");
 
   useEffect(() => {
@@ -22,7 +34,7 @@ function PaymentMethodPage()  {
   }, []);
 
   const appearance = {
-    theme: 'stripe',
+    theme: "stripe",
   };
   const options = {
     clientSecret,
@@ -30,48 +42,18 @@ function PaymentMethodPage()  {
   };
 
   return (
-    <div className="Payment">
+    <MyIndex className="Payment">
       {clientSecret && (
         <Elements options={options} stripe={stripePromise}>
           <CheckoutForm />
         </Elements>
       )}
-    </div>
+    </MyIndex>
   );
-}
+};
 
-
-export default PaymentMethodPage;
+export default PaymentCardMethodPage;
 // padding: "260px 170px"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // import { Box, Button, Grid, Typography } from "@mui/material";
 // import AddIcon from "@mui/icons-material/Add";
