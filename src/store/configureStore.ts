@@ -1,19 +1,19 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { woolyProApi } from "../API/wollyProApi";
+import { wollyProApi } from "../API/wollyProApi";
 import userReducer from "./userSlice";
 import tokenReducer from "./tokenSlice";
 import draftsReducer from "./draftMessageSlice";
 
 export const store = configureStore({
   reducer: {
-    [woolyProApi.reducerPath]: woolyProApi.reducer,
+    [wollyProApi.reducerPath]: wollyProApi.reducer,
     user: userReducer,
     token: tokenReducer,
     drafts: draftsReducer,
   },
 
   middleware: (getDefaultMiddleware: any) =>
-    getDefaultMiddleware().concat(woolyProApi.middleware),
+    getDefaultMiddleware().concat(wollyProApi.middleware),
 });
 
 store.subscribe(() => {
