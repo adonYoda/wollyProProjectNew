@@ -15,7 +15,7 @@ export const loginRegex = /^[A-Za-z0-9_-]{3,16}$/;
 export const createToken = (login: string, password: string) =>
   `${window.btoa(login + ":" + password)}`;
 // <URLs> ==============================================================================
-export const baseUrl = "https://wollypro.herokuapp.com";
+export const baseUrl = "https://wollypro.fly.dev";
 export const baseUrlStripe = "https://api.stripe.com";
 export const baseUrlPayPalSandbox = "https://api-m.sandbox.paypal.com"
 export const baseUrlPayPalLive = "https://api-m.paypal.com"

@@ -140,7 +140,7 @@ const Message: React.FC<Props> = ({
                 <RemoveCircleIcon
                   cursor="pointer"
                   onClick={() => {
-                    page > 0 && setPage(page - 1);
+                    page > data.totalPages && setPage(data.totalPages - 1);
                   }}
                 />
                 page {page + 1}
