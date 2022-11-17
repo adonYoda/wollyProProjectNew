@@ -1,19 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { RootState } from "../store/configureStore";
 import { baseUrl } from "../utils/constants";
+import { wollyProApi } from "./wollyProApi";
 
-export const messageApi = createApi({
-  tagTypes: ["Messages"],
-  baseQuery: fetchBaseQuery({
-    baseUrl: baseUrl,
-    prepareHeaders: (headers, { getState }) => {
-      const token = (getState() as RootState).token.token;
-      if (token) {
-        headers.set("Authorization", `Basic ${token}`);
-      }
-      return headers;
-    },
-  }),
+const messageApi = wollyProApi.injectEndpoints({
   endpoints: (build) => ({
     addMessage: build.mutation({
       query: (message) => ({
@@ -23,12 +13,14 @@ export const messageApi = createApi({
           ...message,
         },
       }),
+      invalidatesTags: ['Messages']
     }),
     deleteMessage: build.mutation({
       query: (id) => ({
         url: `/profile/mailbox/${id}`,
         method: "DELETE",
       }),
+      invalidatesTags: ['Messages']
     }),
     trashMessage: build.mutation({
       query: ({ id, isTrashed }) => ({
@@ -38,6 +30,7 @@ export const messageApi = createApi({
           trashed: isTrashed,
         },
       }),
+      invalidatesTags: ['Messages']
     }),
     readMessage: build.mutation({
       query: ({ id, isRead }) => ({
@@ -47,6 +40,7 @@ export const messageApi = createApi({
           read: isRead,
         },
       }),
+      invalidatesTags: ['Messages']
     }),
     starMessage: build.mutation({
       query: ({ id, isStared }: any) => ({
@@ -56,6 +50,7 @@ export const messageApi = createApi({
           stared: isStared,
         },
       }),
+      invalidatesTags: ['Messages']
     }),
     findMessageById: build.mutation({
       query: ({ token, message }) => ({
@@ -105,16 +100,18 @@ export const messageApi = createApi({
           method: "GET",
         };
       },
-      providesTags: (result) =>
-        result
-          ? [
-            ...result.map((id: any) => ({ type: "Messages", id })),
-            { type: "Messages", id: "LIST" },
-          ]
-          : [{ type: "Messages", id: "LIST" }],
+      providesTags: ['Messages']
+      // providesTags: (result) =>
+      //   result
+      //     ? [
+      //       ...result.map((id: any) => ({ type: "Messages", id })),
+      //       { type: "Messages", id: "LIST" },
+      //     ]
+      //     : [{ type: "Messages", id: "LIST" }],
     }),
     //================================================================
   }),
+  overrideExisting: true,
 });
 
 export const {

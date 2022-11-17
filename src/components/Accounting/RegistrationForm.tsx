@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { useAddUserMutation } from "../../API/wollyProApi";
+import { useAddUserMutation } from "../../API/authApi";
 import { putUser } from "../../store/userSlice";
 import { setToken } from "../../store/tokenSlice";
 import { createToken, emailRegex, loginRegex } from "../../utils/constants";
