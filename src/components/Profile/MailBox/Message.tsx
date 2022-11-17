@@ -45,6 +45,7 @@ const Message: React.FC<Props> = ({
   const [readMessage, { isLoading }] = useReadMessageMutation();
   const [flag, setFlag] = useState(false);
   const [draft, setDraft] = useState<IDraft>();
+  
 
   const drafts = useSelector<IState, IDraft[] | undefined>(
     (state) => state.drafts
@@ -140,14 +141,14 @@ const Message: React.FC<Props> = ({
                 <RemoveCircleIcon
                   cursor="pointer"
                   onClick={() => {
-                    page > data.totalPages && setPage(data.totalPages - 1);
+                    data.pageNumber > 0 && setPage(data.pageNumber - 1);
                   }}
                 />
                 page {page + 1}
                 <AddCircleIcon
                   cursor="pointer"
                   onClick={() => {
-                    data.messages.length > 0 && setPage(page + 1);
+                    data.pageNumber + 1  < data.totalPages && setPage(page + 1);
                   }}
                 />
               </Grid>

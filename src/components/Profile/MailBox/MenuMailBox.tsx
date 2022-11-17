@@ -18,9 +18,10 @@ import { categoryName } from "../../../utils/constants";
 interface Props {
   changeFolder: (args: string) => void;
   changeCategory: (category: string) => void;
+  resetPage: (number: number) => void;
 }
 
-const NestedList: React.FC<Props> = ({ changeFolder, changeCategory }) => {
+const MenuMailBox: React.FC<Props> = ({ changeFolder, changeCategory, resetPage }) => {
   const [open, setOpen] = React.useState(false);
 
   const handleClick = () => {
@@ -43,6 +44,7 @@ const NestedList: React.FC<Props> = ({ changeFolder, changeCategory }) => {
         onClick={() => {
           changeFolder("sent");
           changeCategory(categoryName.sent);
+          resetPage(0)
         }}
       >
         <ListItemIcon>
@@ -65,6 +67,7 @@ const NestedList: React.FC<Props> = ({ changeFolder, changeCategory }) => {
           changeFolder("inbox");
           handleClick();
           changeCategory(categoryName.inbox);
+          resetPage(0)
         }}
       >
         <ListItemIcon>
@@ -80,6 +83,7 @@ const NestedList: React.FC<Props> = ({ changeFolder, changeCategory }) => {
             onClick={() => {
               changeFolder("unread");
               changeCategory(categoryName.unread);
+              resetPage(0)
             }}
           >
             <ListItemIcon>
@@ -92,6 +96,7 @@ const NestedList: React.FC<Props> = ({ changeFolder, changeCategory }) => {
             onClick={() => {
               changeFolder("stared");
               changeCategory(categoryName.stared);
+              resetPage(0)
             }}
           >
             <ListItemIcon>
@@ -105,6 +110,7 @@ const NestedList: React.FC<Props> = ({ changeFolder, changeCategory }) => {
         onClick={() => {
           changeFolder("trash");
           changeCategory(categoryName.deleted);
+          resetPage(0)
         }}
       >
         <ListItemIcon>
@@ -116,4 +122,4 @@ const NestedList: React.FC<Props> = ({ changeFolder, changeCategory }) => {
   );
 };
 
-export default NestedList;
+export default MenuMailBox;

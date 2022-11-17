@@ -1,7 +1,7 @@
 import { Grid, Skeleton } from "@mui/material";
 import React, { useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
-import ListDividers from "./MenuMailBox";
+import MenuMailBox from "./MenuMailBox";
 import Message from "./Message";
 import { messagePageSizes } from "../../../utils/constants";
 import { useGetMailboxMessagesQuery } from "../../../API/messageApi";
@@ -62,9 +62,10 @@ const MailPage: React.FC<Props> = () => {
           style={{ display: "flex", justifyContent: "space-between" }}
         >
           <GridNav item>
-            <ListDividers
+            <MenuMailBox
               changeFolder={setFolder}
               changeCategory={setCategory}
+              resetPage={setPage}
             />
           </GridNav>
           {isLoading ? (
