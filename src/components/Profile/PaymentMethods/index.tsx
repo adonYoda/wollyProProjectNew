@@ -1,9 +1,23 @@
-import React from 'react'
+import { Button } from "@mui/material";
+import React, { useState } from "react";
+import styled from "styled-components";
+import PayPalCheckoutButton from "./PayPalMethod/PayPalCheckoutButton";
+
+// const Button = styled.div`
+  
+// `
 
 const PaymentMethodPage = () => {
-  return (
-    <div>Your payment methods could have been here...</div>
-  )
-}
+  const [product, setProduct] = useState({ description: "PayPal", price: 100 });
 
-export default PaymentMethodPage
+  return (
+    <>
+      <div>Your payment methods could have been here...</div>
+      <Button variant="outlined" >
+        <PayPalCheckoutButton product={product} />
+      </Button>
+    </>
+  );
+};
+
+export default PaymentMethodPage;

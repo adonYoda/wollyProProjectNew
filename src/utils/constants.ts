@@ -9,7 +9,7 @@ import jewel6 from '../images/Images/2xStones_01.143.jpg'
 import jewel7 from '../images/Images/4xStones_01.136.jpg'
 
 
-
+export const CLIENT_ID = "Ac8wqS6_Iq898YSGlMSN2gPnaGdoncDa19XE-8DWbr1KqDLVgwLh-L1JAq98XJQB43Q0BO2nbp8k1Yms";
 export const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 export const loginRegex = /^[A-Za-z0-9_-]{3,16}$/;
 export const createToken = (login: string, password: string) =>
