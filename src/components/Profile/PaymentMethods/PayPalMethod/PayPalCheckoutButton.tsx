@@ -41,7 +41,7 @@ const PayPalCheckoutButton = (props: any) => {
       style={{ color: "silver" }}
       onClick = {(data, actions)=>{
          //Validate on button click, client or server side
-         const hasAlreadyBoughtJewel = true;
+         const hasAlreadyBoughtJewel = false;
 
          if(hasAlreadyBoughtJewel){
           setError("You already buy this jewel")
